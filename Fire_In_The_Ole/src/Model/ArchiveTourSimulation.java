@@ -20,9 +20,9 @@ public final class ArchiveTourSimulation {
 	
 	@Override
 	public String toString() {
-		String chaineTour = "";
+		String chaineTour = "Nouveau Tour=====================================================================================================\n";
 		for (EtatEntite etatEntite : etatsEntite) {
-			chaineTour += etatEntite;
+			chaineTour += etatEntite + "\n";
 		}
 		return chaineTour;
 	}
