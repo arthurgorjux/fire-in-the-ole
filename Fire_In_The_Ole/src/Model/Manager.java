@@ -1,4 +1,4 @@
-package fr.gfg.fireintheole;
+package Model;
 
 public class Manager implements Entite, Observateur{
 	boolean besoinAnalyse;

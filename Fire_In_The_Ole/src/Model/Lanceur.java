@@ -1,4 +1,5 @@
-package fr.gfg.fireintheole;
+package Model;
+import Controller.*;
 
 /**
  * Un lanceur de test pour simulation

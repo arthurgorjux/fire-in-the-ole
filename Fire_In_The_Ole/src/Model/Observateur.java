@@ -1,4 +1,4 @@
-package fr.gfg.fireintheole;
+package Model;
 
 public interface Observateur {
 	public void prevenir();

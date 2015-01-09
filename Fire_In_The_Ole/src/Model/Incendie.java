@@ -1,4 +1,4 @@
-package fr.gfg.fireintheole;
+package Model;
 
 public class Incendie implements Entite{
 	public int x;

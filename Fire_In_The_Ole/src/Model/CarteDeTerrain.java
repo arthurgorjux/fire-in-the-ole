@@ -1,7 +1,7 @@
-package fr.gfg.fireintheole;
+package Model;
 
 /**
- * Données geographiques d'une carte
+ * Donnï¿½es geographiques d'une carte
  * immutable
  * @author S219
  *

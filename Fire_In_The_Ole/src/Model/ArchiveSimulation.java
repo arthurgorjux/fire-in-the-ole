@@ -1,5 +1,6 @@
-package fr.gfg.fireintheole;
+package Model;
 
+import Model.ArchiveTourSimulation;
 import java.util.LinkedList;
 import java.util.List;
 

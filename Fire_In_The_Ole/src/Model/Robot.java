@@ -1,4 +1,4 @@
-package fr.gfg.fireintheole;
+package Model;
 
 public class Robot implements Entite{
 	public int x;

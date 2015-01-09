@@ -1,4 +1,5 @@
-package fr.gfg.fireintheole;
+package Controller;
+import Model.*;
 
 public class Simulateur {
 	ArchiveSimulation archive;

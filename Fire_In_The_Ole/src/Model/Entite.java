@@ -1,9 +1,9 @@
-package fr.gfg.fireintheole;
+package Model;
 
 public interface Entite {
 
 	/**
-	 * L'appel de cette méthode permet à l'entité d'agir pour un tour. 
+	 * L'appel de cette mï¿½thode permet ï¿½ l'entitï¿½ d'agir pour un tour. 
 	 */
 	public void agir();
 }

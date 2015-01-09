@@ -1,4 +1,4 @@
-package fr.gfg.fireintheole;
+package Model;
 
 import java.util.LinkedList;
 import java.util.List;

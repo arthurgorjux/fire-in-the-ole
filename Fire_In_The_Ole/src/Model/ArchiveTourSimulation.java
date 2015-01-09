@@ -1,9 +1,9 @@
-package fr.gfg.fireintheole;
+package Model;
 
 import java.util.List;
 
 /**
- * En théorie immutable dans la mesure ou EtatEntite est également immutable
+ * En thï¿½orie immutable dans la mesure ou EtatEntite est ï¿½galement immutable
  * @author gael
  *
  */
