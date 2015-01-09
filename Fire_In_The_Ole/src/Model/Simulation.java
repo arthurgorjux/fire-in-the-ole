@@ -15,7 +15,7 @@ public class Simulation {
 	private int cpttest = 1;
 	
 	public Simulation() {
-		manager = new Manager();
+		manager = new Manager(this);
 		archive = new ArchiveSimulation();
 		carte = new CarteDeTerrain();
 		
@@ -107,7 +107,15 @@ public class Simulation {
             }
             return true;
         }
-        
+
+    public List<Incendie> getIncendies() {
+        return incendies;
+    }
+
+    public List<Robot> getRobots() {
+        return robots;
+    }
+  
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
     }

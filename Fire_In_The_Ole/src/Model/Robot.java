@@ -10,13 +10,15 @@ public class Robot implements Entite{
 	public final String typeRobot;
 	public final String nom;
         public final List<Observateur> observateurs;
-	
+        public EtatRobot etat;
+        
 	public Robot(int origineX, int origineY, String type, String nom ){
 		x = origineX;
 		y = origineY;
 		typeRobot = type;
 		this.nom = nom;
 		observateurs = new LinkedList<>();
+                etat = EtatRobot.ARRET;
 	}
 
         public void ajouterObservateur(Observateur observateur) {
