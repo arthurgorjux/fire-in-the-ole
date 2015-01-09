@@ -59,6 +59,13 @@ public class Incendie implements Entite{
     
         private void sEteindre() {
             simulation.eteindreFeu(this);
+            prevenirObservateurs();
+        }
+        
+         /**
+         * Prévient tous les observateurs de la liste.
+         */
+        private void prevenirObservateurs() {
             for (Observateur observateur : observateurs) {
                 observateur.prevenir();
             }

@@ -28,6 +28,15 @@ public class Robot implements Entite{
 		
 	}
 	
+        /**
+         * Prévient tous les observateurs de la liste.
+         */
+        private void prevenirObservateurs() {
+            for (Observateur observateur : observateurs) {
+                observateur.prevenir();
+            }
+        }
+        
 	public EtatEntite getEtatEntite() {
 		return new EtatEntite(x, y, this.nom, "typeRobot");
 	}
