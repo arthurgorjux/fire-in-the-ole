@@ -7,6 +7,8 @@ import java.util.List;
 public class Robot implements Entite{
 	public int x;
 	public int y;
+        private int destinationX;
+        private int destinationY;
 	public final String typeRobot;
 	public final String nom;
         public final List<Observateur> observateurs;
@@ -15,12 +17,19 @@ public class Robot implements Entite{
 	public Robot(int origineX, int origineY, String type, String nom ){
 		x = origineX;
 		y = origineY;
+                destinationX = x;
+                destinationY = y;
 		typeRobot = type;
 		this.nom = nom;
 		observateurs = new LinkedList<>();
                 etat = EtatRobot.ARRET;
 	}
 
+        public void definirDestination(int x, int y) {
+            destinationX = x;
+            destinationY = y;
+        }
+        
         public void ajouterObservateur(Observateur observateur) {
             observateurs.add(observateur);
         }
