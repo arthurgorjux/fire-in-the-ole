@@ -1,6 +1,5 @@
 package Model;
 
-import Model.ArchiveTourSimulation;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,7 +7,7 @@ public class ArchiveSimulation {
 	 List<ArchiveTourSimulation> tours;
 	 
 	 public ArchiveSimulation() {
-		 tours = new LinkedList<ArchiveTourSimulation>();
+		 tours = new LinkedList<>();
 	 }
 	 
 	 public void addTour(ArchiveTourSimulation tour) {

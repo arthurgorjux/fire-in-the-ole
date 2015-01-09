@@ -12,6 +12,8 @@ public class Lanceur {
 		// TODO Auto-generated method stub
 		Simulateur simulateur = new Simulateur();
 		simulateur.jouerSimulation(new CarteDeTerrain());
+                simulateur.rejouerSimulation();
+                System.out.println("fin !");
 	}
 
 }

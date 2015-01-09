@@ -9,6 +9,7 @@ public class Simulateur {
 		Simulation simulation = new Simulation();
 		while (!simulation.estTerminee()) {
 			simulation.mettreAJour();
+                        simulation.archiverTour();
 		}
 		archive = simulation.getArchiveResultat();
 	}
