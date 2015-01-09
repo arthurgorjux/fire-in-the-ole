@@ -1,5 +1,7 @@
 package Model;
 
+import Observer.Observateur;
+
 public class Manager implements Entite, Observateur{
 	boolean besoinAnalyse;
 	
