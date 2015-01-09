@@ -14,7 +14,7 @@ public final class CarteDeTerrain {
 		{0,0,0,0},
 		{0,40,40,0},
 		{0,40,40,2},
-		{0,0,0,0}
+		{2,0,0,0}
 		};
 		carte = carteGeneree;
 	}
