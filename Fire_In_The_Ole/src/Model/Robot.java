@@ -1,5 +1,6 @@
 package Model;
 
+import Observer.Observateur;
 import java.util.LinkedList;
 import java.util.List;
 

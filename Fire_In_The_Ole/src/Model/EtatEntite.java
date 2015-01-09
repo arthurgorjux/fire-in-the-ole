@@ -31,7 +31,7 @@ public class EtatEntite {
 	 * Debugage log
 	 */
 	public String toString() {
-		return "Entit� "+nom+" de type "+type+" en x="+x+" et y="+y;		
+		return "Entite "+nom+" de type "+type+" en x="+x+" et y="+y;		
 	}
 
 }

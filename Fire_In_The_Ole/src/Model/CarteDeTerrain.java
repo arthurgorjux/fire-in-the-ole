@@ -22,5 +22,9 @@ public final class CarteDeTerrain {
 	public int getDifficulte(int x, int y) {
 		return carte[x][y];
 	}
+        
+        public int[][] getCarte(){
+            return carte;
+        }
 
 }
