@@ -1,0 +1,43 @@
+﻿@startuml
+
+title Fire in the Ole
+
+:Utilisateur: as Utilisateur  
+
+usecase (Lancer simulation) as UC0
+usecase (Récupérer statistiques) as UC1
+usecase (Importer nouvelle carte) as UC2
+usecase (Positionner robots pompiers) as UC3
+usecase (Positionner indendies) as UC4
+usecase (Ajouter nouveau type de robot) as UC5
+usecase (Visualiser simulation) as UC6
+usecase (Visualiser carte) as UC7
+usecase (Mettre en pause simulation) as UC8
+usecase (Accélerer simulation) as UC9
+usecase (Réinitialiser simulation) as UC10
+usecase (Remplacer algorithme de pathfinding) as UC11
+usecase (Sauvegarder simulation) as UC12
+
+
+Utilisateur -left-> UC0
+Utilisateur -left-> UC1
+Utilisateur -left-> UC2
+Utilisateur -up-> UC3
+Utilisateur -up-> UC4
+Utilisateur -up-> UC5
+Utilisateur -right-> UC6
+Utilisateur -right-> UC7
+Utilisateur -right-> UC8
+Utilisateur -down-> UC9
+Utilisateur -down-> UC10
+Utilisateur -down-> UC11
+Utilisateur -down-> UC12
+
+UC6 <. UC0 : <<extends>>
+UC0 <. UC8 : <<extends>>
+UC0 <. UC9 : <<extends>>
+UC0 <. UC10 : <<extends>>
+UC0 <. UC12 : <<extends>>
+UC7 .> UC6 : <<include>>
+
+@enduml
