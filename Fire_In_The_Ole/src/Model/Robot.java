@@ -3,10 +3,15 @@ package Model;
 public class Robot implements Entite{
 	public int x;
 	public int y;
+	public String typeRobot;
+	public String nom;
 	
-	public Robot(int origineX, int origineY) {
+	public Robot(int origineX, int origineY, String type, String nom) {
 		x = origineX;
 		y = origineY;
+		typeRobot = type;
+		this.nom = nom;
+		
 	}
 
 	public void agir() {
@@ -15,7 +20,7 @@ public class Robot implements Entite{
 	}
 	
 	public EtatEntite getEtatEntite() {
-		return new EtatEntite(x, y, "Robot", "typeRobot");
+		return new EtatEntite(x, y, this.nom, "typeRobot");
 	}
 }
 

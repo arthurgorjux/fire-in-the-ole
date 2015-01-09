@@ -9,6 +9,8 @@ public class Simulation {
 	private final CarteDeTerrain carte;
 	private final List<Robot> robots;
 	private final List<Incendie> incendies;
+	//temp
+	private int cpttest = 1;
 	
 	public Simulation() {
 		manager = new Manager();
@@ -19,6 +21,9 @@ public class Simulation {
 		incendies = new LinkedList<Incendie>();
 		
 		// On ajoute les robots et les incendies aux listes
+		robots.add(new Robot(1, 1,"typerobotbidon","Toto"));
+		robots.add(new Robot(2, 2,"typerobotbidon","Titi"));
+		incendies.add(new Incendie(5,5));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
 	}
 	
@@ -33,7 +38,7 @@ public class Simulation {
 		
 	}
 
-	public void archiverTour() {
+	public ArchiveTourSimulation archiverTour() {
 		final List<EtatEntite> etatsEntite;
 		etatsEntite = new LinkedList<EtatEntite>();
 		for (Robot robot : robots) {
@@ -43,17 +48,24 @@ public class Simulation {
 			etatsEntite.add(incendie.getEtatEntite());
 		}
 		
-		archive.addTour(new ArchiveTourSimulation(etatsEntite));
+		ArchiveTourSimulation tour = new ArchiveTourSimulation(etatsEntite);
+		archive.addTour(tour);
+		return tour;
 	}
 	
 	public boolean estTerminee() {
 		// TODO Auto-generated method stub
-		return false;
+		cpttest = cpttest +1;
+		if (cpttest < 15) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	public ArchiveSimulation getArchiveResultat() {
 		// TODO Auto-generated method stub
-		return null;
+		return archive;
 	}
 
 }
