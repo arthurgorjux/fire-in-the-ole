@@ -10,6 +10,7 @@ public class Simulation {
 	private final List<Robot> robots;
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
+        private final List<Incendie> incendiesEteints;
 	//temp
 	private int cpttest = 1;
 	
@@ -18,21 +19,31 @@ public class Simulation {
 		archive = new ArchiveSimulation();
 		carte = new CarteDeTerrain();
 		
-		robots = new LinkedList<Robot>();
-		incendies = new LinkedList<Incendie>();
-                incendiesFutur = new LinkedList<Incendie>();
+		robots = new LinkedList<>();
+		incendies = new LinkedList<>();
+                incendiesFutur = new LinkedList<>();
+                incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
 		robots.add(new Robot(1, 1,"typerobotbidon","Toto"));
 		robots.add(new Robot(2, 2,"typerobotbidon","Titi"));
 		incendies.add(new Incendie(5,5, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
+                for (Robot robot : robots) {
+			robot.ajouterObservateur(manager);
+		}
+                for (Incendie incendie : incendies) {
+			incendie.ajouterObservateur(manager);
+		}
 	}
 	
 	public void mettreAJour() {
             // on fait apparaitre les incendies supplémentaires
             incendies.addAll(incendiesFutur);
             incendiesFutur.removeAll(incendiesFutur);
+            
+            incendies.removeAll(incendiesEteints);
+            incendiesEteints.removeAll(incendiesEteints);
             
 		manager.agir();
 		for (Robot robot : robots) {
@@ -79,4 +90,8 @@ public class Simulation {
             incendiesFutur.add(new Incendie(x,y, this));
             return true;
         }
+
+    void eteindreFeu(Incendie feu) {
+        incendiesEteints.add(feu);
+    }
 }
