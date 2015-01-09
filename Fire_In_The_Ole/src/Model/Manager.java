@@ -23,19 +23,28 @@ public class Manager implements Entite, Observateur{
 	public void analyserSituation() {
 		// se debrouille pour occuper tous les robots
             List<Robot> robots = simulation.getRobots();
-            List<Incendie> incendies = simulation.getIncendies();
+            
+            
+            //gérer si incendie éteint pour virer de la liste etc...
+            
             
             Iterator iteratorRobots = robots.iterator();
             //itération sur tout les robots
-            if (iteratorRobots.hasNext())
+            for (Robot robotActuel : robots) 
             {
-                Robot robotActuel = (Robot) iteratorRobots.next();
                 //si le robot est à l'arret
                 if (robotActuel.etat == EtatRobot.ARRET)
                 {
                     //assigner à un feu
+                    Incendie incendieProche = calculIncendieLePlusProche(robotActuel);
+                    listeOccupation.put(robotActuel, incendieProche);
+                    //lancer le déplacement
+                    robotActuel.definirDestination(incendieProche.x, incendieProche.y);
                 }
             }
+            
+            
+          
             besoinAnalyse = false;
 	}
 
@@ -50,7 +59,42 @@ public class Manager implements Entite, Observateur{
 		besoinAnalyse = true;
 	}
         
+        private Incendie calculIncendieLePlusProche(Robot robot){
+            //calcul de l'incendie le plus proche à vol d'oiseau
+            int xRobot = robot.x;
+            int yRobot = robot.y;
+            
+            int xIncendie;
+            int yIncendie;
+            
+            double distanceAbscisse;
+            double distanceOrdonnee;
+            
+            double distanceTotale = -1;
+            double distanceMinimum = -1;
+            Incendie temp = null;
+            
+            List<Incendie> incendies = simulation.getIncendies();
+            for (Incendie i : incendies)
+            {
+                xIncendie = i.x;
+                yIncendie = i.y;
+                
+                //calcul diagonale
+                distanceAbscisse = Math.pow(Math.abs(xRobot - xIncendie), 2);
+                distanceOrdonnee = Math.pow(Math.abs(yRobot - yIncendie),2);
+                
+                distanceTotale = Math.sqrt(distanceAbscisse+distanceOrdonnee);
+                
+                //on garde le plus court...
+                if (distanceMinimum == -1 || distanceMinimum > distanceTotale) {
+                    distanceMinimum = distanceTotale;
+                    temp = i;
+                }   
+            }
+            
+            return temp;
+        }
         
-        //assigner les robots pour éteindre les feux
         
 }
