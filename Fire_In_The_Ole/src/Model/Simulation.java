@@ -28,6 +28,7 @@ public class Simulation {
 		robots.add(new Robot(1, 1,"typerobotbidon","Toto"));
 		robots.add(new Robot(2, 2,"typerobotbidon","Titi"));
 		incendies.add(new Incendie(5,5, this));
+                incendies.add(new Incendie(6,5, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
                 for (Robot robot : robots) {
 			robot.ajouterObservateur(manager);
@@ -86,11 +87,27 @@ public class Simulation {
 	}
 
         public boolean ajouterFeu(int intensite, int x, int y) {
-            // penser a tester collisions
-            incendiesFutur.add(new Incendie(x,y, this));
-            return true;
+            if (estUnEmplacementLibre(x, y)) {
+                incendiesFutur.add(new Incendie(x,y, this));
+                return true;
+            }
+            return false;
         }
 
+        public boolean estUnEmplacementLibre(int x, int y) {
+            for (Robot robot : robots) {
+		if (robot.x == x && robot.y == y) {
+                    return false;
+                }
+            }
+            for (Incendie incendie : incendies) {
+		if (incendie.x == x && incendie.y == y) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
     }
