@@ -28,22 +28,8 @@ class StartListener implements ActionListener {
         System.out.println("Génération de la simulation...");
         window.getSimulation().mettreAJour();
         window.setMap(window.getSimulation().archiverTour());
-        Timer timer = new Timer(1000, new ActionListener() {
-            
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                window.getSimulation().mettreAJour();
-                window.setMap(window.getSimulation().archiverTour());
-            }
-        });
-        if(!window.getSimulation().estTerminee()){
-            timer.start(); 
-        }else{
-            timer.stop();
-            System.out.println("Fin");
-            ArchiveSimulation archive = this.window.getSimulation().getArchiveResultat();
-            archive.afficher();
-        }
+        Timer timer = new Timer(1000, new TimerListener(window));
+        timer.start(); 
     }
     
 }
