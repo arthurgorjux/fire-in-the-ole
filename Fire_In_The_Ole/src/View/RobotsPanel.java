@@ -6,10 +6,16 @@
 package View;
 
 import Model.EtatEntite;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.imageio.ImageIO;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JList;
@@ -31,24 +37,25 @@ public class RobotsPanel extends JPanel{
         this.window = window;
         Image imgRobot = ImageIO.read(getClass().getResource("/IMG/plus.png"));
         creerRobot = new JButton(new ImageIcon(imgRobot));
-        
-        this.add(creerRobot);
+        this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
     
     public void setList(EtatEntite[] entites){
-        ArrayList<EtatEntite> result = new ArrayList<>();
+        ArrayList<String> result = new ArrayList<>();
         for(EtatEntite entite : entites){
             if(entite.getType() == "typeRobot"){
-                result.add(entite);
+                result.add(entite.getNom());
             }
         }
         
         if(!this.alreadyExist){        
             robots = new JList(result.toArray());
             this.add(robots);
+            this.add(creerRobot);
         }else{
             robots.setListData(result.toArray());
-        }
+        }        
+        this.doLayout();
         this.alreadyExist = true;
     }
     

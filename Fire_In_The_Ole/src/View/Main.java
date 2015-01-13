@@ -114,6 +114,7 @@ public class Main extends JFrame{
         simulateur.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         stats.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         listeRobots.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+        listeRobots.setPreferredSize(new Dimension(200, 300));
         //simulateur.add(start);
         //listeRobots.add(creerRobot);
         layout_north.add(mapPanel);
