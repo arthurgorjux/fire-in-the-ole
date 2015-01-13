@@ -81,7 +81,7 @@ public class Manager implements Entite, Observateur{
                 }  
             }
             System.out.println("Robot : ");
-            System.out.println("x = "+robot.x+" y = "+robot.y);
+            System.out.println("x = "+robot.getPosition().getX()+" y = "+robot.getPosition().getY());
             System.out.println("Icendie choisit : ");
             System.out.println("x = "+incendieTemp.getPosition().getX()+" y = "+incendieTemp.getPosition().getY());
             return incendieTemp;

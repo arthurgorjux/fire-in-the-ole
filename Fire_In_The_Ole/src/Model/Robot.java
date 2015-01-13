@@ -9,26 +9,20 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Robot implements Entite{
-	public int x;
-	public int y;
-        private int destinationX;
-        private int destinationY;
+        private Position destination;
 	public final String typeRobot;
 	public final String nom;
         public final List<Observateur> observateurs;
         public EtatRobot etat;
         private final PathFinder pathFinder;
-        private Position position;
+        private Position positionActuelle;
         private Chemin chemin;
         private final Simulation simulation;
         
 	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder, Simulation simulation ){
-            x = origineX;
-            y = origineY;
+            positionActuelle = new Position(origineX, origineY);
             this.simulation = simulation;
-            position = new Position(x, y);
-            destinationX = x;
-            destinationY = y;
+            destination = new Position(origineY, origineY);
             typeRobot = type;
             this.nom = nom;
             observateurs = new LinkedList<>();
@@ -37,15 +31,14 @@ public class Robot implements Entite{
             calculerChemin();
 	}
 
-        public void definirDestination(Position position) {
+        public void definirDestination(Position nouvelleDestination) {
             //le robot à reçu des coordonnées du manager, il se met en déplacement
-            destinationX = position.getX();
-            destinationY = position.getY();
+            destination = nouvelleDestination;
             this.etat = EtatRobot.DEPLACEMENT;
         }
         
         private void calculerChemin() {
-            chemin = pathFinder.getCheminLePlusCourt(getPosition(), new Position(destinationX, destinationY));
+            chemin = pathFinder.getCheminLePlusCourt(positionActuelle, destination);
         }
         
         public void ajouterObservateur(Observateur observateur) {
@@ -53,7 +46,7 @@ public class Robot implements Entite{
         }
         
         public Position getPosition() {
-            return position;
+            return positionActuelle;
         }
         
         /**
@@ -61,12 +54,12 @@ public class Robot implements Entite{
          */
         @Override
 	public void agir() {
-            Position suivant = chemin.getPositionSuivante(position);
+            Position suivant = chemin.getPositionSuivante(positionActuelle);
             boolean aAgis = false;
 		switch(etat){
                     case DEPLACEMENT:
                         if (estArriveDestination()) {
-                            prevenirObservateurs();//prevenur le manager qu'on est en train de glander
+                            prevenirObservateurs();
                         } else {
                            while(!aAgis){
                                 if (simulation.contientUnIncendie(suivant)) {
@@ -76,10 +69,7 @@ public class Robot implements Entite{
                                     calculerChemin();
                                     aAgis = true;//TODO Actuelement un robot qui en 'percute" un autre perds un tour
                                 } else {
-                                    // TODO nettoyer bordel des position des x et des y
-                                    position = suivant;
-                                    x = suivant.getX();
-                                    y = suivant.getY();
+                                    positionActuelle = suivant;
                                     aAgis = true;
                                 }
                             }
@@ -87,10 +77,10 @@ public class Robot implements Entite{
                         break;
                     case EXTINCTION:
                         if (simulation.contientUnIncendie(suivant)) {
-                            Incendie incendie = simulation.getIncendieAt(position);
-                            incendie.arroser(15);//TODO changer variable en dur
+                            Incendie incendie = simulation.getIncendieAt(positionActuelle);
+                            incendie.arroser(150);//TODO changer variable en dur
                         } else {
-                            prevenirObservateurs();// prévenir le manager qu'on glande
+                            prevenirObservateurs();
                             etat = DEPLACEMENT;
                         }
                         break;
@@ -100,7 +90,7 @@ public class Robot implements Entite{
         }
 	
         private boolean estArriveDestination() {
-            return ((x == destinationX) && (y == destinationY));
+            return positionActuelle == destination;
         }
         
         /**
@@ -113,12 +103,6 @@ public class Robot implements Entite{
         }
         
 	public EtatEntite getEtatEntite() {
-		return new EtatEntite(x, y, this.nom, "typeRobot");
+		return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
 	}
 }
-
-/*
-etats robots 
-arret --> EnDeplacement --> Extinction --> Arret
-
-*/
