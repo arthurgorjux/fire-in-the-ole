@@ -68,7 +68,6 @@ public class Manager implements Entite, Observateur{
             {
                 xIncendie = i.getPosition().getX();
                 yIncendie = i.getPosition().getY();
-                
                 //calcul diagonale
                 distanceAbscisse = Math.pow(Math.abs(xRobot - xIncendie), 2);
                 distanceOrdonnee = Math.pow(Math.abs(yRobot - yIncendie),2);

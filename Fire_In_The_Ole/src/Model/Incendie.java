@@ -20,9 +20,9 @@ public class Incendie implements Entite{
      * @param simulation
      */
     public Incendie(int origineX, int origineY, Simulation simulation) {
-        position = new Position(x, y);
         x = origineX;
         y = origineY;
+        position = new Position(x, y);
         intensite = 1;//intensite par defaut
         this.simulation = simulation;
         observateurs = new LinkedList<>();
