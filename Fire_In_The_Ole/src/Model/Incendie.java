@@ -1,5 +1,6 @@
 package Model;
 
+import Model.pathfinding.Position;
 import Observer.Observateur;
 import java.util.LinkedList;
 import java.util.List;
@@ -25,6 +26,10 @@ public class Incendie implements Entite{
         observateurs = new LinkedList<>();
     }
 
+    public Position getPosition(){
+        return new Position(x,y);
+    }
+    
     @Override
     public void agir() {
         if (intensite >= 5) {

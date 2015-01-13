@@ -9,6 +9,14 @@ package Model;
 public final class CarteDeTerrain {
 	private final int carte [][];
 	
+        public int getHauteur() {
+            return 7; //TODO placeholder
+        }
+        
+        public int getLargeur() {
+            return 8; //TODO placeholder
+        }
+        
 	public CarteDeTerrain() {
 		int carteGeneree [][] = {
 		{0,0,0,0,0,0,2,2},

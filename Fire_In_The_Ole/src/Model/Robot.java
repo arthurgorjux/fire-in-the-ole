@@ -44,13 +44,14 @@ public class Robot implements Entite{
         /**
          * Présence possible du patron de conception "Etat" non implémenté pour des raison de simplicité. Seulements deux etats présent/
          */
+        @Override
 	public void agir() {
+            boolean aAgis = false;
 		switch(etat){
                     case DEPLACEMENT:
                         if (estArriveDestination()) {
                             prevenirObservateurs();//prevenur le manager qu'on est en train de glander
                         } else {
-                           // boolean aAgis = false
                            // tant que n'a pas agis :
                                 //reagrde dans son chemin si la case suivante est vide.
                                      //si la case contient un incendie

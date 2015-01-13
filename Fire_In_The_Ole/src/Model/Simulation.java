@@ -2,7 +2,7 @@ package Model;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Timer;
+import Model.pathfinding.Position;
 
 public class Simulation {
 	private final Manager manager;
@@ -86,26 +86,45 @@ public class Simulation {
 	}
 
         public boolean ajouterFeu(int intensite, int x, int y) {
-            if (estUnEmplacementLibre(x, y)) {
+            if (estUnEmplacementLibre(new Position(x, y))) {
                 incendiesFutur.add(new Incendie(x,y, this));
                 return true;
             }
             return false;
         }
 
-        public boolean estUnEmplacementLibre(int x, int y) {
-            for (Robot robot : robots) {
-		if (robot.x == x && robot.y == y) {
-                    return false;
-                }
-            }
-            for (Incendie incendie : incendies) {
-		if (incendie.x == x && incendie.y == y) {
-                    return false;
-                }
-            }
-            return true;
+        /**
+         * Indique si un emplacement ne contient ni incendies ni robots
+         * @param emplacement
+         * @return 
+         */
+        public boolean estUnEmplacementLibre(Position emplacement) {
+            return !contientUnIncendie(emplacement) && !contientUnRobot(emplacement);
         }
+        
+        /**
+         * Indique si un emplacement contient un incendie
+         * @param emplacement
+         * @return 
+         */
+        public boolean contientUnIncendie(Position emplacement) {
+            for (Incendie incendie : incendies) {
+		if (incendie.getPosition() == emplacement) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        public boolean contientUnRobot(Position emplacement) {
+            for (Robot robot : robots) {
+		if (robot.getPosition() == emplacement) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 
     public List<Incendie> getIncendies() {
         return incendies;
