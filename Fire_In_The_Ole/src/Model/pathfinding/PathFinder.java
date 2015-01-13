@@ -5,12 +5,12 @@
  */
 package Model.pathfinding;
 
+import Model.Simulation;
+
 /**
  *
  * @author S219
  */
 public interface PathFinder {
-    
-    public Chemin getCheminLePlusCourt();
-    
+    public Chemin getCheminLePlusCourt(Position robot, Position feu);   
 }

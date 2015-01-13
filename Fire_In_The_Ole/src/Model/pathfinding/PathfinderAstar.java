@@ -12,7 +12,7 @@ package Model.pathfinding;
 public class PathfinderAstar implements PathFinder{
     
     @Override
-    public Chemin getCheminLePlusCourt() {
+    public Chemin getCheminLePlusCourt(Position robot, Position feu) {
         return null;
     }
     

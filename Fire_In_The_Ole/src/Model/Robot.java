@@ -1,5 +1,6 @@
 package Model;
 
+import Model.pathfinding.PathFinder;
 import Model.pathfinding.Position;
 import Observer.Observateur;
 import java.util.LinkedList;
@@ -14,9 +15,10 @@ public class Robot implements Entite{
 	public final String nom;
         public final List<Observateur> observateurs;
         public EtatRobot etat;
+        private final PathFinder pathFinder;
         private Position position;
         
-	public Robot(int origineX, int origineY, String type, String nom ){
+	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder ){
             x = origineX;
             y = origineY;
             position = new Position(x, y);
@@ -26,6 +28,7 @@ public class Robot implements Entite{
             this.nom = nom;
             observateurs = new LinkedList<>();
             etat = EtatRobot.ARRET;
+            this.pathFinder = pathFinder;
 	}
 
         public void definirDestination(Position position) {
@@ -33,6 +36,10 @@ public class Robot implements Entite{
             destinationX = position.getX();
             destinationY = position.getY();
             this.etat = EtatRobot.DEPLACEMENT;
+        }
+        
+        private void calculerChemin() {
+            pathFinder.getCheminLePlusCourt(getPosition(), new Position(destinationX, destinationY));
         }
         
         public void ajouterObservateur(Observateur observateur) {
@@ -54,7 +61,7 @@ public class Robot implements Entite{
                         if (estArriveDestination()) {
                             prevenirObservateurs();//prevenur le manager qu'on est en train de glander
                         } else {
-                           // tant que n'a pas agis :
+                            while(!aAgis){
                                 //reagrde dans son chemin si la case suivante est vide.
                                      //si la case contient un incendie
                                          // mode extintion
@@ -64,7 +71,7 @@ public class Robot implements Entite{
                                      //si la case est libre
                                         // position = position suivante dans le chemin
                                         //aAgis = true
-                            //fin tant que
+                            }
                             
                         }
                         break;

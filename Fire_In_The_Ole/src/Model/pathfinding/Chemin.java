@@ -13,7 +13,7 @@ import java.util.List;
  * une suite de positions successives
  * @author S219
  */
-class Chemin {
+public class Chemin {
     private final List<Position> etapes;
     
     public Chemin(List<Position> etapes) {

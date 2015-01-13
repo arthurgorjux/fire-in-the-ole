@@ -3,6 +3,8 @@ package Model;
 import java.util.LinkedList;
 import java.util.List;
 import Model.pathfinding.Position;
+import Model.pathfinding.PathFinder;
+import Model.pathfinding.PathFinderToutDroit;
 
 public class Simulation {
 	private final Manager manager;
@@ -11,11 +13,14 @@ public class Simulation {
 	private final List<Robot> robots;
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
-        private final List<Incendie> incendiesEteints;      
+        private final List<Incendie> incendiesEteints;
+        private final PathFinder pathFinder;
 	//temp
 	private int duree = 1;
 	
 	public Simulation() {
+            
+                pathFinder = new PathFinderToutDroit(this);
 		manager = new Manager(this);
 		archive = new ArchiveSimulation();
 		carte = new CarteDeTerrain();
@@ -26,8 +31,8 @@ public class Simulation {
                 incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
-		robots.add(new Robot(1, 1,"typerobotbidon","Toto"));
-		robots.add(new Robot(2, 2,"typerobotbidon","Titi"));
+		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder));
+		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder));
 		incendies.add(new Incendie(2,3, this));
                 incendies.add(new Incendie(0,0, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
