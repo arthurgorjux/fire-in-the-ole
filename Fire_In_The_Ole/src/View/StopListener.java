@@ -16,11 +16,11 @@ import javax.swing.Timer;
  *
  * @author arthur
  */
-class StartListener implements ActionListener {
+class StopListener implements ActionListener {
 
     private Main window;
     private SimulationPanel panel;
-    public StartListener(Main window, SimulationPanel panel) {
+    public StopListener(Main window, SimulationPanel panel) {
         this.window = window;
         this.panel = panel;
     }
@@ -28,17 +28,17 @@ class StartListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.checkState();
-        System.out.println("Génération de la simulation...");
+        /*System.out.println("Génération de la simulation...");
         window.getSimulation().mettreAJour();
         window.setMap(window.getSimulation().archiverTour());
         Timer timer = new Timer(1000, new TimerListener(window));
-        timer.start(); 
+        timer.start(); */
     }
     
     public void checkState(){
-        this.panel.setEtat(1);
-        this.panel.getStart().setEnabled(false);
-        this.panel.getStop().setEnabled(true);
+        this.panel.setEtat(0);
+        this.panel.getStop().setEnabled(false);
+        this.panel.getStart().setEnabled(true);
     }
     
 }

@@ -12,6 +12,7 @@ import Model.Simulation;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.io.IOException;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,7 +40,7 @@ public class Main extends JFrame{
     private javax.swing.JPanel simulateur;
     private javax.swing.JPanel stats;
     
-    public Main(Simulation simulation) {
+    public Main(Simulation simulation) throws IOException {
         this.simulation = simulation;
         this.initComponents();        
         //this.setContentPane(mapPanel);
@@ -70,7 +71,7 @@ public class Main extends JFrame{
         return this.simulation;
     }
 
-    private void initComponents() {
+    private void initComponents() throws IOException {
         JPanel layout = new JPanel();
         layout.setLayout(new BoxLayout(layout, BoxLayout.Y_AXIS));
         JPanel layout_north = new JPanel();
@@ -79,10 +80,10 @@ public class Main extends JFrame{
         JPanel layout_south = new JPanel();
         layout_south.setLayout(new GridLayout(1, 2));
         
-        start = new JButton("Start");
+        //start = new JButton("Start");
         creerRobot = new JButton("Creer");
         
-        start.addActionListener(new StartListener(this));
+        //start.addActionListener(new StartListener(this));
         
         mapPanel = new MapPanel(map);
         mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
