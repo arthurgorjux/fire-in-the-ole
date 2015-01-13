@@ -61,7 +61,8 @@ public class Robot implements Entite{
                         if (estArriveDestination()) {
                             prevenirObservateurs();//prevenur le manager qu'on est en train de glander
                         } else {
-                            while(!aAgis){
+                            //while(!aAgis){
+                                
                                 //reagrde dans son chemin si la case suivante est vide.
                                      //si la case contient un incendie
                                          // mode extintion
@@ -71,7 +72,7 @@ public class Robot implements Entite{
                                      //si la case est libre
                                         // position = position suivante dans le chemin
                                         //aAgis = true
-                            }
+                            //}
                             
                         }
                         break;
