@@ -10,48 +10,42 @@ import java.util.List;
 public class Manager implements Entite, Observateur{
 	boolean besoinAnalyse;
         Simulation simulation;
-//        public String[] etatsRobots; //liste des états que peut prendre un robot
         
         //contiendra la liste des robots occupés (ayant un incendie à éteindre)
-        HashMap<Robot, Incendie> listeOccupation = new HashMap<>();
+//        HashMap<Robot, Incendie> listeOccupation = new HashMap<>();
 	
 	public Manager(Simulation simulation) {
             this.simulation = simulation;
-            besoinAnalyse = false;
+            besoinAnalyse = true;
 	}
 
 	public void analyserSituation() {
-		// se debrouille pour occuper tous les robots
+            // se debrouille pour occuper tous les robots
             List<Robot> robots = simulation.getRobots();
+            List<Incendie> incendies = simulation.getIncendies();
             
             
-            //gérer si incendie éteint pour virer de la liste etc...
-            
-            
-            Iterator iteratorRobots = robots.iterator();
             //itération sur tout les robots
             for (Robot robotActuel : robots) 
             {
-                //si le robot est à l'arret
-                if (robotActuel.etat == EtatRobot.ARRET)
+                //si le robot est en extinction de feu -> pas de réafectation
+                //sinon on réafecte au feu le plus proche
+                if (!(robotActuel.etat == EtatRobot.EXTINCTION))
                 {
-                    //assigner à un feu
                     Incendie incendieProche = calculIncendieLePlusProche(robotActuel);
-                    listeOccupation.put(robotActuel, incendieProche);
-                    //lancer le déplacement
+                    robotActuel.etat = EtatRobot.DEPLACEMENT;
+                    //affectation de la destionation
                     robotActuel.definirDestination(incendieProche.x, incendieProche.y);
                 }
+              
             }
-            
-            
-          
             besoinAnalyse = false;
 	}
 
 	public void agir() {
-		if (besoinAnalyse) {
-			analyserSituation();
-		}
+            if (besoinAnalyse) {
+                analyserSituation();
+            }
 	}
 
 	@Override
@@ -61,6 +55,7 @@ public class Manager implements Entite, Observateur{
         
         private Incendie calculIncendieLePlusProche(Robot robot){
             //calcul de l'incendie le plus proche à vol d'oiseau
+            //2 robots sur le même feu est un cas possible
             int xRobot = robot.x;
             int yRobot = robot.y;
             
@@ -72,7 +67,7 @@ public class Manager implements Entite, Observateur{
             
             double distanceTotale = -1;
             double distanceMinimum = -1;
-            Incendie temp = null;
+            Incendie incendieTemp = null;
             
             List<Incendie> incendies = simulation.getIncendies();
             for (Incendie i : incendies)
@@ -89,11 +84,14 @@ public class Manager implements Entite, Observateur{
                 //on garde le plus court...
                 if (distanceMinimum == -1 || distanceMinimum > distanceTotale) {
                     distanceMinimum = distanceTotale;
-                    temp = i;
-                }   
+                    incendieTemp = i;
+                }  
             }
-            
-            return temp;
+            System.out.println("Robot : ");
+            System.out.println("x = "+robot.x+" y = "+robot.y);
+            System.out.println("Icendie choisit : ");
+            System.out.println("x = "+incendieTemp.x+" y = "+incendieTemp.y);
+            return incendieTemp;
         }
         
         
