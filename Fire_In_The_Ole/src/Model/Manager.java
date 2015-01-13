@@ -1,10 +1,6 @@
 package Model;
 
 import Observer.Observateur;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 
 public class Manager implements Entite, Observateur{
@@ -20,20 +16,17 @@ public class Manager implements Entite, Observateur{
 	}
 
 	public void analyserSituation() {
-            // se debrouille pour occuper tous les robots
+            // assigne des feux aux robots
             List<Robot> robots = simulation.getRobots();
-            List<Incendie> incendies = simulation.getIncendies();
-            
             
             //itération sur tout les robots
             for (Robot robotActuel : robots) 
-            {
+            {   
                 //si le robot est en extinction de feu -> pas de réafectation
                 //sinon on réafecte au feu le plus proche
                 if (!(robotActuel.etat == EtatRobot.EXTINCTION))
                 {
                     Incendie incendieProche = calculIncendieLePlusProche(robotActuel);
-                    robotActuel.etat = EtatRobot.DEPLACEMENT;
                     //affectation de la destionation
                     robotActuel.definirDestination(incendieProche.x, incendieProche.y);
                 }

@@ -15,19 +15,21 @@ public class Robot implements Entite{
         public EtatRobot etat;
         
 	public Robot(int origineX, int origineY, String type, String nom ){
-		x = origineX;
-		y = origineY;
-                destinationX = x;
-                destinationY = y;
-		typeRobot = type;
-		this.nom = nom;
-		observateurs = new LinkedList<>();
-                etat = EtatRobot.ARRET;
+            x = origineX;
+            y = origineY;
+            destinationX = x;
+            destinationY = y;
+            typeRobot = type;
+            this.nom = nom;
+            observateurs = new LinkedList<>();
+            etat = EtatRobot.ARRET;
 	}
 
         public void definirDestination(int x, int y) {
+            //le robot à reçu des coordonnées du manager, il se met en déplacement
             destinationX = x;
             destinationY = y;
+            this.etat = EtatRobot.DEPLACEMENT;
         }
         
         public void ajouterObservateur(Observateur observateur) {
