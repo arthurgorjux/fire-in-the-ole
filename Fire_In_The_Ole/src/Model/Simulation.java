@@ -2,6 +2,7 @@ package Model;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Timer;
 
 public class Simulation {
 	private final Manager manager;
@@ -10,8 +11,9 @@ public class Simulation {
 	private final List<Robot> robots;
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
-        private final List<Incendie> incendiesEteints;
-        private int duree;
+        private final List<Incendie> incendiesEteints;      
+	//temp
+	private int cpttest = 1;
 	
 	public Simulation() {
 		manager = new Manager(this);
@@ -26,8 +28,8 @@ public class Simulation {
 		// On ajoute les robots et les incendies aux listes
 		robots.add(new Robot(1, 1,"typerobotbidon","Toto"));
 		robots.add(new Robot(2, 2,"typerobotbidon","Titi"));
-		incendies.add(new Incendie(5,5, this));
-                incendies.add(new Incendie(6,5, this));
+		incendies.add(new Incendie(2,3, this));
+                incendies.add(new Incendie(0,0, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
                 for (Robot robot : robots) {
 			robot.ajouterObservateur(manager);
@@ -36,7 +38,7 @@ public class Simulation {
 			incendie.ajouterObservateur(manager);
 		}
 	}
-	
+        
 	public void mettreAJour() {
             // on fait apparaitre les incendies supplémentaires
             incendies.addAll(incendiesFutur);
@@ -45,14 +47,13 @@ public class Simulation {
             incendies.removeAll(incendiesEteints);
             incendiesEteints.removeAll(incendiesEteints);
             
-		manager.agir();
-		for (Robot robot : robots) {
-			robot.agir();
-		}
-		for (Incendie incendie : incendies) {
-			incendie.agir();
-		}
-		
+            manager.agir();
+            for (Robot robot : robots) {
+                    robot.agir();
+            }
+            for (Incendie incendie : incendies) {
+                    incendie.agir();
+            }
 	}
 
 	public ArchiveTourSimulation archiverTour() {
@@ -72,8 +73,8 @@ public class Simulation {
 	
 	public boolean estTerminee() {
 		// TODO Auto-generated method stub
-		duree = duree +1;
-		if (duree < 15) {
+		cpttest = cpttest +1;
+		if (cpttest < 15) {
 			return false;
 		} else {
 			return true;
@@ -113,6 +114,10 @@ public class Simulation {
 
     public List<Robot> getRobots() {
         return robots;
+    }
+    
+    public Manager getManager(){
+        return this.manager;
     }
   
     void eteindreFeu(Incendie feu) {

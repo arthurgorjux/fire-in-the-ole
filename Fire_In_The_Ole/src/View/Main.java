@@ -6,16 +6,15 @@
 package View;
 
 import Controller.Simulateur;
+import Model.ArchiveTourSimulation;
 import Model.CarteDeTerrain;
+import Model.Simulation;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -24,8 +23,9 @@ import javax.swing.JPanel;
  */
 public class Main extends JFrame{
     
-    CarteDeTerrain map = new CarteDeTerrain();
+    private CarteDeTerrain map = new CarteDeTerrain();
     private MapPanel mapPanel;
+    private Simulation simulation;
     
     private javax.swing.JButton start;
     private javax.swing.JButton creerRobot;
@@ -39,20 +39,35 @@ public class Main extends JFrame{
     private javax.swing.JPanel simulateur;
     private javax.swing.JPanel stats;
     
-    public Main() {
+    public Main(Simulation simulation) {
+        this.simulation = simulation;
         this.initComponents();        
         //this.setContentPane(mapPanel);
         this.setLocationRelativeTo(null);
-
+        this.setSize(500, 500);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        this.setVisible(true);
     }
     
-    public static void main(String args[]) {
+    /*public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Main().setVisible(true);
             }
         });
+    }*/
+    
+    public void setMap(ArchiveTourSimulation tour){
+        mapPanel.setEtatsEntites(tour.getEtatsEntite());
+        mapPanel.repaint();
+    }
+    
+    public CarteDeTerrain getMap(){
+        return this.map;
+    }
+    
+    public Simulation getSimulation(){
+        return this.simulation;
     }
 
     private void initComponents() {
@@ -67,13 +82,7 @@ public class Main extends JFrame{
         start = new JButton("Start");
         creerRobot = new JButton("Creer");
         
-        start.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                Simulateur simulateur = new Simulateur();
-                simulateur.jouerSimulation(new CarteDeTerrain());
-                simulateur.rejouerSimulation(); 
-            }
-        });
+        start.addActionListener(new StartListener(this));
         
         mapPanel = new MapPanel(map);
         mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
@@ -87,7 +96,7 @@ public class Main extends JFrame{
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
         simulateur = new javax.swing.JPanel();
         simulateur.setPreferredSize(new Dimension(infos.getWidth()*(1/3), infos.getHeight()));
-        start = new javax.swing.JButton("Start");
+        //start = new javax.swing.JButton("Start");
 
         
         simulateur.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
