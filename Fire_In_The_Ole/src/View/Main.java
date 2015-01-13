@@ -8,6 +8,7 @@ package View;
 import Controller.Simulateur;
 import Model.ArchiveTourSimulation;
 import Model.CarteDeTerrain;
+import Model.EtatEntite;
 import Model.Simulation;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -35,10 +36,11 @@ public class Main extends JFrame{
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;*/
-    private javax.swing.JPanel listeRobots;
+    private RobotsPanel listeRobots;
     private javax.swing.JPanel infos;
     private javax.swing.JPanel simulateur;
     private javax.swing.JPanel stats;
+    private EtatEntite[] etatsEntite;
     
     public Main(Simulation simulation) throws IOException {
         this.simulation = simulation;
@@ -59,8 +61,17 @@ public class Main extends JFrame{
     }*/
     
     public void setMap(ArchiveTourSimulation tour){
+        this.etatsEntite = tour.getEtatsEntite();
         mapPanel.setEtatsEntites(tour.getEtatsEntite());
         mapPanel.repaint();
+    }
+    
+    public EtatEntite[] getEtatsEntites(){
+        return this.etatsEntite;
+    }
+    
+    public RobotsPanel getRobotsPanel(){
+        return this.listeRobots;
     }
     
     public CarteDeTerrain getMap(){
@@ -91,7 +102,7 @@ public class Main extends JFrame{
         
         infos = new javax.swing.JPanel();
         infos.setPreferredSize(new Dimension(layout_south.getWidth(), layout_south.getHeight()));
-        listeRobots = new javax.swing.JPanel();
+        listeRobots = new RobotsPanel(this);
         creerRobot = new javax.swing.JButton("Creer");
         stats = new javax.swing.JPanel();
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
@@ -104,7 +115,7 @@ public class Main extends JFrame{
         stats.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         listeRobots.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         //simulateur.add(start);
-        listeRobots.add(creerRobot);
+        //listeRobots.add(creerRobot);
         layout_north.add(mapPanel);
         layout_north.add(listeRobots);
         

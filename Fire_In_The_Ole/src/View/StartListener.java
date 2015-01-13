@@ -32,11 +32,14 @@ class StartListener implements ActionListener {
         window.setMap(window.getSimulation().archiverTour());
         Timer timer;
         if(this.panel.getTimer()!= null){
+            System.out.println("Reprise de la simulation...");
             timer = this.panel.getTimer();
         }else{
+            System.out.println("Début de la simulation...");
             timer = new Timer(1000, new TimerListener(window, panel));
             this.panel.setTimer(timer);
-        }        
+        }  
+        this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
         timer.start();        
     }
     

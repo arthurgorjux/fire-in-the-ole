@@ -28,6 +28,7 @@ class StopListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.checkState();
+        System.out.println("Simulation en pause...");
         this.panel.getTimer().stop();
         /*System.out.println("Génération de la simulation...");
         window.getSimulation().mettreAJour();
