@@ -39,7 +39,9 @@ class StartListener implements ActionListener {
             timer = new Timer(1000, new TimerListener(window, panel));
             this.panel.setTimer(timer);
         }  
-        this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
+        //if(!this.window.getRobotsPanel().alreadyExist()){
+            this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
+        //}
         timer.start();        
     }
     

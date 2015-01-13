@@ -23,14 +23,15 @@ public class RobotsPanel extends JPanel{
     
     private JButton creerRobot;
     private Main window;
-    private JList robots;
+    private JList robots = null;
+    private boolean alreadyExist = false;
     
     public RobotsPanel(Main window) throws IOException{
         super();
         this.window = window;
         Image imgRobot = ImageIO.read(getClass().getResource("/IMG/plus.png"));
         creerRobot = new JButton(new ImageIcon(imgRobot));
-        this.add(robots);
+        
         this.add(creerRobot);
     }
     
@@ -41,6 +42,21 @@ public class RobotsPanel extends JPanel{
                 result.add(entite);
             }
         }
-        robots = new JList(result.toArray());
+        
+        if(!this.alreadyExist){        
+            robots = new JList(result.toArray());
+            this.add(robots);
+        }else{
+            robots.setListData(result.toArray());
+        }
+        this.alreadyExist = true;
+    }
+    
+    public boolean alreadyExist(){
+        return this.alreadyExist;
+    }
+
+    public JList getList() {
+        return this.robots;
     }
 }
