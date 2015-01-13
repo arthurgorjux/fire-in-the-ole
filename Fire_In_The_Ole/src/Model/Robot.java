@@ -35,7 +35,7 @@ public class Robot implements Entite{
         }
         
 	public void agir() {
-		// TODO Auto-generated method stub
+		
 		
 	}
 	

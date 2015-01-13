@@ -27,7 +27,7 @@ public final class CarteDeTerrain {
 	}
         
         public int[][] getCarte(){
-            return carte;
+            return carte.clone();
         }
 
 }
