@@ -28,11 +28,16 @@ class StartListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.checkState();
-        System.out.println("Génération de la simulation...");
         window.getSimulation().mettreAJour();
         window.setMap(window.getSimulation().archiverTour());
-        Timer timer = new Timer(1000, new TimerListener(window));
-        timer.start(); 
+        Timer timer;
+        if(this.panel.getTimer()!= null){
+            timer = this.panel.getTimer();
+        }else{
+            timer = new Timer(1000, new TimerListener(window, panel));
+            this.panel.setTimer(timer);
+        }        
+        timer.start();        
     }
     
     public void checkState(){

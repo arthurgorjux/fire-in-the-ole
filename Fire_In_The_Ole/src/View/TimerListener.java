@@ -17,9 +17,11 @@ import javax.swing.Timer;
 public class TimerListener implements ActionListener{
     
     private Main window;
+    private SimulationPanel panel;
     
-    public TimerListener(Main window){
+    public TimerListener(Main window, SimulationPanel panel){
         this.window = window;
+        this.panel = panel;
     }
     
     @Override
