@@ -85,5 +85,9 @@ public class Incendie implements Entite{
 	public EtatEntite getEtatEntite() {
 		return new EtatEntite(x, y, "Flammes", "incendie");
 	}
+
+    void arroser(int puissanceDuJet) {
+        intensite -= puissanceDuJet;
+    }
 	
 }

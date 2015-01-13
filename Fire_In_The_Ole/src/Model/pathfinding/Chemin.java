@@ -28,10 +28,17 @@ public class Chemin {
      */
     public Position getPositionSuivante(Position etapeCourante) {
        int indiceEtapeCourante ;
+       Position positionSuivante;
        
        if (etapes.contains(etapeCourante)) {
            indiceEtapeCourante = etapes.indexOf(etapeCourante);
-           return etapes.get(indiceEtapeCourante+1); //TODO verifier que ca retourne bien la position suivante dans la liste
+           // gerer le cas ou il n'y a pas de position suivante
+           if (indiceEtapeCourante+1 < etapes.size()) {
+                positionSuivante = etapes.get(indiceEtapeCourante+1); //TODO verifier que ca retourne bien la position suivante dans la liste
+           } else {
+               positionSuivante = etapeCourante;
+           }
+           return positionSuivante;
        } else {
            throw new Error("getPositionSuivante de Chemin marche mal");
        }

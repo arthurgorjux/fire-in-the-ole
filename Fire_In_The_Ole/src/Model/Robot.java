@@ -1,5 +1,7 @@
 package Model;
 
+import static Model.EtatRobot.DEPLACEMENT;
+import Model.pathfinding.Chemin;
 import Model.pathfinding.PathFinder;
 import Model.pathfinding.Position;
 import Observer.Observateur;
@@ -17,10 +19,13 @@ public class Robot implements Entite{
         public EtatRobot etat;
         private final PathFinder pathFinder;
         private Position position;
+        private Chemin chemin;
+        private final Simulation simulation;
         
-	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder ){
+	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder, Simulation simulation ){
             x = origineX;
             y = origineY;
+            this.simulation = simulation;
             position = new Position(x, y);
             destinationX = x;
             destinationY = y;
@@ -29,6 +34,7 @@ public class Robot implements Entite{
             observateurs = new LinkedList<>();
             etat = EtatRobot.ARRET;
             this.pathFinder = pathFinder;
+            calculerChemin();
 	}
 
         public void definirDestination(Position position) {
@@ -39,7 +45,7 @@ public class Robot implements Entite{
         }
         
         private void calculerChemin() {
-            pathFinder.getCheminLePlusCourt(getPosition(), new Position(destinationX, destinationY));
+            chemin = pathFinder.getCheminLePlusCourt(getPosition(), new Position(destinationX, destinationY));
         }
         
         public void ajouterObservateur(Observateur observateur) {
@@ -55,35 +61,38 @@ public class Robot implements Entite{
          */
         @Override
 	public void agir() {
+            Position suivant = chemin.getPositionSuivante(position);
             boolean aAgis = false;
 		switch(etat){
                     case DEPLACEMENT:
                         if (estArriveDestination()) {
                             prevenirObservateurs();//prevenur le manager qu'on est en train de glander
                         } else {
-                            //while(!aAgis){
-                                
-                                //reagrde dans son chemin si la case suivante est vide.
-                                     //si la case contient un incendie
-                                         // mode extintion
-                                         // aAgis = true
-                                     //si la case contient un obstacle
-                                         // recalculer cheminvers destination
-                                     //si la case est libre
-                                        // position = position suivante dans le chemin
-                                        //aAgis = true
-                            //}
-                            
+                           while(!aAgis){
+                                if (simulation.contientUnIncendie(suivant)) {
+                                         etat = EtatRobot.EXTINCTION;
+                                          aAgis = true;
+                                } else if  (simulation.contientUnRobot(suivant)) {
+                                    calculerChemin();
+                                    aAgis = true;//TODO Actuelement un robot qui en 'percute" un autre perds un tour
+                                } else {
+                                    // TODO nettoyer bordel des position des x et des y
+                                    position = suivant;
+                                    x = suivant.getX();
+                                    y = suivant.getY();
+                                    aAgis = true;
+                                }
+                            }
                         }
                         break;
                     case EXTINCTION:
-                        // Si il y a un feu dans la case suivante du chemin
-                            // feu = getIncendiePosition(x,y)
-                            // feu.arroser(forceArrosage)
-                        // Sinon
+                        if (simulation.contientUnIncendie(suivant)) {
+                            Incendie incendie = simulation.getIncendieAt(position);
+                            incendie.arroser(15);//TODO changer variable en dur
+                        } else {
                             prevenirObservateurs();// prévenir le manager qu'on glande
-                            // etat = DEPLACEMENT
-                        //FINSI
+                            etat = DEPLACEMENT;
+                        }
                         break;
                     default:
                         throw new Error("Erreur : robot sans etat");

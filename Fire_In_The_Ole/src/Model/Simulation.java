@@ -31,8 +31,8 @@ public class Simulation {
                 incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
-		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder));
-		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder));
+		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder, this));
+		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
 		incendies.add(new Incendie(2,3, this));
                 incendies.add(new Incendie(0,0, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
@@ -147,5 +147,14 @@ public class Simulation {
   
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
+    }
+
+    Incendie getIncendieAt(Position position) {
+        for (Incendie incendie : incendies) {
+            if(incendie.getPosition()==position) {
+                return incendie;
+            }
+        }
+        throw new Error("Ta mère");
     }
 }
