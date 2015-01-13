@@ -6,8 +6,9 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Incendie implements Entite{
-    public int x;
-    public int y;
+    private int x;
+    private int y;
+    private Position position;
     private int intensite;
     private final Simulation simulation;
     private final List<Observateur> observateurs;
@@ -19,6 +20,7 @@ public class Incendie implements Entite{
      * @param simulation
      */
     public Incendie(int origineX, int origineY, Simulation simulation) {
+        position = new Position(x, y);
         x = origineX;
         y = origineY;
         intensite = 1;//intensite par defaut
@@ -27,7 +29,7 @@ public class Incendie implements Entite{
     }
 
     public Position getPosition(){
-        return new Position(x,y);
+        return position;
     }
     
     @Override

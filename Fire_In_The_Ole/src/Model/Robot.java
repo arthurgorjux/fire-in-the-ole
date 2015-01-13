@@ -14,10 +14,12 @@ public class Robot implements Entite{
 	public final String nom;
         public final List<Observateur> observateurs;
         public EtatRobot etat;
+        private Position position;
         
 	public Robot(int origineX, int origineY, String type, String nom ){
             x = origineX;
             y = origineY;
+            position = new Position(x, y);
             destinationX = x;
             destinationY = y;
             typeRobot = type;
@@ -26,10 +28,10 @@ public class Robot implements Entite{
             etat = EtatRobot.ARRET;
 	}
 
-        public void definirDestination(int x, int y) {
+        public void definirDestination(Position position) {
             //le robot à reçu des coordonnées du manager, il se met en déplacement
-            destinationX = x;
-            destinationY = y;
+            destinationX = position.getX();
+            destinationY = position.getY();
             this.etat = EtatRobot.DEPLACEMENT;
         }
         
@@ -38,7 +40,7 @@ public class Robot implements Entite{
         }
         
         public Position getPosition() {
-            return new Position(x,y);
+            return position;
         }
         
         /**

@@ -24,11 +24,13 @@ public class Manager implements Entite, Observateur{
             {   
                 //si le robot est en extinction de feu -> pas de réafectation
                 //sinon on réafecte au feu le plus proche
+                //cela permet de prendre en compte un feu qui se serait déclaré
+                //plus proche que le feu fixé initialement
                 if (!(robotActuel.etat == EtatRobot.EXTINCTION))
                 {
                     Incendie incendieProche = calculIncendieLePlusProche(robotActuel);
                     //affectation de la destionation
-                    robotActuel.definirDestination(incendieProche.x, incendieProche.y);
+                    robotActuel.definirDestination(incendieProche.getPosition());
                 }
               
             }
@@ -36,9 +38,8 @@ public class Manager implements Entite, Observateur{
 	}
 
 	public void agir() {
-            if (besoinAnalyse) {
+            if (besoinAnalyse)
                 analyserSituation();
-            }
 	}
 
 	@Override
@@ -49,8 +50,8 @@ public class Manager implements Entite, Observateur{
         private Incendie calculIncendieLePlusProche(Robot robot){
             //calcul de l'incendie le plus proche à vol d'oiseau
             //2 robots sur le même feu est un cas possible
-            int xRobot = robot.x;
-            int yRobot = robot.y;
+            int xRobot = robot.getPosition().getX();
+            int yRobot = robot.getPosition().getY();
             
             int xIncendie;
             int yIncendie;
@@ -65,8 +66,8 @@ public class Manager implements Entite, Observateur{
             List<Incendie> incendies = simulation.getIncendies();
             for (Incendie i : incendies)
             {
-                xIncendie = i.x;
-                yIncendie = i.y;
+                xIncendie = i.getPosition().getX();
+                yIncendie = i.getPosition().getY();
                 
                 //calcul diagonale
                 distanceAbscisse = Math.pow(Math.abs(xRobot - xIncendie), 2);
@@ -83,7 +84,7 @@ public class Manager implements Entite, Observateur{
             System.out.println("Robot : ");
             System.out.println("x = "+robot.x+" y = "+robot.y);
             System.out.println("Icendie choisit : ");
-            System.out.println("x = "+incendieTemp.x+" y = "+incendieTemp.y);
+            System.out.println("x = "+incendieTemp.getPosition().getX()+" y = "+incendieTemp.getPosition().getY());
             return incendieTemp;
         }
         
