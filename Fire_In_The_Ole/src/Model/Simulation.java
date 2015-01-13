@@ -72,7 +72,6 @@ public class Simulation {
 	}
 	
 	public boolean estTerminee() {
-		// TODO Auto-generated method stub
 		duree = duree +1;
 		if (duree < 15) {
 			return false;

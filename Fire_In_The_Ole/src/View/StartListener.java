@@ -5,6 +5,7 @@
  */
 package View;
 
+import Model.ArchiveSimulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -25,17 +26,24 @@ class StartListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         System.out.println("Génération de la simulation...");
-        new Timer(1000, new ActionListener() {
-
+        window.getSimulation().mettreAJour();
+        window.setMap(window.getSimulation().archiverTour());
+        Timer timer = new Timer(1000, new ActionListener() {
+            
             @Override
             public void actionPerformed(ActionEvent e) {
-                
                 window.getSimulation().mettreAJour();
                 window.setMap(window.getSimulation().archiverTour());
-                System.out.println("Affichage de la simulation :");
-                System.out.println("fin !");
             }
         });
+        if(!window.getSimulation().estTerminee()){
+            timer.start(); 
+        }else{
+            timer.stop();
+            System.out.println("Fin");
+            ArchiveSimulation archive = this.window.getSimulation().getArchiveResultat();
+            archive.afficher();
+        }
     }
     
 }
