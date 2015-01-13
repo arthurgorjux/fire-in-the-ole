@@ -1,0 +1,31 @@
+@startuml
+
+title "Lancer simulation"
+
+actor Utilisateur
+entity startListener
+entity Panel
+entity Window
+entity Timer
+
+
+Utilisateur -> startListener : LancerSimulation()
+startListener -> Panel : setEtat(1)
+startListener -> Panel : getStart().setEnabled(false)
+startListener -> Panel : getStop().setEnabled(true)
+startListener -> Window : mettreAJour()
+startListener -> Window : setMap(Window.getSimulation().archiverTour())
+
+alt panel.getTimer() != null
+    Timer -> Panel : getTimer()
+    Window -> Utilisateur : System.out.prinln("Reprise de la simulation...")
+else
+   Timer -> Timer : new Timer(1000, new TimerListener(window, panel))
+   Timer -> Panel : setTimer(timer)
+    Window -> Utilisateur : System.out.prinln("Début de la simulation")
+end
+Window -> Window : getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite())
+Timer -> Timer : start()
+
+
+@enduml
