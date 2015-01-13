@@ -71,14 +71,16 @@ public class Simulation {
 		return tour;
 	}
 	
-	public boolean estTerminee() {
-		duree = duree +1;
-		if (duree < 15) {
-			return false;
-		} else {
-			return true;
-		}
-	}
+
+	public boolean estTerminee() {            
+            //on termine la simulation si la liste des incendies est vide
+            //ou au bout d'un certain nombre de tours dans un premier temps...
+            duree = duree +1;
+            if (incendies.isEmpty())
+                return true;
+            else
+                return (duree>=15);
+        }
 
 	public ArchiveSimulation getArchiveResultat() {
 		// TODO Auto-generated method stub
