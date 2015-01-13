@@ -19,12 +19,41 @@ public class Position {
         this.y = y;
     }
     
+    /**
+     * Le numéro de colonne dans la grille
+     * @return 
+     */
     public int getX() {
         return x;
     }
     
+    /** 
+     * Le numéro de ligne dans la grille
+     * @return 
+     */
     public int getY() {
         return y;
+    }
+    
+    @Override
+    public boolean equals(Object obj) {
+        if (obj instanceof Position){
+            Position autre = (Position)obj;
+            if (autre.x == x && autre.y == y) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    /** Honnetement je sais meme pas a quoi ca sert. A vue de nez faire des comparaisons plus rapide
+     Suggéré par NetBean en warning */
+    public int hashCode() {
+        int hash = 7;
+        hash = 97 * hash + this.x;
+        hash = 97 * hash + this.y;
+        return hash;
     }
     
 }
