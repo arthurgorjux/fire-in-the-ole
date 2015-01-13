@@ -94,7 +94,7 @@ public class Main extends JFrame{
         creerRobot = new javax.swing.JButton("Creer");
         stats = new javax.swing.JPanel();
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
-        simulateur = new javax.swing.JPanel();
+        simulateur = new SimulationPanel(this);
         simulateur.setPreferredSize(new Dimension(infos.getWidth()*(1/3), infos.getHeight()));
         //start = new javax.swing.JButton("Start");
 
@@ -102,7 +102,7 @@ public class Main extends JFrame{
         simulateur.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         stats.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         listeRobots.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-        simulateur.add(start);
+        //simulateur.add(start);
         listeRobots.add(creerRobot);
         layout_north.add(mapPanel);
         layout_north.add(listeRobots);

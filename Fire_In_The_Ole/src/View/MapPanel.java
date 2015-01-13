@@ -73,8 +73,8 @@ public class MapPanel extends javax.swing.JPanel{
                         colorEntite = new Color(255, 0, 0);
                         break;
                 }
-                int widthEntite = NUM_COLS * 3;
-                int heightEntite = NUM_ROWS * 3;
+                int widthEntite = NUM_COLS * 10;
+                int heightEntite = NUM_ROWS * 10;
                 int x = entite.getX() * rectWidth;
                 int y = entite.getY() * rectHeight;
                 g2d.setColor(colorEntite);
