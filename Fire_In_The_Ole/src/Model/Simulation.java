@@ -11,8 +11,7 @@ public class Simulation {
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
         private final List<Incendie> incendiesEteints;
-	//temp
-	private int cpttest = 1;
+        private int duree;
 	
 	public Simulation() {
 		manager = new Manager(this);
@@ -73,8 +72,8 @@ public class Simulation {
 	
 	public boolean estTerminee() {
 		// TODO Auto-generated method stub
-		cpttest = cpttest +1;
-		if (cpttest < 15) {
+		duree = duree +1;
+		if (duree < 15) {
 			return false;
 		} else {
 			return true;
