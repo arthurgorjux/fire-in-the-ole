@@ -15,9 +15,9 @@ import java.util.*;
  * @author S219
  */
 public class PathFinderToutDroit {
-    public ArrayList getCheminLePlusCourt(Position robot, Position feu, Simulation simu) {
+    public Chemin getCheminLePlusCourt(Position robot, Position feu, Simulation simu) {
         CarteDeTerrain carte = new CarteDeTerrain();
-        ArrayList chemin = new ArrayList();
+        List<Position> chemin = new ArrayList<>();
         chemin.add(robot);
         int robot_temp_x = robot.getX();
         int robot_temp_y = robot.getY();
@@ -57,20 +57,6 @@ public class PathFinderToutDroit {
                 chemin.add(new Position(robot_temp_x, robot_temp_y));
             }    
         }
-        return chemin;        
-    }
-    
-    public static void main(String args[]) {
-        PathFinderToutDroit toutdroit = new PathFinderToutDroit();
-        Position robot = new Position(2, 0);
-        Position feu = new Position(2, 3);
-        Simulation simu = new Simulation();
-        ArrayList resultat = toutdroit.getCheminLePlusCourt(robot, feu, simu);
-        for (Iterator it = resultat.iterator(); it.hasNext();) {
-            Position pos = (Position) it.next();
-            System.out.println (pos.getX() + " " + pos.getY());
-        }
-            
-        //System.out.println(rez);
+        return new Chemin(chemin);        
     }
 }
