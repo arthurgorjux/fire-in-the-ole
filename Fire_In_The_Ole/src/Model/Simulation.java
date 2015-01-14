@@ -35,6 +35,7 @@ public class Simulation {
 		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
 		incendies.add(new Incendie(2,3, this));
                 incendies.add(new Incendie(0,0, this));
+                incendies.add(new Incendie(2,5, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
                 for (Robot robot : robots) {
 			robot.ajouterObservateur(manager);
@@ -91,7 +92,7 @@ public class Simulation {
             if (incendies.isEmpty())
                 return true;
             else
-                return (duree>=15);
+                return (duree>=30);
         }
 
 	public ArchiveSimulation getArchiveResultat() {

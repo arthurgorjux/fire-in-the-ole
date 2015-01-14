@@ -19,8 +19,6 @@ import java.awt.Graphics2D;
 public class MapPanel extends javax.swing.JPanel{
 
     private CarteDeTerrain map;
-    public static final int NUM_ROWS = 7;
-    public static final int NUM_COLS = 8;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 7;
     private EtatEntite[] etatEntites;
     
@@ -28,8 +26,8 @@ public class MapPanel extends javax.swing.JPanel{
         this.map = map;
         
         // Set size map
-        int preferredWidth = NUM_COLS * PREFERRED_GRID_SIZE_PIXELS;
-        int preferredHeight = NUM_ROWS * PREFERRED_GRID_SIZE_PIXELS;
+        int preferredWidth = this.map.getLargeur()* PREFERRED_GRID_SIZE_PIXELS;
+        int preferredHeight = this.map.getHauteur() * PREFERRED_GRID_SIZE_PIXELS;
         setPreferredSize(new Dimension(preferredWidth, preferredHeight));
     }
     
@@ -40,11 +38,11 @@ public class MapPanel extends javax.swing.JPanel{
         
         g2d.clearRect(0, 0, getWidth(), getHeight());
         
-        int rectWidth = NUM_COLS * 10;
-        int rectHeight = NUM_ROWS * 10;
+        int rectWidth = this.map.getLargeur() * 10;
+        int rectHeight = this.map.getHauteur() * 10;
         
-        for (int i = 0; i < NUM_ROWS-1; i++) {
-            for (int j = 0; j < NUM_COLS-1; j++) {
+        for (int i = 0; i < this.map.getHauteur()-1; i++) {
+            for (int j = 0; j < this.map.getLargeur()-1; j++) {
                 Color color = new Color(102,153,0);
                 int [][] carte = this.map.getCarte();
                 switch(carte[i][j]){
@@ -73,8 +71,8 @@ public class MapPanel extends javax.swing.JPanel{
                         colorEntite = new Color(255, 0, 0);
                         break;
                 }
-                int widthEntite = NUM_COLS * 10;
-                int heightEntite = NUM_ROWS * 10;
+                int widthEntite = this.map.getLargeur()* 10;
+                int heightEntite = this.map.getHauteur() * 10;
                 int x = entite.getPosition().getX() * rectWidth;
                 int y = entite.getPosition().getY() * rectHeight;
                 g2d.setColor(colorEntite);
