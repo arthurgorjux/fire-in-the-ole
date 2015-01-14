@@ -30,6 +30,8 @@ class StartListener implements ActionListener {
         this.checkState();
         window.getSimulation().mettreAJour();
         window.setMap(window.getSimulation().archiverTour());
+        System.out.println("ARCHIVE==========");
+        System.out.println(window.getSimulation().archiverTour());
         Timer timer;
         if(this.panel.getTimer()!= null){
             System.out.println("Reprise de la simulation...");
@@ -40,7 +42,7 @@ class StartListener implements ActionListener {
             this.panel.setTimer(timer);
             this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
         }        
-        timer.start();        
+        timer.start();   
     }
     
     public void checkState(){

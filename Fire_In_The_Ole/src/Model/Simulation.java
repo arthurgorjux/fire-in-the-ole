@@ -51,13 +51,20 @@ public class Simulation {
             
             incendies.removeAll(incendiesEteints);
             incendiesEteints.removeAll(incendiesEteints);
-            
-            manager.agir();
-            for (Robot robot : robots) {
-                    robot.agir();
-            }
-            for (Incendie incendie : incendies) {
-                    incendie.agir();
+            System.out.println("ROBOTS MAJ=====");
+            System.out.println(robots);
+            System.out.println("INCENDIES MAJ=====");
+            System.out.println(incendies);
+            System.out.println("INCENDIES ETEINTS=====");
+            System.out.println(incendiesEteints);
+            if(incendies.size() != 0){
+                manager.agir();
+                for (Robot robot : robots) {
+                        robot.agir();
+                }
+                for (Incendie incendie : incendies) {
+                        incendie.agir();
+                }
             }
 	}
 
@@ -70,7 +77,7 @@ public class Simulation {
 		for (Incendie incendie : incendies) {
 			etatsEntite.add(incendie.getEtatEntite());
 		}
-		
+                
 		ArchiveTourSimulation tour = new ArchiveTourSimulation(etatsEntite);
 		archive.addTour(tour);
 		return tour;
@@ -116,7 +123,8 @@ public class Simulation {
          */
         public boolean contientUnIncendie(Position emplacement) {
             for (Incendie incendie : incendies) {
-		if (incendie.getPosition() == emplacement) {
+		if (incendie.getPosition().equals(emplacement)) {
+                    System.out.println(emplacement + " Ya un feu ici");
                     return true;
                 }
             }
@@ -125,7 +133,7 @@ public class Simulation {
         
         public boolean contientUnRobot(Position emplacement) {
             for (Robot robot : robots) {
-		if (robot.getPosition() == emplacement) {
+		if (robot.getPosition().equals(emplacement)) {
                     return true;
                 }
             }
@@ -147,14 +155,18 @@ public class Simulation {
   
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
+        System.out.println("ETEINTS FEU : " + feu);
+        System.out.println("FEU ETEINTS SIMU===");
+        System.out.println(incendiesEteints);
     }
 
     Incendie getIncendieAt(Position position) {
         for (Incendie incendie : incendies) {
-            if(incendie.getPosition()==position) {
+            if(incendie.getPosition().equals(position)) {
                 return incendie;
             }
         }
-        throw new Error("Ta mère");
+        //throw new Error("Ta mère");
+            return null;
     }
 }

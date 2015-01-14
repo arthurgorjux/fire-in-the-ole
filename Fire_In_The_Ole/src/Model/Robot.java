@@ -55,34 +55,30 @@ public class Robot implements Entite{
         @Override
 	public void agir() {
             Position suivant = chemin.getPositionSuivante(positionActuelle);
-            boolean aAgis = false;
 		switch(etat){
                     case DEPLACEMENT:
-                        if (estArriveDestination()) {
-                            prevenirObservateurs();
-                        } else {
-                           while(!aAgis){
-                                if (simulation.contientUnIncendie(suivant)) {
-                                         etat = EtatRobot.EXTINCTION;
-                                          aAgis = true;
-                                } else if  (simulation.contientUnRobot(suivant)) {
-                                    calculerChemin();
-                                    aAgis = true;//TODO Actuelement un robot qui en 'percute" un autre perds un tour
-                                } else {
-                                    positionActuelle = suivant;
-                                    aAgis = true;
-                                }
+                        if (simulation.contientUnIncendie(suivant)) {
+                            //prevenirObservateurs();
+                            etat = EtatRobot.EXTINCTION;
+                        } else {                           
+                            if(simulation.contientUnRobot(suivant)) {
+                                calculerChemin();
+                            }else{
+                                positionActuelle = suivant;
                             }
                         }
                         break;
                     case EXTINCTION:
-                        if (simulation.contientUnIncendie(suivant)) {
-                            Incendie incendie = simulation.getIncendieAt(positionActuelle);
+                        if (simulation.getIncendieAt(suivant) != null) {
+                            System.out.println(this + " eteint un feu");
+                            Incendie incendie = simulation.getIncendieAt(suivant);
                             incendie.arroser(150);//TODO changer variable en dur
                         } else {
                             prevenirObservateurs();
                             etat = DEPLACEMENT;
                         }
+                        break;
+                    case ARRET:
                         break;
                     default:
                         throw new Error("Erreur : robot sans etat");
@@ -105,4 +101,9 @@ public class Robot implements Entite{
 	public EtatEntite getEtatEntite() {
 		return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
 	}
+        
+        @Override
+        public String toString(){
+            return this.nom + " : " + this.positionActuelle.getX() + ", " + this.positionActuelle.getY();
+        }
 }

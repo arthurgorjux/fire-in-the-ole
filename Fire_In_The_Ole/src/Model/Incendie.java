@@ -42,6 +42,10 @@ public class Incendie implements Entite{
         intensite += 1;
 
     }
+    
+    public boolean isEteint(){
+        return this.intensite == 0;
+    }
 
     /**
      * Propagation primitive : le feu essaye de se propager a doirte puis vers le haut puis vers le bas puis vers la gauche
@@ -65,6 +69,7 @@ public class Incendie implements Entite{
     }
     
         private void sEteindre() {
+            System.out.println("JE M'ETEINTS : " + this);
             simulation.eteindreFeu(this);
             prevenirObservateurs();
         }
@@ -87,7 +92,14 @@ public class Incendie implements Entite{
 	}
 
     void arroser(int puissanceDuJet) {
+        System.out.println("JE SUIS ARROSE" + this);
         intensite -= puissanceDuJet;
+    }
+    
+    @Override
+    public String toString(){
+        return "Incendie : " + this.x + ", " + this.y;
+        
     }
 	
 }
