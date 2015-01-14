@@ -32,6 +32,9 @@ public class TimerListener implements ActionListener{
         }else{
             Timer t = (Timer) e.getSource();
             t.stop();
+            panel.getStop().setEnabled(false);
+            panel.getStart().setEnabled(true);
+            panel.getReset().setEnabled(true);
             System.out.println("Fin");
             ArchiveSimulation archive = this.window.getSimulation().getArchiveResultat();
             archive.afficher();

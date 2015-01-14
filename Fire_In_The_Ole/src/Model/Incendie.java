@@ -34,7 +34,7 @@ public class Incendie implements Entite{
     
     @Override
     public void agir() {
-        if (intensite >= 5) {
+        if (intensite >= 7) {
             sePropager();
         } else if (intensite <= 0) {
             sEteindre();

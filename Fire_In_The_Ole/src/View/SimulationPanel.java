@@ -25,6 +25,7 @@ public class SimulationPanel extends JPanel{
     private int STOP = 0;
     private JButton start;
     private JButton stop;
+    private JButton reset;
     private Main window;
     private Timer timer;
     
@@ -37,11 +38,15 @@ public class SimulationPanel extends JPanel{
         start = new JButton(new ImageIcon(imgStart));
         Image imgStop = ImageIO.read(getClass().getResource("/IMG/pause.png"));
         stop = new JButton(new ImageIcon(imgStop));
+        Image imgReset = ImageIO.read(getClass().getResource("/IMG/reset.png"));
+        reset = new JButton(new ImageIcon(imgReset));
         stop.setEnabled(false);
+        reset.setEnabled(false);
         start.addActionListener(new StartListener(this.window, this));
         this.add(start);
         stop.addActionListener(new StopListener(this.window, this));
         this.add(stop);
+        this.add(reset);
     }
     
     public void setEtat(int etat){
@@ -58,6 +63,10 @@ public class SimulationPanel extends JPanel{
     
     public JButton getStop(){
         return this.stop;
+    }
+    
+    public JButton getReset(){
+        return this.reset;
     }
 
     void setTimer(Timer timer) {
