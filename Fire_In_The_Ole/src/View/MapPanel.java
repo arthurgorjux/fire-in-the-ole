@@ -11,6 +11,11 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 /**
  *
@@ -63,20 +68,31 @@ public class MapPanel extends javax.swing.JPanel{
         } 
         if(this.etatEntites != null){
             for(EtatEntite entite : this.etatEntites){
-                Color colorEntite = new Color(0, 0, 0);
-                switch(entite.getType()){
-                    case "typeRobot":
-                        break;
-                    case "incendie":
-                        colorEntite = new Color(255, 0, 0);
-                        break;
+                try {
+                    Color colorEntite = new Color(0, 0, 0);
+                    Image img = null;
+                    switch(entite.getType()){
+                        case "typeRobot":
+                            Image imgRobot = ImageIO.read(getClass().getResource("/IMG/robot.png"));
+                            img = imgRobot;
+                            break;
+                        case "incendie":
+                            colorEntite = new Color(255, 0, 0);
+                            Image imgFeu = ImageIO.read(getClass().getResource("/IMG/feu_2.png"));
+                            img = imgFeu;
+                            break;
+                    }
+                    int widthEntite = this.map.getLargeur()* 10;
+                    int heightEntite = this.map.getHauteur() * 10;
+                    int x = entite.getPosition().getX() * rectWidth;
+                    int y = entite.getPosition().getY() * rectHeight;
+                    g2d.setColor(colorEntite);
+                    
+                    g2d.drawImage(img, x, y, widthEntite, heightEntite, this);
+                    //g2d.fillRect(x, y, widthEntite, heightEntite);
+                } catch (IOException ex) {
+                    Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                int widthEntite = this.map.getLargeur()* 10;
-                int heightEntite = this.map.getHauteur() * 10;
-                int x = entite.getPosition().getX() * rectWidth;
-                int y = entite.getPosition().getY() * rectHeight;
-                g2d.setColor(colorEntite);
-                g2d.fillRect(x, y, widthEntite, heightEntite);
             }
         }
     }
