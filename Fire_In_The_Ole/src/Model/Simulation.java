@@ -33,6 +33,8 @@ public class Simulation {
 		// On ajoute les robots et les incendies aux listes
 		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder, this));
 		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
+                robots.add(new Robot(4, 5,"typerobotbidon","Robert", pathFinder, this));
+                robots.add(new Robot(7, 5,"typerobotbidon","Robert", pathFinder, this));
 		incendies.add(new Incendie(2,3, this));
                 incendies.add(new Incendie(0,0, this));
                 incendies.add(new Incendie(2,5, this));
@@ -58,7 +60,7 @@ public class Simulation {
             System.out.println(incendies);
             System.out.println("INCENDIES ETEINTS=====");
             System.out.println(incendiesEteints);
-            if(incendies.size() != 0){
+            if(!incendies.isEmpty()){
                 manager.agir();
                 for (Robot robot : robots) {
                         robot.agir();
@@ -92,7 +94,7 @@ public class Simulation {
             if (incendies.isEmpty())
                 return true;
             else
-                return (duree>=30);
+                return (duree>=60);
         }
 
 	public ArchiveSimulation getArchiveResultat() {

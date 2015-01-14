@@ -7,11 +7,13 @@ package View;
 
 import Model.CarteDeTerrain;
 import Model.EtatEntite;
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Stroke;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,12 +26,12 @@ import javax.imageio.ImageIO;
 public class MapPanel extends javax.swing.JPanel{
 
     private CarteDeTerrain map;
-    public static final int PREFERRED_GRID_SIZE_PIXELS = 7;
+    public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
     
     MapPanel(CarteDeTerrain map) {
         this.map = map;
-        
+        //this.setBackground(new Color(144,238,144));
         // Set size map
         int preferredWidth = this.map.getLargeur()* PREFERRED_GRID_SIZE_PIXELS;
         int preferredHeight = this.map.getHauteur() * PREFERRED_GRID_SIZE_PIXELS;
@@ -43,8 +45,8 @@ public class MapPanel extends javax.swing.JPanel{
         
         g2d.clearRect(0, 0, getWidth(), getHeight());
         
-        int rectWidth = this.map.getLargeur() * 10;
-        int rectHeight = this.map.getHauteur() * 10;
+        int rectWidth = PREFERRED_GRID_SIZE_PIXELS * 3;
+        int rectHeight = PREFERRED_GRID_SIZE_PIXELS * 3;
         
         for (int i = 0; i < this.map.getHauteur()-1; i++) {
             for (int j = 0; j < this.map.getLargeur()-1; j++) {
@@ -62,7 +64,7 @@ public class MapPanel extends javax.swing.JPanel{
                 int x = i * rectWidth;
                 int y = j * rectHeight;
                 g2d.setColor(color);
-                g2d.fillRect(x, y, rectWidth, rectHeight);
+                g2d.fill3DRect(x, y, rectWidth, rectHeight, false);
                 
             }
         } 
@@ -82,8 +84,8 @@ public class MapPanel extends javax.swing.JPanel{
                             img = imgFeu;
                             break;
                     }
-                    int widthEntite = this.map.getLargeur()* 10;
-                    int heightEntite = this.map.getHauteur() * 10;
+                    int widthEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
+                    int heightEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
                     int x = entite.getPosition().getX() * rectWidth;
                     int y = entite.getPosition().getY() * rectHeight;
                     g2d.setColor(colorEntite);
