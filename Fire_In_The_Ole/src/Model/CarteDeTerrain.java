@@ -17,6 +17,12 @@ public final class CarteDeTerrain {
             return 18; //TODO placeholder
         }
         
+        private int[][] analyserImageBitmap() {
+            int[][] matrice = null;
+            
+            return matrice;
+        }
+        
 	public CarteDeTerrain() {
 		int carteGeneree [][] = {
 		{0,0,0,0,0,0,2,2,2,2,2,0,2,0,2,0,0,0},

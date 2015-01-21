@@ -21,12 +21,12 @@ import javax.swing.Timer;
 public class SimulationPanel extends JPanel{
     
     private int etat;
-    private int START = 1;
-    private int STOP = 0;
-    private JButton start;
-    private JButton stop;
-    private JButton reset;
-    private Main window;
+    private final int START = 1;
+    private final int STOP = 0;
+    private final JButton start;
+    private final JButton stop;
+    private final JButton reset;
+    private final Main window;
     private Timer timer;
     
     public SimulationPanel(Main window) throws IOException{

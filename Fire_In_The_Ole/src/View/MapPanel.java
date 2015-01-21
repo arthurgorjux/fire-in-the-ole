@@ -7,13 +7,11 @@ package View;
 
 import Model.CarteDeTerrain;
 import Model.EtatEntite;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Stroke;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
