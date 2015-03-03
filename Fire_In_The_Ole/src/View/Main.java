@@ -7,6 +7,7 @@ package View;
 
 import Controller.Simulateur;
 import Model.ArchiveTourSimulation;
+import Model.BitmapLoader;
 import Model.CarteDeTerrain;
 import Model.EtatEntite;
 import Model.Simulation;
@@ -25,7 +26,7 @@ import javax.swing.JPanel;
  */
 public class Main extends JFrame{
     
-    private CarteDeTerrain map = new CarteDeTerrain();
+    private CarteDeTerrain map;
     private MapPanel mapPanel;
     private Simulation simulation;
     
@@ -44,6 +45,9 @@ public class Main extends JFrame{
     
     public Main(Simulation simulation) throws IOException {
         this.simulation = simulation;
+        BitmapLoader bmp = new BitmapLoader();
+        this.map = new CarteDeTerrain();
+        this.map.setCarte(bmp.getCarte());
         this.initComponents();        
         //this.setContentPane(mapPanel);
         this.setLocationRelativeTo(null);
