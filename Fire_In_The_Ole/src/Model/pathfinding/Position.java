@@ -39,9 +39,7 @@ public class Position {
     public boolean equals(Object obj) {
         if (obj instanceof Position){
             Position autre = (Position)obj;
-            if (autre.x == x && autre.y == y) {
-                return true;
-            }
+            return (autre.x == x && autre.y == y);
         }
         return false;
     }

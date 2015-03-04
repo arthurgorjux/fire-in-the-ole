@@ -12,6 +12,9 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
@@ -42,15 +45,19 @@ public class BitmapChargerListener implements ActionListener{
         if(!filename.endsWith(".bmp")){
             JOptionPane.showMessageDialog(window, "L'extension du fichier doit être un .bmp", "Mauvaise extension", JOptionPane.ERROR_MESSAGE);
         }else{
-            BitmapLoader bmp = new BitmapLoader(dir + "/" + filename);
-            this.map = new CarteDeTerrain(bmp.getCarte());
-            this.window.changeMap(this.map);
-            this.window.mapPanel = new MapPanel(map);
-            this.window.mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-            this.window.mapPanel.setPreferredSize(new Dimension(300,300)); 
-            this.window.layout_north.add(this.window.mapPanel);
-            this.window.revalidate();
-            this.window.repaint();
+            try {
+                BitmapLoader bmp = new BitmapLoader();
+                this.map = new CarteDeTerrain(bmp.lireFichierBitmap(dir + "/" + filename));
+                this.window.changeMap(this.map);
+                this.window.mapPanel = new MapPanel(map);
+                this.window.mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+                this.window.mapPanel.setPreferredSize(new Dimension(300,300));
+                this.window.layout_north.add(this.window.mapPanel);
+                this.window.revalidate();
+                this.window.repaint();
+            } catch (IOException ex) {
+                Logger.getLogger(BitmapChargerListener.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
       }
       if (rVal == JFileChooser.CANCEL_OPTION) {

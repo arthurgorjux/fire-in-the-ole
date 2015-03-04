@@ -11,7 +11,7 @@ public class Simulation {
 	private final Manager manager;
 	private final ArchiveSimulation archive;
 	private final CarteDeTerrain carte;
-	private List<Robot> robots;
+	private final List<Robot> robots;
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
         private final List<Incendie> incendiesEteints;
@@ -201,7 +201,6 @@ public class Simulation {
                 return incendie;
             }
         }
-        //throw new Error("Ta mère");
             return null;
     }
 }
