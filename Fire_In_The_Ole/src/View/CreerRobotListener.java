@@ -16,12 +16,10 @@ import java.util.List;
  */
 class CreerRobotListener implements ActionListener {
 
-    private Main windowMain;
-    private RobotsPanel panel;
+    private ConfigDialog windowMain;
     private List<Robot> robots;
-    public CreerRobotListener(Main window, RobotsPanel aThis, List<Robot> robots) {
+    public CreerRobotListener(ConfigDialog window, List<Robot> robots) {
         windowMain = window;
-        panel = aThis;
         this.robots = robots;
     }
 

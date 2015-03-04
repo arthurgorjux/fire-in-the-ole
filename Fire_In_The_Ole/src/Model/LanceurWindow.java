@@ -1,4 +1,5 @@
 package Model;
+import View.ConfigDialog;
 import View.Main;
 import java.io.IOException;
 
@@ -11,7 +12,8 @@ public class LanceurWindow {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub            
-                Main mainWindow = new Main();
+                //Main mainWindow = new Main();
+            ConfigDialog config = new ConfigDialog();
 		/*Simulateur simulateur = new Simulateur();
 		System.out.println("Génération de la simulation...");
                 simulateur.jouerSimulation(new CarteDeTerrain(), new Main());

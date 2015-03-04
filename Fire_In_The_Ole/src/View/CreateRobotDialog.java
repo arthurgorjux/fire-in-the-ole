@@ -38,9 +38,9 @@ public class CreateRobotDialog extends JDialog{
     public List<Robot> robots;
     private JSpinner coordX;
     private JSpinner coordY;
-    private Main main;
+    private ConfigDialog main;
     
-    public CreateRobotDialog(List<Robot> robots, Main main){
+    public CreateRobotDialog(List<Robot> robots, ConfigDialog main){
         super();
         this.robots = robots;
         this.main = main;
@@ -103,7 +103,7 @@ public class CreateRobotDialog extends JDialog{
         return this.coordY;
     }
     
-    public Main getMainWindow(){
+    public ConfigDialog getMainWindow(){
         return this.main;
     }
     

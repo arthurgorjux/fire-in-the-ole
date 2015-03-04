@@ -47,7 +47,7 @@ public class Main extends JFrame{
     private javax.swing.JPanel simulateur;
     private javax.swing.JPanel stats;
     private EtatEntite[] etatsEntite;
-    private List<Robot> robots = new LinkedList<>();
+    private List<Robot> robots;
     private JPanel layout = new JPanel();
     public JPanel layout_north = new JPanel();
     private JPanel layout_south = new JPanel();
@@ -55,8 +55,10 @@ public class Main extends JFrame{
     private JMenu fichier = new JMenu("Fichier");
     private JMenuItem bitmapCharger = new JMenuItem("Charger map");
     
-    public Main() throws IOException {
+    public Main(LinkedList<Robot> robots, CarteDeTerrain map) throws IOException {
         //this.simulation = new Simulation();
+        this.robots = robots;
+        this.map = map;
         this.initComponents();        
         //this.setContentPane(mapPanel);
         this.setLocationRelativeTo(null);
@@ -97,28 +99,28 @@ public class Main extends JFrame{
 
     private void initComponents() throws IOException {
         
-        this.bitmapCharger.addActionListener(new BitmapChargerListener(this, this.map));
+        /*this.bitmapCharger.addActionListener(new BitmapChargerListener(this, this.map));
         this.fichier.add(this.bitmapCharger);
         this.menu.add(this.fichier);
-        this.setJMenuBar(this.menu);
+        this.setJMenuBar(this.menu);*/
         
         layout.setLayout(new BoxLayout(layout, BoxLayout.Y_AXIS));
         layout_north.setLayout(new BoxLayout(layout_north, BoxLayout.X_AXIS));
         layout_south.setLayout(new GridLayout(1, 2));
         
         //start = new JButton("Start");
-        creerRobot = new JButton("Creer");
+        //creerRobot = new JButton("Creer");
         
         //start.addActionListener(new StartListener(this));
         
-        /*mapPanel = new MapPanel(map);
+        mapPanel = new MapPanel(map);
         mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-        mapPanel.setPreferredSize(new Dimension(300,300));*/     
+        mapPanel.setPreferredSize(new Dimension(300,300));  
         
         infos = new javax.swing.JPanel();
         infos.setPreferredSize(new Dimension(layout_south.getWidth(), layout_south.getHeight()));
         listeRobots = new RobotsPanel(this, robots);
-        creerRobot = new javax.swing.JButton("Creer");
+        //creerRobot = new javax.swing.JButton("Creer");
         stats = new javax.swing.JPanel();
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
         simulateur = new SimulationPanel(this);
@@ -132,8 +134,8 @@ public class Main extends JFrame{
         listeRobots.setPreferredSize(new Dimension(200, 300));
         //simulateur.add(start);
         //listeRobots.add(creerRobot);
-        //layout_north.add(mapPanel);
-        layout_north.add(listeRobots);
+        layout_north.add(mapPanel);
+        //layout_north.add(listeRobots);
         
         layout_south.add(simulateur);
         layout_south.add(stats);

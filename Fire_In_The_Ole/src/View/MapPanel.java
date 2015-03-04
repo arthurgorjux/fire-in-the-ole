@@ -7,13 +7,11 @@ package View;
 
 import Model.CarteDeTerrain;
 import Model.EtatEntite;
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.Stroke;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.logging.Level;
@@ -26,7 +24,7 @@ import javax.imageio.ImageIO;
  */
 public class MapPanel extends javax.swing.JPanel{
 
-    private CarteDeTerrain map;
+    private final CarteDeTerrain map;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
     private HashMap<Integer,Color> mapping;

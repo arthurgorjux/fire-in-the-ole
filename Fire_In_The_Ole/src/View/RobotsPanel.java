@@ -34,7 +34,7 @@ public class RobotsPanel extends JPanel{
         this.window = window;
         Image imgRobot = ImageIO.read(getClass().getResource("/IMG/plus.png"));
         creerRobot = new JButton(new ImageIcon(imgRobot));
-        this.creerRobot.addActionListener(new CreerRobotListener(this.window, this, robots));
+        //this.creerRobot.addActionListener(new CreerRobotListener(this.window, this, robots));
         this.add(creerRobot);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }

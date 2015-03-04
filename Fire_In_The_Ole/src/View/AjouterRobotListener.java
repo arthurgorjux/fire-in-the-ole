@@ -6,6 +6,7 @@
 package View;
 
 import Model.Robot;
+import Model.Simulation;
 import Model.pathfinding.PathFinderToutDroit;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
@@ -34,8 +35,9 @@ class AjouterRobotListener implements ActionListener {
             // Add robot dans la liste + fermer fenetre
             int x = (Integer) this.window.getCoordX().getValue();
             int y = (Integer) this.window.getCoordY().getValue();
-            if(this.coordAvailable(x, y) == true){                
-                this.window.robots.add(new Robot(x, y, (String) this.window.getTypeRobot().getSelectedItem(), this.window.getNameRobot().getText(), new PathFinderToutDroit(this.window.getMainWindow().getSimulation()), this.window.getMainWindow().getSimulation()));
+            if(this.coordAvailable(x, y) == true){  
+                Simulation simuTmp = new Simulation();
+                this.window.robots.add(new Robot(x, y, (String) this.window.getTypeRobot().getSelectedItem(), this.window.getNameRobot().getText(), new PathFinderToutDroit(simuTmp), simuTmp));
                 JOptionPane.showMessageDialog(window, "Le robot " + this.window.getNameRobot().getText() + "\na été ajouté avec succès\naux coordonnées : " + x + ", " + y, "Robot ajouté ", JOptionPane.INFORMATION_MESSAGE);
                 this.window.dispose();
             }else{

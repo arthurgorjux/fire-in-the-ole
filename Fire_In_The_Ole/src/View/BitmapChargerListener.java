@@ -24,12 +24,10 @@ import javax.swing.JOptionPane;
  */
 public class BitmapChargerListener implements ActionListener{
     
-    private Main window;
-    private CarteDeTerrain map;
+    private ConfigDialog window;
 
-    public BitmapChargerListener(Main window, CarteDeTerrain map) {
+    public BitmapChargerListener(ConfigDialog window) {
         this.window = window;
-        this.map = map;
     }
 
     @Override
@@ -47,14 +45,9 @@ public class BitmapChargerListener implements ActionListener{
         }else{
             try {
                 BitmapLoader bmp = new BitmapLoader();
-                this.map = new CarteDeTerrain(bmp.lireFichierBitmap(dir + "/" + filename));
-                this.window.changeMap(this.map);
-                this.window.mapPanel = new MapPanel(map);
-                this.window.mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-                this.window.mapPanel.setPreferredSize(new Dimension(300,300));
-                this.window.layout_north.add(this.window.mapPanel);
-                this.window.revalidate();
-                this.window.repaint();
+                CarteDeTerrain map = new CarteDeTerrain(bmp.lireFichierBitmap(dir + "/" + filename));
+                this.window.setMap(map);
+                this.window.setLabel("Carte choisie : " + filename);
             } catch (IOException ex) {
                 Logger.getLogger(BitmapChargerListener.class.getName()).log(Level.SEVERE, null, ex);
             }
