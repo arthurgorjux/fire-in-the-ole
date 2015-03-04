@@ -1,0 +1,11 @@
+@startuml
+
+[*] --> Arrêt
+
+Arrêt --> EnDéplacement : Feu assigné par le manager
+EnDéplacement --> Extinction : Arriver aux coordonnées du feu
+EnDéplacement --> Arrêt : Feu éteint
+Extinction --> Arrêt : Feu éteint
+
+
+@enduml

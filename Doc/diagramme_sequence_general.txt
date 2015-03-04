@@ -1,0 +1,60 @@
+@startuml
+actor Utilisateur
+actor Simulateur
+actor Simulation
+entity Manager
+entity Robot
+
+
+== Initialization ==
+Utilisateur -> Simulateur : jouerSimulation(CarteDeTerrain)
+Simulateur -> Simulation : initialiser()
+
+Simulation -> Manager : initialiser()
+Simulation -> Robot : initialiser()
+Simulation -> Robot : ajouterObservateur(Manager)
+
+Simulation -> Incendie : initialiser()
+Simulation -> Incendie : ajouterObservateur(Manager)
+
+== Repetition ==
+alt Simulation pas terminée
+    Simulateur -> Simulation : mettreAJour()
+    Simulation -> Manager : agir()
+    
+    note over Manager
+        si besoinAnalyse == TRUE
+    end note
+    Manager -> Manager : analyserSituation()
+    
+    loop Pour tout les robots
+    note over Manager,Robot
+        Si robot disponible
+    end note
+    Manager -> Robot : definirDestination(Incendie)
+    activate Robot
+    Simulation -> Robot : agir()
+    Robot -> Robot : blabla()
+    Robot -> Manager : prevenir()
+    deactivate Robot
+    end loop
+    
+    loop Pour tout les incendies
+        Simulation -> Incendie : agir()
+        activate Incendie
+        alt intensité suffisante
+            Incendie -> Incendie : sePropager()
+        else intensité insuffisante
+            Incendie -> Incendie : sEteindre()
+        end
+        Incendie -> Manager : prevenir()
+        deactivate Incendie
+    end loop
+    
+    Simulateur -> Simulation : archiverTour()
+
+else Simulation terminée
+end
+
+
+@enduml
