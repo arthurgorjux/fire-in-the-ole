@@ -6,6 +6,8 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Incendie implements Entite{
+    private int x;
+    private int y;
     private Position position;
     private int intensite;
     private final Simulation simulation;
@@ -18,7 +20,9 @@ public class Incendie implements Entite{
      * @param simulation
      */
     public Incendie(int origineX, int origineY, Simulation simulation) {
-        position = new Position(origineX, origineY);
+        x = origineX;
+        y = origineY;
+        position = new Position(x, y);
         intensite = 1;//intensite par defaut
         this.simulation = simulation;
         observateurs = new LinkedList<>();
@@ -38,6 +42,10 @@ public class Incendie implements Entite{
         intensite += 1;
 
     }
+    
+    public boolean isEteint(){
+        return this.intensite == 0;
+    }
 
     /**
      * Propagation primitive : le feu essaye de se propager a doirte puis vers le haut puis vers le bas puis vers la gauche
@@ -45,15 +53,15 @@ public class Incendie implements Entite{
     private void sePropager() {
         boolean sEstPropage = false;
         
-        sEstPropage = simulation.ajouterFeu(1,position.getX()+1,position.getY());
+        sEstPropage = simulation.ajouterFeu(1,x+1,y);
         if (!sEstPropage) { 
-            sEstPropage = simulation.ajouterFeu(1,position.getX(),position.getY()+1);
+            sEstPropage = simulation.ajouterFeu(1,x,y+1);
         }
         if (!sEstPropage) { 
-            sEstPropage = simulation.ajouterFeu(1,position.getX(),position.getY()-1);
+            sEstPropage = simulation.ajouterFeu(1,x,y-1);
         }
         if (!sEstPropage) { 
-            sEstPropage = simulation.ajouterFeu(1,position.getX()-1,position.getY());
+            sEstPropage = simulation.ajouterFeu(1,x-1,y);
         }
         if (sEstPropage) {
             intensite = intensite -5;
@@ -80,7 +88,7 @@ public class Incendie implements Entite{
         }
         
 	public EtatEntite getEtatEntite() {
-		return new EtatEntite(position.getX(), position.getY(), "Flammes", "incendie");
+		return new EtatEntite(x, y, "Flammes", "incendie");
 	}
 
     void arroser(int puissanceDuJet) {
@@ -90,7 +98,7 @@ public class Incendie implements Entite{
     
     @Override
     public String toString(){
-        return "Incendie : " + position.getX() + ", " + this.position.getY();
+        return "Incendie : " + this.x + ", " + this.y;
         
     }
 	

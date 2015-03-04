@@ -5,8 +5,12 @@
  */
 package View;
 
+import Model.ArchiveSimulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.Timer;
 
 /**
  *
@@ -14,9 +18,8 @@ import java.awt.event.ActionListener;
  */
 class StopListener implements ActionListener {
 
-    private final Main window;
-    private final SimulationPanel panel;
-    
+    private Main window;
+    private SimulationPanel panel;
     public StopListener(Main window, SimulationPanel panel) {
         this.window = window;
         this.panel = panel;

@@ -1,5 +1,6 @@
 package Model;
 
+import Model.pathfinding.Chemin;
 import java.util.LinkedList;
 import java.util.List;
 import Model.pathfinding.Position;
@@ -10,7 +11,7 @@ public class Simulation {
 	private final Manager manager;
 	private final ArchiveSimulation archive;
 	private final CarteDeTerrain carte;
-	private final List<Robot> robots;
+	private List<Robot> robots;
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
         private final List<Incendie> incendiesEteints;
@@ -31,8 +32,13 @@ public class Simulation {
                 incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
-		ajouterRobot();
-                ajouterIncendies();
+		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder, this));
+		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
+                robots.add(new Robot(4, 5,"typerobotbidon","Robert", pathFinder, this));
+                robots.add(new Robot(7, 5,"typerobotbidon","Robert", pathFinder, this));
+		incendies.add(new Incendie(2,3, this));
+                incendies.add(new Incendie(0,0, this));
+                incendies.add(new Incendie(2,5, this));
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
                 for (Robot robot : robots) {
 			robot.ajouterObservateur(manager);
@@ -42,19 +48,36 @@ public class Simulation {
 		}
 	}
         
-        private void ajouterRobot() {
-            robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder, this));
-            robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
-            robots.add(new Robot(4, 5,"typerobotbidon","Robert", pathFinder, this));
-            robots.add(new Robot(7, 5,"typerobotbidon","Robert", pathFinder, this));
-        }
-        
-        private void ajouterIncendies() {
+        public Simulation(List<Robot> robotsFromUI) {  
+            if(robotsFromUI.size() > 0){
+                
+            }
+            pathFinder = new PathFinderToutDroit(this);
+            manager = new Manager(this);
+            archive = new ArchiveSimulation();
+            carte = new CarteDeTerrain();
+                
+            robots = robotsFromUI;
+            
+            incendies = new LinkedList<>();
+            incendiesFutur = new LinkedList<>();
+            incendiesEteints = new LinkedList<>();
+
+            // On ajoute les robots et les incendies aux listes
             incendies.add(new Incendie(2,3, this));
             incendies.add(new Incendie(0,0, this));
-            incendies.add(new Incendie(2,5, this));
-            
-        }
+            // On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
+            for (Robot robot : robots) { 
+                    robot.ajouterObservateur(manager);
+                    robot.setPathFinder((PathFinderToutDroit) this.pathFinder);
+                    robot.setSimulation(this);
+                    Chemin chemin = pathFinder.getCheminLePlusCourt(robot.getPosition(), robot.getDestination());
+                    robot.setChemin(chemin);
+            }
+            for (Incendie incendie : incendies) {
+                    incendie.ajouterObservateur(manager);
+            }
+	}
         
 	public void mettreAJour() {
             // on fait apparaitre les incendies supplémentaires

@@ -11,7 +11,7 @@ public class LanceurWindow {
 
 	public static void main(String[] args) throws IOException {
 		// TODO Auto-generated method stub            
-                Main mainWindow = new Main(new Simulation());
+                Main mainWindow = new Main();
 		/*Simulateur simulateur = new Simulateur();
 		System.out.println("Génération de la simulation...");
                 simulateur.jouerSimulation(new CarteDeTerrain(), new Main());

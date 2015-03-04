@@ -6,6 +6,7 @@
 package View;
 
 import Model.ArchiveSimulation;
+import Model.Simulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.logging.Level;
@@ -22,6 +23,7 @@ class StartListener implements ActionListener {
     private SimulationPanel panel;
     public StartListener(Main window, SimulationPanel panel) {
         this.window = window;
+        this.window.setSimulation(new Simulation(this.window.getRobotsList()));
         this.panel = panel;
     }
 
@@ -40,7 +42,7 @@ class StartListener implements ActionListener {
             System.out.println("Début de la simulation...");
             timer = new Timer(1000, new TimerListener(window, panel));
             this.panel.setTimer(timer);
-            this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
+            //this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
         }        
         timer.start();   
     }

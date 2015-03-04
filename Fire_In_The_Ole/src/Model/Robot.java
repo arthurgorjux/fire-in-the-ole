@@ -3,6 +3,7 @@ package Model;
 import static Model.EtatRobot.DEPLACEMENT;
 import Model.pathfinding.Chemin;
 import Model.pathfinding.PathFinder;
+import Model.pathfinding.PathFinderToutDroit;
 import Model.pathfinding.Position;
 import Observer.Observateur;
 import java.util.LinkedList;
@@ -14,10 +15,10 @@ public class Robot implements Entite{
 	public final String nom;
         public final List<Observateur> observateurs;
         public EtatRobot etat;
-        private final PathFinder pathFinder;
+        private PathFinder pathFinder;
         private Position positionActuelle;
         private Chemin chemin;
-        private final Simulation simulation;
+        private Simulation simulation;
         
 	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder, Simulation simulation ){
             positionActuelle = new Position(origineX, origineY);
@@ -39,6 +40,10 @@ public class Robot implements Entite{
         
         private void calculerChemin() {
             chemin = pathFinder.getCheminLePlusCourt(positionActuelle, destination);
+        }
+        
+        public void setChemin (Chemin chemin){
+            this.chemin = chemin;
         }
         
         public void ajouterObservateur(Observateur observateur) {
@@ -106,4 +111,17 @@ public class Robot implements Entite{
         public String toString(){
             return this.nom + " : " + this.positionActuelle.getX() + ", " + this.positionActuelle.getY();
         }
+
+    public void setPathFinder(PathFinderToutDroit pathFinderToutDroit) {
+        this.pathFinder = pathFinderToutDroit;
+    }
+
+    public void setSimulation(Simulation simu) {
+        this.simulation = simu;
+    }
+    
+    public Position getDestination(){
+        return this.destination;
+    }
+    
 }

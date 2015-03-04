@@ -6,9 +6,11 @@
 package View;
 
 import Model.EtatEntite;
+import Model.Robot;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import javax.imageio.ImageIO;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -27,11 +29,13 @@ public class RobotsPanel extends JPanel{
     private JList robots = null;
     private boolean alreadyExist = false;
     
-    public RobotsPanel(Main window) throws IOException{
+    public RobotsPanel(Main window, List<Robot> robots) throws IOException{
         super();
         this.window = window;
         Image imgRobot = ImageIO.read(getClass().getResource("/IMG/plus.png"));
         creerRobot = new JButton(new ImageIcon(imgRobot));
+        this.creerRobot.addActionListener(new CreerRobotListener(this.window, this, robots));
+        this.add(creerRobot);
         this.setLayout(new BoxLayout(this,BoxLayout.Y_AXIS));
     }
     

@@ -17,12 +17,6 @@ public final class CarteDeTerrain {
             return 18; //TODO placeholder
         }
         
-        private int[][] analyserImageBitmap() {
-            int[][] matrice = null;
-            
-            return matrice;
-        }
-        
 	public CarteDeTerrain() {
 		int carteGeneree [][] = {
 		{0,0,0,0,0,0,2,2,2,2,2,0,2,0,2,0,0,0},
@@ -67,10 +61,6 @@ public final class CarteDeTerrain {
 		};
 		carte = carteGeneree;
 	}
-        
-        public CarteDeTerrain(int[][] carte){
-            this.carte = carte;
-        }
 	
 	public int getDifficulte(int x, int y) {
 		return carte[x][y];
@@ -83,5 +73,4 @@ public final class CarteDeTerrain {
         public void setCarte(int[][] carte){
             this.carte = carte;
         }
-
 }
