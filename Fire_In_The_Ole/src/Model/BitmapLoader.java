@@ -17,10 +17,8 @@ import javax.imageio.ImageIO;
 public class BitmapLoader {
     private int[][] carte;
     private BufferedImage  img;
-    private HashMap<Integer,Integer> mapping;
     
     public BitmapLoader(){
-        this.initMapping();
         try {
             img = ImageIO.read(getClass().getResource("/IMG/test_1.bmp"));
         } catch (Exception e) {
@@ -37,13 +35,12 @@ public class BitmapLoader {
             for (int w = 1; w<width; w++){
                 rgb = img.getRGB(w, h);
                 green = (rgb >> 8 ) & 0x000000FF;
-                carte[w][h] = this.mapping.get(green);
+                carte[w][h] = green;
             }
         }
     }
     
     public BitmapLoader(String filename){
-        this.initMapping();
         try {
             File file = new File(filename);
             System.out.println("File : " + file);
@@ -62,19 +59,12 @@ public class BitmapLoader {
             for (int w = 1; w<width; w++){
                 rgb = img.getRGB(w, h);
                 green = (rgb >> 8 ) & 0x000000FF;
-                carte[w][h] = this.mapping.get(green);
+                carte[w][h] = green;
             }
         }
     }
     
     public int[][] getCarte(){
         return this.carte;
-    }
-
-    private void initMapping() {
-        this.mapping = new HashMap<>();
-        this.mapping.put(51, 40);
-        this.mapping.put(153, 2);
-        this.mapping.put(255, 0);
     }
 }

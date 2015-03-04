@@ -43,8 +43,7 @@ public class BitmapChargerListener implements ActionListener{
             JOptionPane.showMessageDialog(window, "L'extension du fichier doit être un .bmp", "Mauvaise extension", JOptionPane.ERROR_MESSAGE);
         }else{
             BitmapLoader bmp = new BitmapLoader(dir + "/" + filename);
-            this.map = new CarteDeTerrain();
-            this.map.setCarte(bmp.getCarte());
+            this.map = new CarteDeTerrain(bmp.getCarte());
             this.window.changeMap(this.map);
             this.window.mapPanel = new MapPanel(map);
             this.window.mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));

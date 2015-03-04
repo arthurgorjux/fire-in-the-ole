@@ -15,6 +15,7 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Stroke;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,6 +29,7 @@ public class MapPanel extends javax.swing.JPanel{
     private CarteDeTerrain map;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
+    private HashMap<Integer,Color> mapping;
     
     MapPanel(CarteDeTerrain map) {
         this.map = map;
@@ -41,6 +43,7 @@ public class MapPanel extends javax.swing.JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
+        this.initMapping();
         Graphics2D g2d = (Graphics2D) g;
         
         g2d.clearRect(0, 0, getWidth(), getHeight());
@@ -50,16 +53,8 @@ public class MapPanel extends javax.swing.JPanel{
         
         for (int i = 0; i < this.map.getHauteur()-1; i++) {
             for (int j = 0; j < this.map.getLargeur()-1; j++) {
-                Color color = new Color(102,153,0);
                 int [][] carte = this.map.getCarte();
-                switch(carte[i][j]){
-                    case 0: color = new Color(144,238,144);
-                     break;
-                    case 2: color = new Color(50,205,50);
-                     break;
-                    case 40: color = new Color(139,69,19);
-                     break;
-                   }
+                Color color = this.mapping.get(carte[i][j]);
                 // Upper left corner of this terrain rect
                 int x = i * rectWidth;
                 int y = j * rectHeight;
@@ -71,15 +66,15 @@ public class MapPanel extends javax.swing.JPanel{
         if(this.etatEntites != null){
             for(EtatEntite entite : this.etatEntites){
                 try {
-                    Color colorEntite = new Color(0, 0, 0);
                     Image img = null;
+                    Color colorEntite = null;
                     switch(entite.getType()){
                         case "typeRobot":
                             Image imgRobot = ImageIO.read(getClass().getResource("/IMG/robot.png"));
                             img = imgRobot;
                             break;
                         case "incendie":
-                            colorEntite = new Color(255, 0, 0);
+                            //colorEntite = new Color(255, 0, 0);
                             Image imgFeu = ImageIO.read(getClass().getResource("/IMG/feu_2.png"));
                             img = imgFeu;
                             break;
@@ -88,7 +83,8 @@ public class MapPanel extends javax.swing.JPanel{
                     int heightEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
                     int x = entite.getPosition().getX() * rectWidth;
                     int y = entite.getPosition().getY() * rectHeight;
-                    g2d.setColor(colorEntite);
+                    /*if(colorEntite != null)
+                        g2d.setColor(colorEntite*/
                     
                     g2d.drawImage(img, x, y, widthEntite, heightEntite, this);
                     //g2d.fillRect(x, y, widthEntite, heightEntite);
@@ -101,5 +97,12 @@ public class MapPanel extends javax.swing.JPanel{
 
     public void setEtatsEntites(EtatEntite[] etatsEntite) {
         this.etatEntites = etatsEntite;
-    }    
+    }  
+    
+    private void initMapping() {
+        this.mapping = new HashMap<>();
+        this.mapping.put(51, new Color(139,69,19));
+        this.mapping.put(153, new Color(50,205,50));
+        this.mapping.put(255, new Color(144,238,144));
+    }
 }
