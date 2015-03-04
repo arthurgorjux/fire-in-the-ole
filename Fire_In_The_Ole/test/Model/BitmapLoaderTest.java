@@ -4,11 +4,8 @@
  * and open the template in the editor.
  */
 package Model;
-
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import java.awt.image.BufferedImage;
+import javax.imageio.ImageIO;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -17,53 +14,26 @@ import static org.junit.Assert.*;
  * @author S219
  */
 public class BitmapLoaderTest {
-    
-    public BitmapLoaderTest() {
-    }
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
-    
-    @Before
-    public void setUp() {
-    }
-    
-    @After
-    public void tearDown() {
-    }
-
-    /**
-     * Test of lireCarteParDefaut method, of class BitmapLoader.
-     */
-    @Test
-    public void testLireCarteParDefaut() throws Exception {
-        System.out.println("lireCarteParDefaut");
-        BitmapLoader instance = new BitmapLoader();
-        int[][] expResult = null;
-        int[][] result = instance.lireCarteParDefaut();
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of lireFichierBitmap method, of class BitmapLoader.
+     * @throws java.lang.Exception
      */
     @Test
     public void testLireFichierBitmap() throws Exception {
         System.out.println("lireFichierBitmap");
-        String chemin_acces_fichier = "";
+        BufferedImage imageBitmap;
+        imageBitmap = ImageIO.read(getClass().getResource("/IMG/Test/mapTest.bmp"));
         BitmapLoader instance = new BitmapLoader();
-        int[][] expResult = null;
-        int[][] result = instance.lireFichierBitmap(chemin_acces_fichier);
+        int[][] expResult = {
+		{0  ,0  ,255,255,255},
+                {0  ,255,255,255,255},
+                {255,255,255,255,255},
+                {255,255,255,255,0  },
+                {255,255,255,0  ,0  },
+		};
+        int[][] result = instance.extraireMatriceDeDifficulte(imageBitmap);
         assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

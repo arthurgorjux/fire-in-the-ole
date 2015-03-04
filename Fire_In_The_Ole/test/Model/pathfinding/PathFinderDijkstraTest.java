@@ -7,10 +7,6 @@ package Model.pathfinding;
 
 import java.util.LinkedList;
 import java.util.List;
-import org.junit.After;
-import org.junit.AfterClass;
-import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
@@ -26,6 +22,7 @@ public class PathFinderDijkstraTest {
     /**
      * Test de chemin nul (depart = destination)
      */
+    /*
     @Test
     public void testCalculerCheminNul() {
         System.out.println("calculerChemin nul (a reflechir)");
@@ -48,6 +45,7 @@ public class PathFinderDijkstraTest {
         Chemin result = instance.calculerChemin(matrice, depart, fin);
         assertEquals(expResult, result);
     }
+    */
     
     /**
      * Test de chemin simple
@@ -74,7 +72,6 @@ public class PathFinderDijkstraTest {
         etapesChemin.add(new Position(1, 3));
         etapesChemin.add(new Position(2, 3));
         etapesChemin.add(new Position(3, 3));
-        System.out.print(etapesChemin);
         Chemin expResult = new Chemin(etapesChemin);
         
         Chemin result = instance.calculerChemin(matrice, depart, fin);

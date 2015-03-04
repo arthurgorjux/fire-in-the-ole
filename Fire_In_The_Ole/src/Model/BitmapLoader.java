@@ -30,7 +30,8 @@ public class BitmapLoader {
         int valeurVert;
         
         valeurRGB = imageBitmap.getRGB(x, y);
-        valeurVert = (valeurRGB >> 8 ) & 0x000000FF;
+        //valeurVert = (valeurRGB >> 8 ) & 0x000000FF;
+        valeurVert = (valeurRGB & 0x0000ff00) >> 8;
         return valeurVert;
     }
     
@@ -39,13 +40,13 @@ public class BitmapLoader {
      * @param imageBitmap L'image dont on veut extraire la matrice
      * @return La matrice de difficulté d'une image, sous la forme d'un tableau d'entiers à double entrée
      */
-    private int[][] extraireMatriceDeDifficulte(BufferedImage imageBitmap) {
+    public int[][] extraireMatriceDeDifficulte(BufferedImage imageBitmap) {
         int hauteurImage = imageBitmap.getHeight();
         int largeurImage = imageBitmap.getWidth();
         int[][] matriceDeDifficulte = new int[largeurImage][hauteurImage];
         
-        for (int x = 1; x < largeurImage; x++){
-            for (int y = 1; y < hauteurImage; y++){
+        for (int x = 0; x < largeurImage; x++){
+            for (int y = 0; y < hauteurImage; y++){
                     matriceDeDifficulte[x][y] = getValeurDeVertDuPixel(imageBitmap, x, y);
             }
         }

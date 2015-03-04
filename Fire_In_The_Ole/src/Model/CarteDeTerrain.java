@@ -1,7 +1,7 @@
 package Model;
 
 /**
- * Donn�es geographiques d'une carte
+ * Données geographiques d'une carte
  * immutable
  * @author S219
  *
