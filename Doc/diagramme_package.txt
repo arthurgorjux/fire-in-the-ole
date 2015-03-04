@@ -1,0 +1,44 @@
+title Package Diagram
+
+package View {
+    class Main
+    class MapPanel
+    class RobotsPanel
+    class SimulationPanel
+}
+
+package Controller {
+    class Simulateur
+    class Simulation
+}
+
+package Model {
+    class ArchiveSimulation
+    class ArchiveTourSimulation
+    class EtatEntite    
+    class Manager    
+    class CarteDeTerrain    
+    class Robot    
+    class Incendie       
+    class JeuDeParametres
+
+    package Model.Pathfinding{
+      class Chemin
+      class Position
+      class PathFinder
+      class PathFinderAstar
+    }
+}
+
+package Observer {
+    Interface Observateur 
+}
+
+class Lanceur
+class LanceurWindow
+
+LanceurWindow --> Simulation
+Lanceur --> Simulateur
+View -up-> Controller
+Controller <--> Model
+Observer <-down-> Model

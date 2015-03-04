@@ -1,0 +1,100 @@
+@startuml
+
+title Classes - Class Diagram
+package Controller {
+    class Simulateur {
+      +ArchiveSimulation archive
+      void jouerSimulation()
+      void rejouerSimulation()
+    }
+
+    class Simulation{
+      -Manager manager
+      -ArchiveSimulation archive
+      -CarteDeTerrain carte
+      -List<Robot> robots
+      -List<Incendie> incendies
+      +void mettreAJour()
+      +void archiverTour()
+      +bool estTerminee()
+      +ArchiveSimulation getArchiveResultat()
+    }
+}
+
+package Model {
+    class ArchiveSimulation {
+      +List<ArchiveTourSimulation> tours
+      +void addTour(ArchiveTourSimulation)
+      +void afficher()
+    }
+    class ArchiveTourSimulation {
+      -EtatEntite[] etatsEntite
+      +void getEtatsEntite()
+      +void toString()
+    }
+    class EtatEntite {
+      -int x
+      -int y
+      -String nom
+      -String type
+      +int getX()
+      +int getY()
+      +String getNom()
+      +String getType()
+    }
+    
+    class Manager{
+      boolean besoinAnalyse
+      +void analyserSituation()
+      +void agir()
+      +void prevenir()
+    }
+    
+    class CarteDeTerrain{
+      -int carte[][]
+      +int getDifficulte()
+    }
+    
+    class Robot{
+      +int x
+      +int y
+      +EtatEntite getEtatEntite()
+      +void agir()
+      +void notifierManager()
+    }
+    
+    class Incendie{
+      +int x
+      +int y
+      +EtatEntite getEtatEntite()
+      +void agir()
+      +void notifierManager()
+    }
+    
+    class JeuDeParametres {
+      +String sensDuVent
+    }
+}
+
+package Observer{
+    Interface Observateur {
+      +void prevenir()
+    }  
+}
+
+
+Simulateur --> ArchiveSimulation
+Simulateur --> Simulation
+Simulation --> Manager
+Simulation --> ArchiveSimulation
+Simulation --> CarteDeTerrain
+Simulation --> Robot
+Simulation --> Incendie
+Simulation --> JeuDeParametres
+Observateur <|-- Manager
+Robot o-- Manager
+Incendie o-- Manager
+
+ArchiveSimulation --> ArchiveTourSimulation
+ArchiveTourSimulation --> EtatEntite
+@enduml

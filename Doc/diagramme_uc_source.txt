@@ -33,11 +33,5 @@ Utilisateur -down-> UC10
 Utilisateur -down-> UC11
 Utilisateur -down-> UC12
 
-UC6 <. UC0 : <<extends>>
-UC0 <. UC8 : <<extends>>
-UC0 <. UC9 : <<extends>>
-UC0 <. UC10 : <<extends>>
-UC0 <. UC12 : <<extends>>
-UC7 .> UC6 : <<include>>
 
 @enduml
