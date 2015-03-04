@@ -5,15 +5,23 @@
  */
 package Model.pathfinding;
 
-/**
- *
- * @author S219
- */
+import java.util.HashMap;
+import java.util.List;
+
+
 public class PathfinderAstar implements PathFinder{
+    private int[][] matrice;
+    private Chemin chemin;
     
     @Override
-    public Chemin getCheminLePlusCourt(Position robot, Position feu) {
-        return null;
+    public Chemin getCheminLePlusCourt(Position debut, Position fin) {
+        return calculerChemin(matrice,debut,fin);
+    }
+
+    private Chemin calculerChemin(int[][] matrice, Position debut, Position fin) {
+        HashMap listeouverte = new HashMap();
+        
+        return chemin;
     }
     
 }
