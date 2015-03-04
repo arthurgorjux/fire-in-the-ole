@@ -5,6 +5,7 @@
  */
 package Model.pathfinding;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;
@@ -64,7 +65,7 @@ public class PathFinderDijkstraTest {
         PathFinderDijkstra instance = new PathFinderDijkstra(null);
         
         // Chemin determiné à la main
-        List<Position> etapesChemin = new LinkedList();
+        List<Position> etapesChemin = new ArrayList<>();
         etapesChemin.add(new Position(0, 0));
         etapesChemin.add(new Position(0, 1));
         etapesChemin.add(new Position(0, 2));

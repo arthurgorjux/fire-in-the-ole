@@ -187,7 +187,11 @@ public class Simulation {
     public Manager getManager(){
         return this.manager;
     }
-  
+    
+    public CarteDeTerrain getCarte(){
+        return this.carte;
+    }
+    
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
         System.out.println("ETEINTS FEU : " + feu);

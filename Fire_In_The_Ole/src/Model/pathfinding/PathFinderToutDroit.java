@@ -21,6 +21,7 @@ public class PathFinderToutDroit implements PathFinder{
         this.simu = simulation;
     }
     
+    @Override
     public Chemin getCheminLePlusCourt(Position robot, Position feu) {
         CarteDeTerrain carte = new CarteDeTerrain();
         List<Position> chemin = new ArrayList<>();
