@@ -32,10 +32,10 @@ public class Simulation {
                 incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
-		robots.add(new Robot(1, 1,"typerobotbidon","Toto", pathFinder, this));
-		robots.add(new Robot(2, 2,"typerobotbidon","Titi", pathFinder, this));
-                robots.add(new Robot(4, 5,"typerobotbidon","Robert", pathFinder, this));
-                robots.add(new Robot(7, 5,"typerobotbidon","Robert", pathFinder, this));
+		robots.add(new Robot(1, 1,"typerobotbidon",0,"Toto", pathFinder, this));
+		robots.add(new Robot(2, 2,"typerobotbidon",0,"Titi", pathFinder, this));
+                robots.add(new Robot(4, 5,"typerobotbidon",0,"Robert", pathFinder, this));
+                robots.add(new Robot(7, 5,"typerobotbidon",0,"Robert", pathFinder, this));
 		incendies.add(new Incendie(2,3, this));
                 incendies.add(new Incendie(0,0, this));
                 incendies.add(new Incendie(2,5, this));

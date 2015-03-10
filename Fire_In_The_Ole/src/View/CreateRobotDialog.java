@@ -54,7 +54,7 @@ public class CreateRobotDialog extends JDialog{
 
     private void init() {
         this.getContentPane().setLayout(new GridLayout(5, 2, 5, 5));
-        String[] listData = {"Robot Normal", "Robot Chenilles", "Robot Gael"};
+        String[] listData = {"Robot à pattes", "Robot à roues" ,"Robot à chenilles", "Robot à jet-pack"};
         this.robotName = new JTextField();
         this.robotName.addFocusListener(new FocusListener() {
 

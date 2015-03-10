@@ -12,6 +12,7 @@ import java.util.List;
 public class Robot implements Entite{
         private Position destination;
 	public final String typeRobot;
+        public final int numTypeRobot;
 	public final String nom;
         public final List<Observateur> observateurs;
         public EtatRobot etat;
@@ -20,11 +21,12 @@ public class Robot implements Entite{
         private Chemin chemin;
         private Simulation simulation;
         
-	public Robot(int origineX, int origineY, String type, String nom, PathFinder pathFinder, Simulation simulation ){
+	public Robot(int origineX, int origineY, String type, int numTypeRobot, String nom, PathFinder pathFinder, Simulation simulation ){
             positionActuelle = new Position(origineX, origineY);
             this.simulation = simulation;
             destination = new Position(origineY, origineY);
             typeRobot = type;
+            this.numTypeRobot = numTypeRobot;
             this.nom = nom;
             observateurs = new LinkedList<>();
             etat = EtatRobot.ARRET;
