@@ -1,12 +1,13 @@
 package Controller;
 import Model.*;
-import View.Main;
+import Model.stockage.JeuDeParametres;
 
-public class Simulateur {
+public class FauxSimulateurPourTestConsole {
 	ArchiveSimulation archive;
 		
-	public void jouerSimulation(CarteDeTerrain carte){
-		Simulation simulation = new Simulation();
+	public void jouerSimulation(CarteDeTerrain carte, JeuDeParametres parametres){
+            
+		Simulation simulation = new Simulation(parametres);
 		while (!simulation.estTerminee()) {
 			simulation.mettreAJour();
                         simulation.archiverTour();
@@ -17,4 +18,6 @@ public class Simulateur {
 	public void rejouerSimulation() {
 		archive.afficher();
 	}
+        
+        
 }

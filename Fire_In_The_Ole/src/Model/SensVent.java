@@ -6,11 +6,13 @@
 package Model;
 
 /**
- *
+ * Les possibilités de direction de vent
+ * 
  * @author S219
  */
-public class MainTestBmp {
-    public static void main(String[] args){
-        BitmapLoader bmp = new BitmapLoader();
-    }
+public enum SensVent {
+    EST,
+    OUEST,
+    NORD,
+    SUD;
 }

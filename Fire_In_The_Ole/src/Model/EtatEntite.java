@@ -3,12 +3,15 @@ package Model;
 import Model.pathfinding.Position;
 
 public class EtatEntite {
-	
+	private final String nom;
+	private final String type;
+        private final Position position;	
+    
 	public int getX() {
-		return x;
+            return position.getX();
 	}
 	public int getY() {
-		return y;
+            return position.getY();
 	}
         
         public Position getPosition(){
@@ -21,18 +24,15 @@ public class EtatEntite {
 	public String getType() {
 		return type;
 	}
-	private final int x;
-	private final int y;
-	private final String nom;
-	private final String type;
-        private Position position;
 	
-	public EtatEntite(int x, int y, String nom, String type) {
-		this.x = x;
-		this.y = y;
-                this.position = new Position(x, y);
+	public EtatEntite(Position position, String nom, String type) {
+                this.position = position;
 		this.nom = nom;
 		this.type = type;
+	}
+        
+        public EtatEntite(int x, int y, String nom, String type) {
+	this(new Position(x,y), nom, type);
 	}
 	
 	@Override
@@ -40,7 +40,7 @@ public class EtatEntite {
 	 * Debugage log
 	 */
 	public String toString() {
-		return " "+ x + "   " + y + "   " + nom+" de type "+type;
+		return " "+ getX() + "   " + getY() + "   " + nom+" de type "+type;
 	}
 
 }

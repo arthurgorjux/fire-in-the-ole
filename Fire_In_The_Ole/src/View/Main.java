@@ -5,7 +5,7 @@
  */
 package View;
 
-import Controller.Simulateur;
+import Controller.FauxSimulateurPourTestConsole;
 import Model.ArchiveTourSimulation;
 import Model.CarteDeTerrain;
 import Model.EtatEntite;

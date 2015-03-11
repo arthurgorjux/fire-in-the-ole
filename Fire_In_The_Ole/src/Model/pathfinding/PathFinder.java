@@ -5,8 +5,6 @@
  */
 package Model.pathfinding;
 
-import Model.Simulation;
-
 /**
  *
  * @author S219

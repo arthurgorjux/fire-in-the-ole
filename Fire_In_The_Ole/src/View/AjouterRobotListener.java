@@ -35,7 +35,7 @@ class AjouterRobotListener implements ActionListener {
             // Add robot dans la liste + fermer fenetre
             int x = (Integer) this.window.getCoordX().getValue();
             int y = (Integer) this.window.getCoordY().getValue();
-            if(this.coordAvailable(x, y) == true){  
+            if(this.coordAvailable(x, y) == true){
                 Simulation simuTmp = new Simulation();
                 this.window.robots.add(new Robot(x, y, (String) this.window.getTypeRobot().getSelectedItem(), this.window.getTypeRobot().getSelectedIndex(), this.window.getNameRobot().getText(), new PathFinderToutDroit(simuTmp), simuTmp));
                 JOptionPane.showMessageDialog(window, "Le robot " + this.window.getNameRobot().getText() + "\na été ajouté avec succès\naux coordonnées : " + x + ", " + y, "Robot ajouté ", JOptionPane.INFORMATION_MESSAGE);

@@ -1,13 +1,14 @@
 package Model;
 
-import Model.pathfinding.Chemin;
 import java.util.LinkedList;
 import java.util.List;
 import Model.pathfinding.Position;
-import Model.pathfinding.PathFinder;
-import Model.pathfinding.PathFinderToutDroit;
+import Model.stockage.InitialisationIncendie;
+import Model.stockage.InitialisationRobot;
+import Model.stockage.JeuDeParametres;
 
 public class Simulation {
+        private final SensVent sens_du_vent;
 	private final Manager manager;
 	private final ArchiveSimulation archive;
 	private final CarteDeTerrain carte;
@@ -15,30 +16,27 @@ public class Simulation {
 	private final List<Incendie> incendies;
         private final List<Incendie> incendiesFutur;
         private final List<Incendie> incendiesEteints;
-        private final PathFinder pathFinder;
-	//temp
 	private int duree = 1;
 	
-	public Simulation() {
-            
-                pathFinder = new PathFinderToutDroit(this);
+        public Simulation(JeuDeParametres parametres) {
 		manager = new Manager(this);
 		archive = new ArchiveSimulation();
 		carte = new CarteDeTerrain();
-		
+                sens_du_vent = parametres.getSens_du_vent();
 		robots = new LinkedList<>();
 		incendies = new LinkedList<>();
                 incendiesFutur = new LinkedList<>();
                 incendiesEteints = new LinkedList<>();
 		
 		// On ajoute les robots et les incendies aux listes
-		robots.add(new Robot(1, 1,"typerobotbidon",0,"Toto", pathFinder, this));
-		robots.add(new Robot(2, 2,"typerobotbidon",0,"Titi", pathFinder, this));
-                robots.add(new Robot(4, 5,"typerobotbidon",0,"Robert", pathFinder, this));
-                robots.add(new Robot(7, 5,"typerobotbidon",0,"Robert", pathFinder, this));
-		incendies.add(new Incendie(2,3, this));
-                incendies.add(new Incendie(0,0, this));
-                incendies.add(new Incendie(2,5, this));
+                for (InitialisationIncendie departs_incendie : parametres.getDeparts_incendie()) {
+                    incendies.add(new Incendie(departs_incendie, this));
+                }
+                
+                for (InitialisationRobot depart_robot : parametres.getDeparts_robot()) {
+                    robots.add(new Robot(depart_robot, "NomRandom", this)); //TODO gerer generation de noms
+                }
+                
 		// On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
                 for (Robot robot : robots) {
 			robot.ajouterObservateur(manager);
@@ -46,38 +44,7 @@ public class Simulation {
                 for (Incendie incendie : incendies) {
 			incendie.ajouterObservateur(manager);
 		}
-	}
-        
-        public Simulation(List<Robot> robotsFromUI) {  
-            if(robotsFromUI.size() > 0){
-                
-            }
-            pathFinder = new PathFinderToutDroit(this);
-            manager = new Manager(this);
-            archive = new ArchiveSimulation();
-            carte = new CarteDeTerrain();
-                
-            robots = robotsFromUI;
-            
-            incendies = new LinkedList<>();
-            incendiesFutur = new LinkedList<>();
-            incendiesEteints = new LinkedList<>();
-
-            // On ajoute les robots et les incendies aux listes
-            incendies.add(new Incendie(2,3, this));
-            incendies.add(new Incendie(0,0, this));
-            // On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
-            for (Robot robot : robots) { 
-                    robot.ajouterObservateur(manager);
-                    robot.setPathFinder((PathFinderToutDroit) this.pathFinder);
-                    robot.setSimulation(this);
-                    Chemin chemin = pathFinder.getCheminLePlusCourt(robot.getPosition(), robot.getDestination());
-                    robot.setChemin(chemin);
-            }
-            for (Incendie incendie : incendies) {
-                    incendie.ajouterObservateur(manager);
-            }
-	}
+        }
         
 	public void mettreAJour() {
             // on fait apparaitre les incendies supplémentaires
@@ -105,7 +72,7 @@ public class Simulation {
 
 	public ArchiveTourSimulation archiverTour() {
 		final List<EtatEntite> etatsEntite;
-		etatsEntite = new LinkedList<EtatEntite>();
+		etatsEntite = new LinkedList<>();
 		for (Robot robot : robots) {
 			etatsEntite.add(robot.getEtatEntite());
 		}
@@ -137,6 +104,14 @@ public class Simulation {
         public boolean ajouterFeu(int intensite, int x, int y) {
             if (estUnEmplacementLibre(new Position(x, y))) {
                 incendiesFutur.add(new Incendie(x,y, this));
+                return true;
+            }
+            return false;
+        }
+        
+        public boolean ajouterFeu(int intensite, Position position) {
+            if (estUnEmplacementLibre(position)) {
+                incendiesFutur.add(new Incendie(position, this));
                 return true;
             }
             return false;

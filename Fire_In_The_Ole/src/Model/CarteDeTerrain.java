@@ -8,13 +8,15 @@ package Model;
  */
 public final class CarteDeTerrain {
 	private final int carte [][];
+        private final int hauteur;
+        private final int largeur;
 	
         public int getHauteur() {
-            return 38; //TODO placeholder
+            return hauteur;
         }
         
         public int getLargeur() {
-            return 18; //TODO placeholder
+            return largeur;
         }
         
 	public CarteDeTerrain() {
@@ -60,10 +62,14 @@ public final class CarteDeTerrain {
                 {2,0,0,0,2,2,0,0,0,0,0,0,2,0,2,0,0,0}
 		};
 		carte = carteGeneree;
+                hauteur = 38;
+                largeur = 18;
 	}
         
         public CarteDeTerrain (int[][] bitmap){
             this.carte = bitmap;
+            hauteur = 38; //TODO placeHolder
+            largeur = 18; //TODO placeHolder
         }
 	
 	public int getDifficulte(int x, int y) {
@@ -73,8 +79,4 @@ public final class CarteDeTerrain {
         public int[][] getCarte(){
             return carte.clone();
         }
-        
-        /*public void setCarte(int[][] carte){
-            this.carte = carte;
-        }*/
 }
