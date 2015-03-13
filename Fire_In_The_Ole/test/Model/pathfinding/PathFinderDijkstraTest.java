@@ -51,7 +51,7 @@ public class PathFinderDijkstraTest {
     /**
      * Test de chemin simple
      */
-    /*@Test
+    @Test
     public void testCalculerCheminSimple() {
         System.out.println("calculerChemin simple");
         int[][] matrice = {
@@ -79,9 +79,9 @@ public class PathFinderDijkstraTest {
         
         System.out.println("Chemin final : " + result);
         assertEquals(expResult, result);
-    }*/
+    }
     
-    @Test
+    /*@Test
     public void testGetMinAdjacent(){
         int[][] matrice = { // => on passe la matrice déja transformée (matrice[x][y] = carte[y][x]
 		{10,10,10,10},
@@ -95,5 +95,5 @@ public class PathFinderDijkstraTest {
         
         Position result = instance.getMinAdjacent(2, 2, matrice);
         assertEquals(expResult, result);   
-    }
+    }*/
 }

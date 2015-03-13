@@ -44,18 +44,9 @@ public class Position {
         return false;
     }
 
-    @Override
-    /** Honnetement je sais meme pas a quoi ca sert. A vue de nez faire des comparaisons plus rapide
-     Suggéré par NetBean en warning */
-    public int hashCode() {
-        int hash = 7;
-        hash = 97 * hash + this.x;
-        hash = 97 * hash + this.y;
-        return hash;
-    }
     
     @Override
     public String toString(){
-        return "Position : " + x + ", " + y;
+        return "(" + x + ", " + y + ")";
     }
 }
