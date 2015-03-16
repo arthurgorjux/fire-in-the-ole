@@ -5,8 +5,10 @@
  */
 package Model.pathfinding;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.NavigableSet;
@@ -18,6 +20,7 @@ import java.util.TreeSet;
  */
 public class Graph {
     public Map<Position, Vecteur> graph;
+    public List<Vecteur> z;
     
     public Graph(List<Arete> aretes){
         graph = new HashMap<>();
@@ -30,47 +33,49 @@ public class Graph {
                 graph.put(a.p2, new Vecteur((a.p2)));
             }
         }
-        
         for(Arete a : aretes){
-            this.getPosition(a.p2).voisins.put(this.getPosition(a.p1), a.difficulte);
+            this.getPosition(a.p1).voisins.put(this.getPosition(a.p2), a.difficulte);
         }
+        
     }
 
-    public NavigableSet<Vecteur> dijkstra(Position debut) {
+    public void dijkstra(Position debut) {
         if(this.getPosition(debut) == null){
             System.out.println("Erreur dans le graph");
-            return null;
+            return;
         }
         Vecteur source = this.getPosition(debut);
-        NavigableSet<Vecteur> q = new TreeSet<>();
+        List<Vecteur> q = new LinkedList<>();
         for(Vecteur v : graph.values()){
             v.precedent = v == source ? source : null;
             v.difficulte = v == source ? 0 : Integer.MAX_VALUE;
-            System.out.println(v);
-            
-            System.out.println(q.add(v));
+            q.add(v);
         }
-        
-        dijkstra(q);
-        return q;
+        Collections.sort(q);
+        dijkstra(q);   
     }
 
-    private void dijkstra(NavigableSet<Vecteur> q) {
+    private void dijkstra(List<Vecteur> q) {
         Vecteur u, v;
+        z = new LinkedList<>();
         while(!q.isEmpty()){
-            u = q.pollFirst();
+            u = q.get(0);
+            if(!z.contains(u)){
+                z.add(u);
+            }
+            q.remove(u);
             if(u.difficulte == Integer.MAX_VALUE)
                 break;
             for(Map.Entry<Vecteur, Integer> a : u.voisins.entrySet()){
                 v = a.getKey();
                 int alternateDifficulte = u.difficulte + a.getValue();
                 if(alternateDifficulte < v.difficulte){
-                    q.remove(v);
                     v.difficulte = alternateDifficulte;
                     v.precedent = u;
-                    q.add(v);
+                    z.add(v);                  
                 }
             }
+            Collections.sort(q);
         }
     }
     

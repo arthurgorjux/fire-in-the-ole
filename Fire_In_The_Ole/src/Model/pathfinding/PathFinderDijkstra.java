@@ -8,6 +8,7 @@ package Model.pathfinding;
 import Model.CarteDeTerrain;
 import Model.Simulation;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.NavigableSet;
@@ -37,7 +38,7 @@ public class PathFinderDijkstra implements PathFinder{
     
     public Chemin calculerChemin(int[][] carte, Position debut, Position fin){
         this.initialisation_matrice(carte);
-        this.dijkstra(debut);        
+        this.dijkstra(debut, fin);        
         
         Chemin cheminCalcule = new Chemin(this.chemin);
         return cheminCalcule;
@@ -52,7 +53,6 @@ public class PathFinderDijkstra implements PathFinder{
             }
         }
         this.map = matrice;
-        System.out.println("Init matrice");
         List<Arete> adjacentsFinaux = new LinkedList<>();
         for(int i = 0 ; i < this.map.length ; i++){
             for(int j = 0 ; j < this.map.length; j++){
@@ -88,9 +88,24 @@ public class PathFinderDijkstra implements PathFinder{
         return true;
     }
     
-    private void dijkstra(Position debut) {
-        System.out.println("Je suis dans dijkstra");
+    private void dijkstra(Position debut, Position fin) {
         Graph graph = new Graph(this.aretes);
-        NavigableSet<Vecteur> truc = graph.dijkstra(debut);
+        graph.dijkstra(debut);
+        List<Vecteur> z = graph.z;
+        Vecteur arrivee = null;
+        List<Position> cheminTmp = new ArrayList<>();
+        for(Vecteur v : z){
+            if(v.pos.equals(fin))
+                arrivee = v;
+        }
+        if(arrivee != null){
+            Vecteur tmp = arrivee;
+            while(!tmp.pos.equals(debut)){
+                chemin.add(tmp.pos);
+                tmp = tmp.precedent;
+            }
+            chemin.add(debut);
+            Collections.reverse(chemin);
+        }
     }
 }

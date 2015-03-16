@@ -29,8 +29,8 @@ public class Vecteur implements Comparable<Vecteur>{
     
     @Override
     public boolean equals(Object o){
-      Vecteur other = (Vecteur) o;
-      return this.pos == other.pos;
+        Vecteur other = (Vecteur) o;
+        return (this.pos.getX() == other.pos.getX() && this.pos.getY() == other.pos.getY());
     }
     
     @Override
@@ -38,8 +38,8 @@ public class Vecteur implements Comparable<Vecteur>{
         String result = "";
         result += pos;
         //result += " Prec : " + precedent;
-        //result += " Voisins : " + voisins.size();
-        result += " Difficulte : " + difficulte;
+        result += " Voisins : " + voisins.size();
+        result += " Difficulte : " + difficulte + "\n";
         return result;
     }
 }
