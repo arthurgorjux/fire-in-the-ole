@@ -5,6 +5,7 @@
  */
 package View;
 
+import Controller.ThreadCalcul;
 import Model.ArchiveSimulation;
 import Model.Simulation;
 import java.awt.event.ActionEvent;
@@ -30,10 +31,10 @@ class StartListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.checkState();
-        window.getSimulation().mettreAJour();
-        window.setMap(window.getSimulation().archiverTour());
+        //window.getSimulation().mettreAJour();
+        //window.setMap(window.getSimulation().archiverTour());
         System.out.println("ARCHIVE==========");
-        System.out.println(window.getSimulation().archiverTour());
+        //System.out.println(window.getSimulation().archiverTour());
         Timer timer;
         if(this.panel.getTimer()!= null){
             System.out.println("Reprise de la simulation...");
@@ -42,6 +43,10 @@ class StartListener implements ActionListener {
             System.out.println("Début de la simulation...");
             timer = new Timer(1000, new TimerListener(window, panel));
             this.panel.setTimer(timer);
+            
+            //on lance le thread calcul
+            ThreadCalcul calcul = new ThreadCalcul(window.getSimulation());
+            calcul.start();
             //this.window.getRobotsPanel().setList(window.getSimulation().archiverTour().getEtatsEntite());
         }        
         timer.start();   

@@ -70,7 +70,7 @@ public class Simulation {
             }
 	}
 
-	public ArchiveTourSimulation archiverTour() {
+	public void archiverTour() {
 		final List<EtatEntite> etatsEntite;
 		etatsEntite = new LinkedList<>();
 		for (Robot robot : robots) {
@@ -82,7 +82,7 @@ public class Simulation {
                 
 		ArchiveTourSimulation tour = new ArchiveTourSimulation(etatsEntite);
 		archive.addTour(tour);
-		return tour;
+//		return tour;
 	}
 	
 

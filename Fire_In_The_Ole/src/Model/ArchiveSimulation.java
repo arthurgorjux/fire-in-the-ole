@@ -1,5 +1,6 @@
 package Model;
 
+import static java.util.Collections.synchronizedList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -7,7 +8,7 @@ public class ArchiveSimulation {
     final List<ArchiveTourSimulation> tours;
 	 
      public ArchiveSimulation() {
-	 tours = new LinkedList<>();
+         tours = synchronizedList(new LinkedList<ArchiveTourSimulation>());
     }
 	
     /**
@@ -25,5 +26,9 @@ public class ArchiveSimulation {
         for (ArchiveTourSimulation tour : tours) {
              System.out.println(tour);
 	}
+    }
+    
+    public List<ArchiveTourSimulation> getArchive(){
+        return tours;
     }
 }

@@ -5,6 +5,8 @@
  */
 package View;
 
+import Controller.ThreadAffichage;
+import Controller.ThreadCalcul;
 import Model.ArchiveSimulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -18,26 +20,51 @@ public class TimerListener implements ActionListener{
     
     private Main window;
     private SimulationPanel panel;
+    private int compteur;
+    private boolean affichageTermine;
     
     public TimerListener(Main window, SimulationPanel panel){
         this.window = window;
         this.panel = panel;
+        compteur = 0;
+        affichageTermine = false;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(!window.getSimulation().estTerminee()){
-            window.getSimulation().mettreAJour();
-            window.setMap(window.getSimulation().archiverTour());
-        }else{
-            Timer t = (Timer) e.getSource();
+        Timer t = (Timer) e.getSource();
+        
+        //Thread affichage en fonction de la valeur du delay
+        //ThreadAffichage affichage = new ThreadAffichage(window.getSimulation(), t.getDelay(), window);
+        //affichage.start();
+        
+        if (compteur < window.getSimulation().getArchiveResultat().getArchive().size()) {
+                // on regarde la taille de l'arraylist pr voir si on peut get l'objet
+                // ex : si compteur = 2 et qu'on a calculé 3 tours on get tours[2] qui existe bien (car size = 3 donc 2<3)
+                // si compteur = 2 et qu'on a calculé 2 tours, on a size = 2 et tours[2] n'existe pas (cpt = size dans ce cas)
+                // si compteur = 2 et qu'on a calculé 1 tour, on a size = 1 et tours[2] n'existe pas (cpt > size)
+                window.setMap(window.getSimulation().getArchiveResultat().getArchive().get(compteur));
+                compteur++;
+            }
+        else if (!window.getSimulation().estTerminee()) {
+            //si le calcul simu n'est pas terminée, c'est que le tour suivant n'est pas encore disponible. on sleep l'affichage
+            System.out.println("Tour pas encore dispo... on laisse le timer tourner");
+        }
+        else {
+            //si le calcul est terminé et qu'on arrive pas a get : on a fini l'affichage
+            System.out.println("Affichage terminé");
+            affichageTermine = true;
+        }
+            
+        if (affichageTermine) {
+            //si affichage terminé on stop le timer et on re-set les boutons
             t.stop();
             panel.getStop().setEnabled(false);
             panel.getStart().setEnabled(true);
             panel.getReset().setEnabled(true);
             System.out.println("Fin");
-            ArchiveSimulation archive = this.window.getSimulation().getArchiveResultat();
-            archive.afficher();
+//            ArchiveSimulation archive = this.window.getSimulation().getArchiveResultat();
+//            archive.afficher();
         }
     }    
 }
