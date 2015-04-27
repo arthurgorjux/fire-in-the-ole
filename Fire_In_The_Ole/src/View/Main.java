@@ -55,9 +55,9 @@ public class Main extends JFrame{
     private JMenu fichier = new JMenu("Fichier");
     private JMenuItem bitmapCharger = new JMenuItem("Charger map");
     
-    public Main(LinkedList<Robot> robots, CarteDeTerrain map) throws IOException {
+    public Main(Simulation simu, CarteDeTerrain map) throws IOException {
         //this.simulation = new Simulation();
-        this.robots = robots;
+        this.simulation = simu;
         this.map = map;
         this.initComponents();        
         //this.setContentPane(mapPanel);
@@ -119,7 +119,7 @@ public class Main extends JFrame{
         
         infos = new javax.swing.JPanel();
         infos.setPreferredSize(new Dimension(layout_south.getWidth(), layout_south.getHeight()));
-        listeRobots = new RobotsPanel(this, robots);
+        //listeRobots = new RobotsPanel(this, robots);
         //creerRobot = new javax.swing.JButton("Creer");
         stats = new javax.swing.JPanel();
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
@@ -130,8 +130,8 @@ public class Main extends JFrame{
         
         simulateur.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         stats.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-        listeRobots.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-        listeRobots.setPreferredSize(new Dimension(200, 300));
+        //listeRobots.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+        //listeRobots.setPreferredSize(new Dimension(200, 300));
         //simulateur.add(start);
         //listeRobots.add(creerRobot);
         layout_north.add(mapPanel);
@@ -152,7 +152,7 @@ public class Main extends JFrame{
     public void setSimulation(Simulation simu){
         this.simulation = simu;
     }
-    
+        
     void changeMap(CarteDeTerrain map) {
         this.map = map;
     }

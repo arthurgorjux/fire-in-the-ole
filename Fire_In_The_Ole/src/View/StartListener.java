@@ -24,7 +24,6 @@ class StartListener implements ActionListener {
     private SimulationPanel panel;
     public StartListener(Main window, SimulationPanel panel) {
         this.window = window;
-        this.window.setSimulation(new Simulation(this.window.getRobotsList()));
         this.panel = panel;
     }
 
