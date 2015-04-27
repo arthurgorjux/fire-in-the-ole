@@ -7,7 +7,7 @@ import java.util.List;
  */
 public class Manager implements Entite, Observateur {
     private boolean besoinAnalyse;
-    private Simulation simulation;
+    private final Simulation simulation;
 
     //contiendra la liste des robots occupés (ayant un incendie à éteindre)
     //HashMap<Robot, Incendie> listeOccupation = new HashMap<>();
@@ -28,7 +28,7 @@ public class Manager implements Entite, Observateur {
         List<Robot> robots = simulation.getRobots();
 
         for (Robot robotActuel : robots) {
-            if (!(robotActuel.etat == EtatRobot.EXTINCTION)) {
+            if (!(robotActuel.getEtatCourant() == EtatRobot.EXTINCTION)) {
                 Incendie incendieProche = calculIncendieLePlusProche(robotActuel);
                 robotActuel.definirDestination(incendieProche.getPosition());
             }
