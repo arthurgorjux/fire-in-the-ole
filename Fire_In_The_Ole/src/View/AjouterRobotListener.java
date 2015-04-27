@@ -8,6 +8,7 @@ package View;
 import Model.Robot;
 import Model.Simulation;
 import Model.pathfinding.PathFinderToutDroit;
+import Model.pathfinding.PathFinderDijkstra;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,7 +38,7 @@ class AjouterRobotListener implements ActionListener {
             int y = (Integer) this.window.getCoordY().getValue();
             if(this.coordAvailable(x, y) == true){
                 Simulation simuTmp = new Simulation();
-                this.window.robots.add(new Robot(x, y, (String) this.window.getTypeRobot().getSelectedItem(), this.window.getTypeRobot().getSelectedIndex(), this.window.getNameRobot().getText(), new PathFinderToutDroit(simuTmp), simuTmp));
+                this.window.robots.add(new Robot(x, y, this.window.getTypeRobot().getSelectedIndex(), this.window.getNameRobot().getText(), simuTmp)); // mettre pathfinder ?
                 JOptionPane.showMessageDialog(window, "Le robot " + this.window.getNameRobot().getText() + "\na été ajouté avec succès\naux coordonnées : " + x + ", " + y, "Robot ajouté ", JOptionPane.INFORMATION_MESSAGE);
                 this.window.dispose();
             }else{

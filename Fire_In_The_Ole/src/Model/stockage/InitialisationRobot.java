@@ -7,9 +7,9 @@ package Model.stockage;
 public class InitialisationRobot {
     private final int x_depart;
     private final int y_depart;
-    private final String type;
+    private final int type;
     
-    public InitialisationRobot(int x_depart, int y_depart, String type) {
+    public InitialisationRobot(int x_depart, int y_depart, int type) {
         this.x_depart = x_depart;
         this.y_depart = y_depart;
         this.type = type;
@@ -23,7 +23,7 @@ public class InitialisationRobot {
         return y_depart;
     }
 
-    public String getType() {
+    public int getType() {
         return type;
     }
     

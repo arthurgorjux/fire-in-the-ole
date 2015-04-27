@@ -1,6 +1,7 @@
 package Model;
 
 import static Model.EtatRobot.DEPLACEMENT;
+import static Model.TypeRobot.PATTE;
 import Model.pathfinding.Chemin;
 import Model.pathfinding.PathFinder;
 import Model.pathfinding.PathFinderToutDroit;
@@ -12,7 +13,7 @@ import java.util.List;
 
 public class Robot implements Entite{
     private Position destination;
-    public final String typeRobot;
+    public final int typeRobot;
     public final String nom;
     public final List<Observateur> observateurs;
     public EtatRobot etat;
@@ -20,8 +21,13 @@ public class Robot implements Entite{
     private Position positionActuelle;
     private Chemin chemin;
     private final Simulation simulation;
+    
+    private static int PUISSANCE_ROBOT_PATTE = 300;
+    private static int PUISSANCE_ROBOT_ROUE = 200;
+    private static int PUISSANCE_ROBOT_CHENILLE = 200;
+    private static int PUISSANCE_ROBOT_JETPACK = 50;
 
-    public Robot(int origineX, int origineY, String type, String nom, Simulation simulation ){
+    public Robot(int origineX, int origineY, int type, String nom, Simulation simulation ){
         positionActuelle = new Position(origineX, origineY);
         this.simulation = simulation;
         destination = new Position(origineY, origineY);
@@ -59,6 +65,26 @@ public class Robot implements Entite{
         return positionActuelle;
     }
 
+    public TypeRobot getType(){
+        TypeRobot type = null;
+        
+        switch(this.typeRobot){
+            case 0:
+                type = TypeRobot.PATTE;
+                break;
+            case 1:
+                type = TypeRobot.ROUE;
+                break;
+            case 2:
+                type = TypeRobot.CHENILLE;
+                break;
+            case 3:
+                type = TypeRobot.JETPACK;
+                break;
+        }
+        return type;
+    }
+    
     /**
      * Présence possible du patron de conception "Etat" non implémenté pour des raison de simplicité. Seulements deux etats présent/
      */
@@ -82,7 +108,7 @@ public class Robot implements Entite{
                 if (simulation.getIncendieAt(suivant) != null) {
                     System.out.println(this + " eteint un feu");
                     Incendie incendie = simulation.getIncendieAt(suivant);
-                    incendie.arroser(150);//TODO changer variable en dur
+                    incendie.arroser(puissance_robot());//TODO changer variable en dur
                 } else {
                     prevenirObservateurs();
                     etat = DEPLACEMENT;
@@ -93,6 +119,28 @@ public class Robot implements Entite{
             default:
                 throw new Error("Erreur : robot sans etat");
         }
+    }
+    
+    // retourne la puissance d'un robot selon son type
+    private int puissance_robot(){
+        int puissance = 0;
+        
+        switch(this.getType()){
+            case PATTE:
+                puissance = PUISSANCE_ROBOT_PATTE;
+                break;
+            case ROUE:
+                puissance = PUISSANCE_ROBOT_ROUE;
+                break;
+            case CHENILLE:
+                puissance = PUISSANCE_ROBOT_CHENILLE;
+                break;
+            case JETPACK:
+                puissance = PUISSANCE_ROBOT_JETPACK;
+                break;
+        }
+        
+        return puissance;
     }
 	
     private boolean estArriveDestination() {
