@@ -2,6 +2,16 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/View/StartListener.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Model/LanceurVersionConsolePourTests.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Controller/FauxSimulateurPourTestConsole.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Model/Simulation.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Controller/ThreadCalcul.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Controller/ThreadAffichage.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Model/Lanceur.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/Model/LanceurWindow.java</file>
+            <file>file:/C:/Users/Lucas/Documents/NetBeansProjects/Fire_In_The_Ole/src/View/AjouterRobotListener.java</file>
+        </group>
     </open-files>
 </project-private>
