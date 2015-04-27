@@ -44,11 +44,11 @@ public class Chemin {
        }
   
     }
-    
+   
     public List<Position> getEtapes(){
         return this.etapes;
     }
-    
+
     @Override
     public boolean equals(Object o){
         Chemin other = (Chemin) o;
@@ -62,6 +62,4 @@ public class Chemin {
         }
         return result;
     }
-    
-    
 }
