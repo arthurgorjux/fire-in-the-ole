@@ -73,11 +73,13 @@ public class JeuParametreDialog extends JFrame{
     
     private List<InitialisationRobot> majRobots(){
         List<InitialisationRobot> robots = new ArrayList<>();
-        robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
+
+        robots.add(new InitialisationRobot(0, 0, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(8, 3, TypeRobot.ROUE));
         robots.add(new InitialisationRobot(10, 0, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(0, 6, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(7, 9, TypeRobot.JETPACK));
+        robots.add(new InitialisationRobot(0, 6, TypeRobot.PATTE));
+
         return robots;
     }
 }

@@ -64,8 +64,8 @@ public class PathFinderDijkstraTest {
 		};
         Position depart = new Position(0, 0);
         Position fin = new Position(3, 3);
-        PathFinderDijkstra instance = new PathFinderDijkstra(null, new Robot(0, 0, TypeRobot.CHENILLE, "Toto", null));
         
+        PathFinderDijkstra instance = new PathFinderDijkstra(null, new Robot(0, 0, TypeRobot.PATTE, "Toto", null));
         // Chemin determiné à la main
         List<Position> etapesChemin = new ArrayList<>();
         etapesChemin.add(new Position(0, 0));
