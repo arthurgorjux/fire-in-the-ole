@@ -50,7 +50,7 @@ public class PathfinderAstar implements PathFinder{
         
         //retour = listefermee.get(debut);
         while(debut.getX() != fin.getX() || debut.getY() != fin.getY()){
-            System.out.println(debut);
+            //System.out.println(debut);
             debut = getMinAdjacent(debut.getX(), debut.getY(), carte, fin, debut);
             retour.add(debut);
         }
@@ -65,8 +65,28 @@ public class PathfinderAstar implements PathFinder{
         int heuristique_x = debut.getX();
         int heuristique_y = debut.getY();
         while (heuristique_x != fin.getX() || heuristique_y != fin.getY()){
-            if (heuristique_x < fin.getX()){
+            if (heuristique_x < fin.getX() && heuristique_y < fin.getY()){
                 heuristique_x += 1;
+                heuristique_y += 1;
+                heuristique = heuristique + carte[heuristique_x][heuristique_y];
+            }
+            else if (heuristique_x < fin.getX() && heuristique_y > fin.getY()){
+                heuristique_x += 1;
+                heuristique_y -= 1;
+                heuristique = heuristique + carte[heuristique_x][heuristique_y];
+            } 
+            else if (heuristique_x < fin.getX()){
+                heuristique_x += 1;
+                heuristique = heuristique + carte[heuristique_x][heuristique_y];
+            }
+            else if (heuristique_x > fin.getX() && heuristique_y < fin.getY()){
+                heuristique_x -= 1;
+                heuristique_y += 1;
+                heuristique = heuristique + carte[heuristique_x][heuristique_y];
+            }
+            else if (heuristique_x > fin.getX() && heuristique_y > fin.getY()){
+                heuristique_x -= 1;
+                heuristique_y -= 1;
                 heuristique = heuristique + carte[heuristique_x][heuristique_y];
             }
             else if (heuristique_x > fin.getX()){
@@ -83,7 +103,7 @@ public class PathfinderAstar implements PathFinder{
             }
             //System.out.println("H = " + heuristique_x + " " + heuristique_y);
         }
-        //System.out.println(heuristique);
+        System.out.println(heuristique_x + " " + heuristique_y + " = " + heuristique);
         heuristique_string = Integer.toString(heuristique);
         return heuristique_string;
     }
@@ -113,8 +133,8 @@ public class PathfinderAstar implements PathFinder{
         for(Position pos : adjacents){
             if (checkAdjacentExiste(pos, carte)){
                 //Collection<String[]> values;
-                //System.out.println(y);
-                //System.out.println(x);
+                System.out.println(pos.getX());
+                System.out.println(pos.getY());
                 //System.out.println(Integer.valueOf(listefermee.get(debut)[0]));
                 g = Integer.toString(Integer.valueOf(listefermee.get(debut)[0]) + carte[pos.getX()][pos.getY()]);
                 infonoeud[0] = g;
@@ -166,6 +186,7 @@ public class PathfinderAstar implements PathFinder{
         keys = listeouverte.keySet();
         values = listeouverte.values();
         for(String[] val : values){
+            System.out.println(val[0] + " " + val[1] + " " + val[2]);
             if (Integer.valueOf(val[2]) < f_prec){
                 
                 resultat = indice;
