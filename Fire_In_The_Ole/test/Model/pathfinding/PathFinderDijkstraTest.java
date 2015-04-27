@@ -5,11 +5,11 @@
  */
 package Model.pathfinding;
 
-import modele.pathfinding.Position;
-import modele.pathfinding.Chemin;
-import modele.pathfinding.PathFinderDijkstra;
-import modele.Robot;
-import modele.TypeRobot;
+import fr.fito.modele.pathfinding.Position;
+import fr.fito.modele.pathfinding.Chemin;
+import fr.fito.modele.pathfinding.PathFinderDijkstra;
+import fr.fito.modele.Robot;
+import fr.fito.modele.TypeRobot;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;

@@ -1,6 +1,6 @@
 package Model;
 
-import modele.CarteDeTerrain;
+import fr.fito.modele.CarteDeTerrain;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

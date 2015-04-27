@@ -5,9 +5,9 @@
  */
 package Model.pathfinding;
 
-import modele.pathfinding.PathfinderAstar;
-import modele.pathfinding.Position;
-import modele.pathfinding.Chemin;
+import fr.fito.modele.pathfinding.PathfinderAstar;
+import fr.fito.modele.pathfinding.Position;
+import fr.fito.modele.pathfinding.Chemin;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.Test;
