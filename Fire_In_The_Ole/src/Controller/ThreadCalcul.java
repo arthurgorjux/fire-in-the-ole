@@ -20,10 +20,18 @@ public class ThreadCalcul extends Thread {
     @Override
     public void run (){
         //Tant que la simulation n'est pas terminée on calcule les nouveaux tours...
+        long startTime;
+        long endTime;
+        int nb_tour = 0;
         while (!simulation.estTerminee()) {
+            nb_tour +=1;
+            startTime = System.currentTimeMillis();
             simulation.mettreAJour();
+            endTime = System.currentTimeMillis();
+            System.out.println("Temps calcul d'un tour = "+(endTime-startTime)); //nécessaire pour les tests de performances
             simulation.archiverTour();
         }
+        System.out.println("Nbr tour total : "+nb_tour);
     }
     
 }
