@@ -11,7 +11,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Robot implements Entite{
-
     private Position destination;
     public final String typeRobot;
     public final String nom;

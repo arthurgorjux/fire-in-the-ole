@@ -18,6 +18,10 @@ public class Simulation {
         private final List<Incendie> incendiesEteints;
 	private int duree = 1;
 	
+        /**
+         * 
+         * @param parametres Le jeu de paramètre de la simulation
+         */
         public Simulation(JeuDeParametres parametres) {
 		manager = new Manager(this);
 		archive = new ArchiveSimulation();
@@ -46,6 +50,7 @@ public class Simulation {
 		}
         }
         
+        
 	public void mettreAJour() {
             // on fait apparaitre les incendies supplémentaires
             incendies.addAll(incendiesFutur);
@@ -70,6 +75,9 @@ public class Simulation {
             }
 	}
 
+        /**
+         * Archive l'état de la simulation.
+         */
 	public void archiverTour() {
 		final List<EtatEntite> etatsEntite;
 		etatsEntite = new LinkedList<>();
@@ -85,7 +93,9 @@ public class Simulation {
 //		return tour;
 	}
 	
-
+/**
+ * @return true si la simulation est terminé, faux sinon
+ */
 	public boolean estTerminee() {            
             //on termine la simulation si la liste des incendies est vide
             //ou au bout d'un certain nombre de tours dans un premier temps...
@@ -141,6 +151,11 @@ public class Simulation {
             return false;
         }
         
+        /**
+         * Perme de savoir si un robot est présent à l'emplacement en paramètres
+         * @param emplacement La position à tester.
+         * @return True si un robot est présent à cette position, false sinon
+         */
         public boolean contientUnRobot(Position emplacement) {
             for (Robot robot : robots) {
 		if (robot.getPosition().equals(emplacement)) {
