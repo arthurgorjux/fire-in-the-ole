@@ -45,5 +45,23 @@ public class Chemin {
   
     }
     
+    public List<Position> getEtapes(){
+        return this.etapes;
+    }
+    
+    @Override
+    public boolean equals(Object o){
+        Chemin other = (Chemin) o;
+        boolean result = false;
+        for(Position etape : this.etapes){
+            if(other.etapes.contains(etape)){
+                result = true;
+            }else{
+                result = false;
+            }
+        }
+        return result;
+    }
+    
     
 }
