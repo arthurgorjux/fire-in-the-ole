@@ -3,7 +3,7 @@ package Model;
 public interface Entite {
 
 	/**
-	 * L'appel de cette m�thode permet � l'entit� d'agir pour un tour. 
+	 * L'appel de cette méthode permet à l'entité d'agir pour un tour. 
 	 */
 	public void agir();
 }

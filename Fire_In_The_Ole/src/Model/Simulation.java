@@ -7,6 +7,7 @@ import Model.stockage.InitialisationIncendie;
 import Model.stockage.InitialisationRobot;
 import Model.stockage.JeuDeParametres;
 
+
 public class Simulation {
         private final SensVent sens_du_vent;
 	private final Manager manager;
@@ -106,11 +107,22 @@ public class Simulation {
                 return (duree>=60);
         }
 
+        /**
+         * 
+         * @return L'archive de la simulation terminée.
+         */
 	public ArchiveSimulation getArchiveResultat() {
 		// TODO Auto-generated method stub
 		return archive;
 	}
 
+        /**
+         * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu être ajouté.
+         * @param intensite L'intensité de départ de l'incendie
+         * @param x La coordonné x de l'incendie à ajouter
+         * @param y La coordonné y de l'incendie à ajouter
+         * @return true si l'incendie à pu être ajouté
+         */
         public boolean ajouterFeu(int intensite, int x, int y) {
             if (estUnEmplacementLibre(new Position(x, y))) {
                 incendiesFutur.add(new Incendie(x,y, this));
@@ -119,6 +131,12 @@ public class Simulation {
             return false;
         }
         
+        /**
+        * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu être ajouté.
+        * @param intensite L'intensité de départ de l'incendie
+        * @param position La position de l'incendie à ajouter
+        * @return true si l'incendie à pu être ajouté
+        */
         public boolean ajouterFeu(int intensite, Position position) {
             if (estUnEmplacementLibre(position)) {
                 incendiesFutur.add(new Incendie(position, this));
@@ -129,8 +147,8 @@ public class Simulation {
 
         /**
          * Indique si un emplacement ne contient ni incendies ni robots
-         * @param emplacement
-         * @return 
+         * @param emplacement La position à tester
+         * @return True si l'emplacement est libre
          */
         public boolean estUnEmplacementLibre(Position emplacement) {
             return !contientUnIncendie(emplacement) && !contientUnRobot(emplacement);
@@ -165,15 +183,26 @@ public class Simulation {
             return false;
         }
 
-
+    /**
+     * 
+     * @return La liste des incendies 
+     */
     public List<Incendie> getIncendies() {
         return incendies;
     }
 
+    /**
+     * 
+     * @return La liste des robots.
+     */
     public List<Robot> getRobots() {
         return robots;
     }
     
+    /**
+     * Retourne le manager de la simulation.
+     * @return Le manager de la simulation.
+     */
     public Manager getManager(){
         return this.manager;
     }

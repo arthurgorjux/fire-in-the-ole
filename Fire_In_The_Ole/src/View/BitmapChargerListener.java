@@ -7,9 +7,6 @@ package View;
 
 import Model.BitmapLoader;
 import Model.CarteDeTerrain;
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
