@@ -6,6 +6,7 @@
 package Model.pathfinding;
 
 import Model.Robot;
+import Model.TypeRobot;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -63,7 +64,7 @@ public class PathFinderDijkstraTest {
 		};
         Position depart = new Position(0, 0);
         Position fin = new Position(3, 3);
-        PathFinderDijkstra instance = new PathFinderDijkstra(null, new Robot(0, 0, 0, "Toto", null));
+        PathFinderDijkstra instance = new PathFinderDijkstra(null, new Robot(0, 0, TypeRobot.CHENILLE, "Toto", null));
         
         // Chemin determiné à la main
         List<Position> etapesChemin = new ArrayList<>();

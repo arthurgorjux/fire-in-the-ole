@@ -26,6 +26,7 @@ class LancerProgListener implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        /*
         try {
             if(this.main.getRobots().size() > 0 && this.main.getCarte() != null){
                 new Main(this.main.getRobots(), this.main.getCarte());
@@ -36,6 +37,7 @@ class LancerProgListener implements ActionListener {
         } catch (IOException ex) {
             Logger.getLogger(LancerProgListener.class.getName()).log(Level.SEVERE, null, ex);
         }
+                */
     }
     
 }

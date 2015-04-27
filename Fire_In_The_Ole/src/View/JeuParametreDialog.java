@@ -1,6 +1,7 @@
 package View;
 
 import Model.SensVent;
+import Model.TypeRobot;
 import Model.stockage.InitialisationIncendie;
 import Model.stockage.InitialisationRobot;
 import Model.stockage.JeuDeParametres;
@@ -72,11 +73,11 @@ public class JeuParametreDialog extends JFrame{
     
     private List<InitialisationRobot> majRobots(){
         List<InitialisationRobot> robots = new ArrayList<>();
-        robots.add(new InitialisationRobot(0, 0, 0));
-        robots.add(new InitialisationRobot(8, 3, 1));
-        robots.add(new InitialisationRobot(10, 0, 2));
-        robots.add(new InitialisationRobot(7, 9, 3));
-        robots.add(new InitialisationRobot(0, 6, 0));
+        robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(10, 0, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(0, 6, TypeRobot.CHENILLE));
         return robots;
     }
 }

@@ -29,10 +29,10 @@ public class LanceurVersionConsolePourTests {
         List<InitialisationIncendie> incendies;
         // Robots
         robots = new LinkedList<>();
-        robots.add(new InitialisationRobot(1, 1, 0));
-        robots.add(new InitialisationRobot(2, 2, 0));
-        robots.add(new InitialisationRobot(4, 5, 0));
-        robots.add(new InitialisationRobot(7, 5, 0));
+        robots.add(new InitialisationRobot(1, 1, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(2, 2, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(4, 5, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(7, 5, TypeRobot.PATTE));
         // Incendies
         incendies = new LinkedList<>();
         incendies.add(new InitialisationIncendie(2, 3));
@@ -47,7 +47,7 @@ public class LanceurVersionConsolePourTests {
      */
     public void executer() {
         System.out.println("Génération de la simulation...");
-        simulateur.jouerSimulation(new CarteDeTerrain(), genererJeuParametresTest());
+        simulateur.jouerSimulation(genererJeuParametresTest());
         System.out.println("Affichage de la simulation :");
         simulateur.rejouerSimulation();
         System.out.println("fin !");
@@ -58,7 +58,9 @@ public class LanceurVersionConsolePourTests {
      * @param args
      */
     public static void main(String[] args) {
-        LanceurVersionConsolePourTests lanceur = new LanceurVersionConsolePourTests();
+        LanceurVersionConsolePourTests lanceur;
+        lanceur = new LanceurVersionConsolePourTests();
+        lanceur.executer();
     }
 
 }

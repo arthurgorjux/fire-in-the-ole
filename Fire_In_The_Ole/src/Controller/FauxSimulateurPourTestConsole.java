@@ -1,12 +1,20 @@
 package Controller;
-import Model.*;
+
+import Model.ArchiveSimulation;
+import Model.Simulation;
 import Model.stockage.JeuDeParametres;
 
+/**
+ * Un simulateur sans interface graphique.
+ */
 public class FauxSimulateurPourTestConsole {
 	ArchiveSimulation archive;
-		
-	public void jouerSimulation(CarteDeTerrain carte, JeuDeParametres parametres){
-            
+        
+        /**
+         * Déroule une simulation à partir du JeuDeParametres et enregistre son résultat.
+         * @param parametres Les paramètres initiaux de la simulation.
+         */
+	public void jouerSimulation(JeuDeParametres parametres){
 		Simulation simulation = new Simulation(parametres);
 		while (!simulation.estTerminee()) {
 			simulation.mettreAJour();
@@ -15,6 +23,9 @@ public class FauxSimulateurPourTestConsole {
 		archive = simulation.getArchiveResultat();
 	}
 	
+        /**
+         * Affiche l'archive de la dernière simulation jouée.
+         */
 	public void rejouerSimulation() {
 		archive.afficher();
 	}

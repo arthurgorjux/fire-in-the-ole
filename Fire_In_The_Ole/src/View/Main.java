@@ -5,7 +5,6 @@
  */
 package View;
 
-import Controller.FauxSimulateurPourTestConsole;
 import Model.ArchiveTourSimulation;
 import Model.CarteDeTerrain;
 import Model.EtatEntite;
@@ -18,7 +17,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 import java.util.List;
 import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
