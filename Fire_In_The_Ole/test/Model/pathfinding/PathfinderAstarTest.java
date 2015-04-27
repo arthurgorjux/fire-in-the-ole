@@ -61,16 +61,16 @@ public class PathfinderAstarTest {
 		};
         Position depart = new Position(0, 0);
         Position fin = new Position(3, 3);
-        PathFinderDijkstra instance = new PathFinderDijkstra(null);
+        PathfinderAstar instance = new PathfinderAstar(null);
         
         // Chemin determiné à la main
         List<Position> etapesChemin = new ArrayList<>();
         etapesChemin.add(new Position(0, 0));
-        etapesChemin.add(new Position(0, 1));
-        etapesChemin.add(new Position(0, 2));
-        etapesChemin.add(new Position(0, 3));
-        etapesChemin.add(new Position(1, 3));
-        etapesChemin.add(new Position(2, 3));
+        etapesChemin.add(new Position(1, 0));
+        etapesChemin.add(new Position(2, 0));
+        etapesChemin.add(new Position(3, 0));
+        etapesChemin.add(new Position(3, 1));
+        etapesChemin.add(new Position(3, 2));
         etapesChemin.add(new Position(3, 3));
         Chemin expResult = new Chemin(etapesChemin);
         
