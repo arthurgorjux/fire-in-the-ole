@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Model;
+import modele.BitmapLoader;
 import java.awt.image.BufferedImage;
 import javax.imageio.ImageIO;
 import org.junit.Test;
