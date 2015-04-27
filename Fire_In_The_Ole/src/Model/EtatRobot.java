@@ -6,10 +6,10 @@
 package Model;
 
 /**
- *
- * @author S219
+ * Les différents etats possibles d'un robot.
  */
 public enum EtatRobot {
+
     ARRET,
     DEPLACEMENT,
     EXTINCTION;

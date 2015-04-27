@@ -11,7 +11,8 @@ import Observer.Observateur;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Robot implements Entite{
+public class Robot implements Entite {
+
     private Position destination;
     public final int typeRobot;
     public final String nom;
@@ -21,13 +22,13 @@ public class Robot implements Entite{
     private Position positionActuelle;
     private Chemin chemin;
     private final Simulation simulation;
-    
+
     private static int PUISSANCE_ROBOT_PATTE = 300;
     private static int PUISSANCE_ROBOT_ROUE = 200;
     private static int PUISSANCE_ROBOT_CHENILLE = 200;
     private static int PUISSANCE_ROBOT_JETPACK = 50;
 
-    public Robot(int origineX, int origineY, int type, String nom, Simulation simulation ){
+    public Robot(int origineX, int origineY, int type, String nom, Simulation simulation) {
         positionActuelle = new Position(origineX, origineY);
         this.simulation = simulation;
         destination = new Position(origineY, origineY);
@@ -38,7 +39,7 @@ public class Robot implements Entite{
         this.pathFinder = new PathFinderToutDroit(simulation);
         calculerChemin();
     }
-        
+
     public Robot(InitialisationRobot parametres, String nom, Simulation simulation) {
         this(parametres.getX_depart(), parametres.getY_depart(), parametres.getType(), nom, simulation);
     }
@@ -53,7 +54,7 @@ public class Robot implements Entite{
         chemin = pathFinder.getCheminLePlusCourt(positionActuelle, destination);
     }
 
-    public void setChemin (Chemin chemin){
+    public void setChemin(Chemin chemin) {
         this.chemin = chemin;
     }
 
@@ -65,10 +66,10 @@ public class Robot implements Entite{
         return positionActuelle;
     }
 
-    public TypeRobot getType(){
+    public TypeRobot getType() {
         TypeRobot type = null;
-        
-        switch(this.typeRobot){
+
+        switch (this.typeRobot) {
             case 0:
                 type = TypeRobot.PATTE;
                 break;
@@ -84,22 +85,23 @@ public class Robot implements Entite{
         }
         return type;
     }
-    
+
     /**
-     * Présence possible du patron de conception "Etat" non implémenté pour des raison de simplicité. Seulements deux etats présent/
+     * Présence possible du patron de conception "Etat" non implémenté pour des
+     * raison de simplicité. Seulements deux etats présent/
      */
     @Override
     public void agir() {
         Position suivant = chemin.getPositionSuivante(positionActuelle);
-        switch(etat){
+        switch (etat) {
             case DEPLACEMENT:
                 if (simulation.contientUnIncendie(suivant)) {
                     //prevenirObservateurs();
                     etat = EtatRobot.EXTINCTION;
-                } else {                           
-                    if(simulation.contientUnRobot(suivant)) {
+                } else {
+                    if (simulation.contientUnRobot(suivant)) {
                         calculerChemin();
-                    }else{
+                    } else {
                         positionActuelle = suivant;
                     }
                 }
@@ -122,10 +124,10 @@ public class Robot implements Entite{
     }
     
     // retourne la puissance d'un robot selon son type
-    private int puissance_robot(){
+    private int puissance_robot() {
         int puissance = 0;
-        
-        switch(this.getType()){
+
+        switch (this.getType()) {
             case PATTE:
                 puissance = PUISSANCE_ROBOT_PATTE;
                 break;
@@ -139,14 +141,14 @@ public class Robot implements Entite{
                 puissance = PUISSANCE_ROBOT_JETPACK;
                 break;
         }
-        
+
         return puissance;
     }
-	
+
     private boolean estArriveDestination() {
         return positionActuelle == destination;
     }
-        
+
     /**
      * Prévient tous les observateurs de la liste.
      */
@@ -155,18 +157,18 @@ public class Robot implements Entite{
             observateur.prevenir();
         }
     }
-        
+
     public EtatEntite getEtatEntite() {
-            return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
+        return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
     }
-        
+
     @Override
-    public String toString(){
+    public String toString() {
         return this.nom + " : " + this.positionActuelle.getX() + ", " + this.positionActuelle.getY();
     }
-    
-    public Position getDestination(){
+
+    public Position getDestination() {
         return this.destination;
     }
-    
+
 }
