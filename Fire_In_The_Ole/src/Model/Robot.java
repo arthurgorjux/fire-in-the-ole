@@ -110,7 +110,7 @@ public class Robot implements Entite {
                 if (simulation.getIncendieAt(suivant) != null) {
                     System.out.println(this + " eteint un feu");
                     Incendie incendie = simulation.getIncendieAt(suivant);
-                    incendie.arroser(puissance_robot());//TODO changer variable en dur
+                    incendie.arroser(puissance_robot());
                 } else {
                     prevenirObservateurs();
                     etat = DEPLACEMENT;
@@ -123,7 +123,10 @@ public class Robot implements Entite {
         }
     }
     
-    // retourne la puissance d'un robot selon son type
+    /**
+     * Retourne la puissance du robot.
+     * @return La puissance du robot.
+     */
     private int puissance_robot() {
         int puissance = 0;
 
@@ -141,16 +144,19 @@ public class Robot implements Entite {
                 puissance = PUISSANCE_ROBOT_JETPACK;
                 break;
         }
-
         return puissance;
     }
 
+    /**
+     * Retourne si le robot est arrivé à sa destination courante.
+     * @return True si le robot est arrivé à sa destination courante.
+     */
     private boolean estArriveDestination() {
         return positionActuelle == destination;
     }
 
     /**
-     * Prévient tous les observateurs de la liste.
+     * Prévient tous les observateurs du robot.
      */
     private void prevenirObservateurs() {
         for (Observateur observateur : observateurs) {
@@ -158,6 +164,10 @@ public class Robot implements Entite {
         }
     }
 
+    /**
+     * Retourne un EtatEntite représentant le robot au moment de l'appel.
+     * @return Un EtatEntite représentant le robot au moment de l'appel.
+     */
     public EtatEntite getEtatEntite() {
         return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
     }
@@ -167,6 +177,10 @@ public class Robot implements Entite {
         return this.nom + " : " + this.positionActuelle.getX() + ", " + this.positionActuelle.getY();
     }
 
+    /**
+     * Retourne la destination courante du robot.
+     * @return La destination courante du robot.
+     */
     public Position getDestination() {
         return this.destination;
     }

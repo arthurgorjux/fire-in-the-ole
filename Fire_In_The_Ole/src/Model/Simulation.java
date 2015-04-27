@@ -7,8 +7,10 @@ import Model.stockage.InitialisationIncendie;
 import Model.stockage.InitialisationRobot;
 import Model.stockage.JeuDeParametres;
 
+/**
+ * La simulation de l'extinction d'incendies par des robots sur un carte.
+ */
 public class Simulation {
-
     private final SensVent sens_du_vent;
     private final Manager manager;
     private final ArchiveSimulation archive;
@@ -20,8 +22,8 @@ public class Simulation {
     private int duree = 1;
 
     /**
-     *
-     * @param parametres Le jeu de paramètre de la simulation
+     * Constucteur à partir d'un JeuDeParametres.
+     * @param parametres Le jeu de paramètres initiaux de la simulation.
      */
     public Simulation(JeuDeParametres parametres) {
         manager = new Manager(this);
@@ -51,6 +53,9 @@ public class Simulation {
         }
     }
 
+    /**
+     * Fait progresser la simulation d'un tour.
+     */
     public void mettreAJour() {
         // on fait apparaitre les incendies supplémentaires
         incendies.addAll(incendiesFutur);
@@ -94,10 +99,11 @@ public class Simulation {
     }
 
     /**
-     * @return true si la simulation est terminé, faux sinon
+     * Retourne si la simulation est terminée.
+     * @return True si la simulation est terminé.
      */
     public boolean estTerminee() {
-            //on termine la simulation si la liste des incendies est vide
+        //on termine la simulation si la liste des incendies est vide
         //ou au bout d'un certain nombre de tours dans un premier temps...
         duree = duree + 1;
         if (incendies.isEmpty()) {
@@ -108,7 +114,7 @@ public class Simulation {
     }
 
     /**
-     *
+     * Retourne l'archive de la simulation terminée.
      * @return L'archive de la simulation terminée.
      */
     public ArchiveSimulation getArchiveResultat() {
@@ -117,13 +123,11 @@ public class Simulation {
     }
 
     /**
-     * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu
-     * être ajouté.
-     *
-     * @param intensite L'intensité de départ de l'incendie
-     * @param x La coordonné x de l'incendie à ajouter
-     * @param y La coordonné y de l'incendie à ajouter
-     * @return true si l'incendie à pu être ajouté
+     * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu être ajouté.
+     * @param intensite L'intensité de départ de l'incendie.
+     * @param x La coordonné x de l'incendie à ajouter.
+     * @param y La coordonné y de l'incendie à ajouter.
+     * @return True si l'incendie à pu être ajouté.
      */
     public boolean ajouterFeu(int intensite, int x, int y) {
         if (estUnEmplacementLibre(new Position(x, y))) {
@@ -134,12 +138,10 @@ public class Simulation {
     }
 
     /**
-     * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu
-     * être ajouté.
-     *
-     * @param intensite L'intensité de départ de l'incendie
-     * @param position La position de l'incendie à ajouter
-     * @return true si l'incendie à pu être ajouté
+     * Essaie d'ajouter un incendie à la position indiquée, indique s'il a pu être ajouté.
+     * @param intensite L'intensité de départ de l'incendie.
+     * @param position La position de l'incendie à ajouter.
+     * @return True si l'incendie à pu être ajouté.
      */
     public boolean ajouterFeu(int intensite, Position position) {
         if (estUnEmplacementLibre(position)) {
@@ -150,20 +152,18 @@ public class Simulation {
     }
 
     /**
-     * Indique si un emplacement ne contient ni incendies ni robots
-     *
-     * @param emplacement La position à tester
-     * @return True si l'emplacement est libre
+     * Retourne si l'emplacement en paramètres ne contient ni incendies ni robots.
+     * @param emplacement La position à tester.
+     * @return True si l'emplacement est libre.
      */
     public boolean estUnEmplacementLibre(Position emplacement) {
         return !contientUnIncendie(emplacement) && !contientUnRobot(emplacement);
     }
 
     /**
-     * Indique si un emplacement contient un incendie
-     *
-     * @param emplacement
-     * @return
+     * Retourne si l'emplacement en paramètres contient un incendie.
+     * @param emplacement La Position à tester.
+     * @return True si l'emplacement contient un incendie.
      */
     public boolean contientUnIncendie(Position emplacement) {
         for (Incendie incendie : incendies) {
@@ -176,10 +176,9 @@ public class Simulation {
     }
 
     /**
-     * Perme de savoir si un robot est présent à l'emplacement en paramètres
-     *
+     * Retourne si un robot est présent à l'emplacement en paramètres.
      * @param emplacement La position à tester.
-     * @return True si un robot est présent à cette position, false sinon
+     * @return True si un robot est présent à cette Position.
      */
     public boolean contientUnRobot(Position emplacement) {
         for (Robot robot : robots) {
@@ -191,15 +190,15 @@ public class Simulation {
     }
 
     /**
-     *
-     * @return La liste des incendies
+     * Retourne la liste des incendies.
+     * @return La liste des incendies.
      */
     public List<Incendie> getIncendies() {
         return incendies;
     }
 
     /**
-     *
+     * Retourne la liste des robots.
      * @return La liste des robots.
      */
     public List<Robot> getRobots() {
@@ -208,17 +207,24 @@ public class Simulation {
 
     /**
      * Retourne le manager de la simulation.
-     *
      * @return Le manager de la simulation.
      */
     public Manager getManager() {
         return this.manager;
     }
 
+    /**
+     * Retourne la carte de la simulation.
+     * @return La carte de la simulation.
+     */
     public CarteDeTerrain getCarte() {
         return this.carte;
     }
 
+    /**
+     * Demande le retrait de l'incendie en paramètres de la simulation pour cause d'extinction.
+     * @param feu L'Incendie à retirer de la simulation.
+     */
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
         System.out.println("ETEINTS FEU : " + feu);
@@ -226,6 +232,11 @@ public class Simulation {
         System.out.println(incendiesEteints);
     }
 
+    /**
+     * Retourne l'incendie à la position en paramètre ou null si la case n'en contient pas.
+     * @param position La position dont on veut récupérer l'Incendie éventuel.
+     * @return L'incendie à la position en paramètre ou null si la case n'en contient pas.
+     */
     Incendie getIncendieAt(Position position) {
         for (Incendie incendie : incendies) {
             if (incendie.getPosition().equals(position)) {
