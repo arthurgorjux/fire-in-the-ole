@@ -22,7 +22,7 @@ import java.util.NavigableSet;
 public class PathFinderDijkstra implements PathFinder{
     
     private Simulation simu;
-    private Robot robot; // pour pouvoir choper le type de robot
+    private Robot robot;
     private Chemin cheminDijkstra;
     private int[][] map;
     private int[][] matrice;
@@ -72,63 +72,74 @@ public class PathFinderDijkstra implements PathFinder{
         switch(pRobot.getType()){
             case PATTE:
                 if(difficulte >= CHEMIN_MIN && difficulte < CHEMIN_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
-                difficulte_robot = 2 * difficulte;
-            }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
-                difficulte_robot = 3 * difficulte;
-            }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
-                difficulte_robot = 4 * difficulte;
-            }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
-                difficulte_robot = 5 * difficulte;
-            }else{
-                difficulte_robot = 6 * difficulte;
-            }
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_CHEMIN() * difficulte;
+                }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_PLAINE() * difficulte;
+                }else if(difficulte > TERRAIN_ACCIDENTE_MIN  && difficulte < TERRAIN_ACCIDENTE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_TERRAIN_ACCIDENTE() * difficulte;
+                }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_FORET() * difficulte;
+                }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_ROCHER() * difficulte;
+                }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_MONTAGNE() * difficulte;
+                }else{
+                    difficulte_robot = pRobot.getFACTEUR_PATTE_MONTAGNE() * difficulte;
+                }
                 break;
+                
             case ROUE:
                 if(difficulte >= CHEMIN_MIN && difficulte < CHEMIN_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
-                difficulte_robot = 2 * difficulte;
-            }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
-                difficulte_robot = 2 * difficulte;
-            }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
-                difficulte_robot = 3 * difficulte;
-            }else{
-                difficulte_robot = 4 * difficulte;
-            }
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_CHEMIN() * difficulte;
+                }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_PLAINE() * difficulte;
+                }else if(difficulte > TERRAIN_ACCIDENTE_MIN  && difficulte < TERRAIN_ACCIDENTE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_TERRAIN_ACCIDENTE() * difficulte;
+                }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_FORET() * difficulte;
+                }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_ROCHER() * difficulte;
+                }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_MONTAGNE()* difficulte;
+                }else{
+                    difficulte_robot = pRobot.getFACTEUR_ROUE_MONTAGNE() * difficulte;
+                }
                 break;
+                
             case CHENILLE:
                 if(difficulte >= CHEMIN_MIN && difficulte < CHEMIN_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
-                difficulte_robot = 2 * difficulte;
-            }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
-                difficulte_robot = 10 * difficulte;
-            }else{
-                difficulte_robot = 10 * difficulte;
-            }
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_CHEMIN() * difficulte;
+                }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_PLAINE()* difficulte;
+                }else if(difficulte > TERRAIN_ACCIDENTE_MIN  && difficulte < TERRAIN_ACCIDENTE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_TERRAIN_ACCIDENTE() * difficulte;
+                }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_FORET() * difficulte;
+                }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_ROCHER() * difficulte;
+                }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_MONTAGNE() * difficulte;
+                }else{
+                    difficulte_robot = pRobot.getFACTEUR_CHENILLE_MONTAGNE() * difficulte;
+                }
                 break;
+                
             case JETPACK:
                 if(difficulte >= CHEMIN_MIN && difficulte < CHEMIN_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
-                difficulte_robot = 1 * difficulte;
-            }else{
-                difficulte_robot = 1 * difficulte;
-            }
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_CHEMIN() * difficulte;
+                }else if(difficulte > PLAINE_MIN && difficulte < PLAINE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_PLAINE() * difficulte;
+                }else if(difficulte > TERRAIN_ACCIDENTE_MIN  && difficulte < TERRAIN_ACCIDENTE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_TERRAIN_ACCIDENTE() * difficulte;
+                }else if(difficulte > FORET_MIN  && difficulte < FORET_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_FORET() * difficulte;
+                }else if(difficulte > ROCHER_MIN && difficulte < ROCHER_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_ROCHER() * difficulte;
+                }else if(difficulte > MONTAGNE_MIN && difficulte < MONTAGNE_MAX){
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_MONTAGNE() * difficulte;
+                }else{
+                    difficulte_robot = pRobot.getFACTEUR_JETPACK_MONTAGNE() * difficulte;
+                }
                 break;
         }
         

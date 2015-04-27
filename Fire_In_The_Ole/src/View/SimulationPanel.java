@@ -46,6 +46,7 @@ public class SimulationPanel extends JPanel{
         this.add(start);
         stop.addActionListener(new StopListener(this.window, this));
         this.add(stop);
+        reset.addActionListener(new ResetSimuListener(this.window,this));
         this.add(reset);
     }
     

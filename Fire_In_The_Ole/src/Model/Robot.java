@@ -13,9 +13,10 @@ import java.util.List;
 
 public class Robot implements Entite {
 
+    
     private Position destination;
-    public final int typeRobot;
     public final String nom;
+    public final TypeRobot typeRobot;
     public final List<Observateur> observateurs;
     public EtatRobot etat;
     private final PathFinder pathFinder;
@@ -27,8 +28,36 @@ public class Robot implements Entite {
     private static int PUISSANCE_ROBOT_ROUE = 200;
     private static int PUISSANCE_ROBOT_CHENILLE = 200;
     private static int PUISSANCE_ROBOT_JETPACK = 50;
+    
+    private static int FACTEUR_PATTE_CHEMIN = 1;
+    private static int FACTEUR_PATTE_PLAINE = 2;
+    private static int FACTEUR_PATTE_TERRAIN_ACCIDENTE = 3;
+    private static int FACTEUR_PATTE_FORET = 4;
+    private static int FACTEUR_PATTE_ROCHER = 5;
+    private static int FACTEUR_PATTE_MONTAGNE = 6;
+    
+    private static int FACTEUR_ROUE_CHEMIN = 1;
+    private static int FACTEUR_ROUE_PLAINE = 1;
+    private static int FACTEUR_ROUE_TERRAIN_ACCIDENTE = 2;
+    private static int FACTEUR_ROUE_FORET = 2;
+    private static int FACTEUR_ROUE_ROCHER = 3;
+    private static int FACTEUR_ROUE_MONTAGNE = 4;
+    
+    private static int FACTEUR_CHENILLE_CHEMIN = 1;
+    private static int FACTEUR_CHENILLE_PLAINE = 1;
+    private static int FACTEUR_CHENILLE_TERRAIN_ACCIDENTE = 2;
+    private static int FACTEUR_CHENILLE_FORET = 2;
+    private static int FACTEUR_CHENILLE_ROCHER = 10;
+    private static int FACTEUR_CHENILLE_MONTAGNE = 10;
+    
+    private static int FACTEUR_JETPACK_CHEMIN = 1;
+    private static int FACTEUR_JETPACK_PLAINE = 1;
+    private static int FACTEUR_JETPACK_TERRAIN_ACCIDENTE = 1;
+    private static int FACTEUR_JETPACK_FORET = 1;
+    private static int FACTEUR_JETPACK_ROCHER = 1;
+    private static int FACTEUR_JETPACK_MONTAGNE = 1;
 
-    public Robot(int origineX, int origineY, int type, String nom, Simulation simulation) {
+    public Robot(int origineX, int origineY, TypeRobot type, String nom, Simulation simulation ){
         positionActuelle = new Position(origineX, origineY);
         this.simulation = simulation;
         destination = new Position(origineY, origineY);
@@ -40,7 +69,7 @@ public class Robot implements Entite {
         calculerChemin();
     }
 
-    public Robot(InitialisationRobot parametres, String nom, Simulation simulation) {
+    public Robot(InitialisationRobot parametres ,String nom, Simulation simulation) {
         this(parametres.getX_depart(), parametres.getY_depart(), parametres.getType(), nom, simulation);
     }
 
@@ -67,23 +96,7 @@ public class Robot implements Entite {
     }
 
     public TypeRobot getType() {
-        TypeRobot type = null;
-
-        switch (this.typeRobot) {
-            case 0:
-                type = TypeRobot.PATTE;
-                break;
-            case 1:
-                type = TypeRobot.ROUE;
-                break;
-            case 2:
-                type = TypeRobot.CHENILLE;
-                break;
-            case 3:
-                type = TypeRobot.JETPACK;
-                break;
-        }
-        return type;
+        return typeRobot;
     }
 
     /**
@@ -129,8 +142,9 @@ public class Robot implements Entite {
      */
     private int puissance_robot() {
         int puissance = 0;
+        
+        switch(this.getType()){
 
-        switch (this.getType()) {
             case PATTE:
                 puissance = PUISSANCE_ROBOT_PATTE;
                 break;
@@ -185,4 +199,171 @@ public class Robot implements Entite {
         return this.destination;
     }
 
+    /**
+     * @return the FACTEUR_PATTE_CHEMIN
+     */
+    public static int getFACTEUR_PATTE_CHEMIN() {
+        return FACTEUR_PATTE_CHEMIN;
+    }
+
+    /**
+     * @return the FACTEUR_PATTE_PLAINE
+     */
+    public static int getFACTEUR_PATTE_PLAINE() {
+        return FACTEUR_PATTE_PLAINE;
+    }
+
+    /**
+     * @return the FACTEUR_PATTE_TERRAIN_ACCIDENTE
+     */
+    public static int getFACTEUR_PATTE_TERRAIN_ACCIDENTE() {
+        return FACTEUR_PATTE_TERRAIN_ACCIDENTE;
+    }
+
+    /**
+     * @return the FACTEUR_PATTE_FORET
+     */
+    public static int getFACTEUR_PATTE_FORET() {
+        return FACTEUR_PATTE_FORET;
+    }
+
+    /**
+     * @return the FACTEUR_PATTE_ROCHER
+     */
+    public static int getFACTEUR_PATTE_ROCHER() {
+        return FACTEUR_PATTE_ROCHER;
+    }
+
+    /**
+     * @return the FACTEUR_PATTE_MONTAGNE
+     */
+    public static int getFACTEUR_PATTE_MONTAGNE() {
+        return FACTEUR_PATTE_MONTAGNE;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_CHEMIN
+     */
+    public static int getFACTEUR_ROUE_CHEMIN() {
+        return FACTEUR_ROUE_CHEMIN;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_PLAINE
+     */
+    public static int getFACTEUR_ROUE_PLAINE() {
+        return FACTEUR_ROUE_PLAINE;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_TERRAIN_ACCIDENTE
+     */
+    public static int getFACTEUR_ROUE_TERRAIN_ACCIDENTE() {
+        return FACTEUR_ROUE_TERRAIN_ACCIDENTE;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_FORET
+     */
+    public static int getFACTEUR_ROUE_FORET() {
+        return FACTEUR_ROUE_FORET;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_ROCHER
+     */
+    public static int getFACTEUR_ROUE_ROCHER() {
+        return FACTEUR_ROUE_ROCHER;
+    }
+
+    /**
+     * @return the FACTEUR_ROUE_MONTAGNE
+     */
+    public static int getFACTEUR_ROUE_MONTAGNE() {
+        return FACTEUR_ROUE_MONTAGNE;
+    }
+
+    /**
+     * @return the FACTEUR_CHENILLE_CHEMIN
+     */
+    public static int getFACTEUR_CHENILLE_CHEMIN() {
+        return FACTEUR_CHENILLE_CHEMIN;
+    }
+
+    /**
+     * @return the FACTEUR_CHENILLE_PLAINE
+     */
+    public static int getFACTEUR_CHENILLE_PLAINE() {
+        return FACTEUR_CHENILLE_PLAINE;
+    }
+
+    /**
+     * @return the FACTEUR_CHENILLE_TERRAIN_ACCIDENTE
+     */
+    public static int getFACTEUR_CHENILLE_TERRAIN_ACCIDENTE() {
+        return FACTEUR_CHENILLE_TERRAIN_ACCIDENTE;
+    }
+
+    /**
+     * @return the FACTEUR_CHENILLE_FORET
+     */
+    public static int getFACTEUR_CHENILLE_FORET() {
+        return FACTEUR_CHENILLE_FORET;
+    }
+    
+    /**
+     * @return the FACTEUR_CHENILLE_ROCHER
+     */
+    public static int getFACTEUR_CHENILLE_ROCHER() {
+        return FACTEUR_CHENILLE_ROCHER;
+    }
+
+    /**
+     * @return the FACTEUR_CHENILLE_MONTAGNE
+     */
+    public static int getFACTEUR_CHENILLE_MONTAGNE() {
+        return FACTEUR_CHENILLE_MONTAGNE;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_CHEMIN
+     */
+    public static int getFACTEUR_JETPACK_CHEMIN() {
+        return FACTEUR_JETPACK_CHEMIN;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_PLAINE
+     */
+    public static int getFACTEUR_JETPACK_PLAINE() {
+        return FACTEUR_JETPACK_PLAINE;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_TERRAIN_ACCIDENTE
+     */
+    public static int getFACTEUR_JETPACK_TERRAIN_ACCIDENTE() {
+        return FACTEUR_JETPACK_TERRAIN_ACCIDENTE;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_FORET
+     */
+    public static int getFACTEUR_JETPACK_FORET() {
+        return FACTEUR_JETPACK_FORET;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_ROCHER
+     */
+    public static int getFACTEUR_JETPACK_ROCHER() {
+        return FACTEUR_JETPACK_ROCHER;
+    }
+
+    /**
+     * @return the FACTEUR_JETPACK_MONTAGNE
+     */
+    public static int getFACTEUR_JETPACK_MONTAGNE() {
+        return FACTEUR_JETPACK_MONTAGNE;
+    }
 }

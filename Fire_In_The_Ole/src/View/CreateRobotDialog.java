@@ -6,6 +6,7 @@
 package View;
 
 import Model.Robot;
+import Model.TypeRobot;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -54,7 +55,7 @@ public class CreateRobotDialog extends JDialog{
 
     private void init() {
         this.getContentPane().setLayout(new GridLayout(5, 2, 5, 5));
-        String[] listData = {"Robot à pattes", "Robot à roues" ,"Robot à chenilles", "Robot à jet-pack"};
+        //String[] listData = {"Robot à pattes", "Robot à roues" ,"Robot à chenilles", "Robot à jet-pack"};
         this.robotName = new JTextField();
         this.robotName.addFocusListener(new FocusListener() {
 
@@ -66,7 +67,9 @@ public class CreateRobotDialog extends JDialog{
             @Override
             public void focusLost(FocusEvent e) {}
         });
-        this.robotType = new JComboBox<>(listData);
+        
+       // this.robotType = new JComboBox<>(listData);
+        this.robotType = new JComboBox(TypeRobot.values());
         SpinnerNumberModel spinnerModelX = new SpinnerNumberModel(0,0,30,1);
         SpinnerNumberModel spinnerModelY = new SpinnerNumberModel(0,0,30,1);
         this.coordX = new JSpinner(spinnerModelX);
