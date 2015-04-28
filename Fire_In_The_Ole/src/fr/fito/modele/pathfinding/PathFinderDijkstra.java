@@ -145,11 +145,8 @@ public class PathFinderDijkstra implements PathFinder{
         List<Arete> edges = new LinkedList<>();
         for(int i = 0 ; i < carte.length ; i++){
             for(int j = 0 ; j < carte.length; j++){
-                //matrice [i][j] = carte[j][i];
-                matrice [i][j] = check_difficulte_typeRobot(this.robot, carte[i][j]);
-                System.out.println(matrice[i][j] + " ");
+                matrice [i][j] = check_difficulte_typeRobot(this.robot, carte[j][i]);
             }
-            System.out.println("\n");
         }
         this.map = matrice;
         List<Arete> adjacentsFinaux = new LinkedList<>();

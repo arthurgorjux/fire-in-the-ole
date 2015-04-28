@@ -81,9 +81,7 @@ public class PathFinderDijkstraTest {
         Chemin expResult = new Chemin(etapesChemin);
         
         Chemin result = instance.calculerChemin(matrice, depart, fin);
-        
-        System.out.println("Chemin final : " + result);
-        assertEquals(expResult, result);
+        assertEquals(expResult.getEtapes(), result.getEtapes());
     }
     
     /*@Test

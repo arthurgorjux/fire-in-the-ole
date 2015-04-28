@@ -43,15 +43,14 @@ public class Chemin {
     }
 
     @Override
-    //TODO Le test est faux, il teste juste si la dernière etape des deux chemin correspond. A refaire
     public boolean equals(Object o){
         Chemin other = (Chemin) o;
-        boolean result = false;
-        for(Position etape : this.etapes){
-            if(other.etapes.contains(etape)){
-                result = true;
-            }else{
-                result = false;
+        boolean result = true;
+        for(int i = 0; i < this.etapes.size(); i++){
+            for(int j = 0; j < other.etapes.size(); j++){
+                if(!other.etapes.get(j).equals(this.etapes.get(i))){
+                    result = false;
+                }
             }
         }
         return result;
