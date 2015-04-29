@@ -7,13 +7,21 @@ import java.awt.event.ActionListener;
  * Ecouteur du bouton lancer la simulation.
  * @author arthur
  */
-class EcouteurBoutonLancerSimulation implements ActionListener {
-    public FenetreAccueil fenetre;
+public class EcouteurBoutonLancerSimulation implements ActionListener {
+    private FenetreAccueil fenetre;
 
+    /**
+     * Construit l'écouteur en lui passant une référence vers la fenêtre qui l'utilise.
+     * @param fenetre 
+     */
     public EcouteurBoutonLancerSimulation(FenetreAccueil fenetre) {
         this.fenetre = fenetre;
     }
 
+    /**
+     * Lors du clic sur le bouton, demande à la fenêtre de lancer la simulation.
+     * @param e L'évènement qui a déclanchée l'action.
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         fenetre.lancerLaSimulation();

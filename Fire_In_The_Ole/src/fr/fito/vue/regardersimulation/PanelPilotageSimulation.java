@@ -6,7 +6,6 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  *
@@ -21,50 +20,71 @@ public class PanelPilotageSimulation extends JPanel{
     private final JButton stop;
     private final JButton reset;
     private final FenetreRegarderSimulation window;
-    private Timer timer;
     
     public PanelPilotageSimulation(FenetreRegarderSimulation window) throws IOException{
         super();
-        this.etat = STOP;
-        this.timer = null;
         this.window = window;
+        
         Image imgStart = ImageIO.read(getClass().getResource("/IMG/play.png"));
         start = new JButton(new ImageIcon(imgStart));
+        start.addActionListener(new EcouteurBoutonDemarrerSimulation( this));
+        this.add(start);
+        
         Image imgStop = ImageIO.read(getClass().getResource("/IMG/pause.png"));
         stop = new JButton(new ImageIcon(imgStop));
+        stop.addActionListener(new EcouteurBoutonMettreEnPauseLaSimulation(this));
+        this.add(stop);
+        
         Image imgReset = ImageIO.read(getClass().getResource("/IMG/reset.png"));
         reset = new JButton(new ImageIcon(imgReset));
+        reset.addActionListener(new EcouteurBoutonRelancerSimulation(this));
+        this.add(reset);
+        
         stop.setEnabled(false);
         reset.setEnabled(false);
-        start.addActionListener(new EcouteurBoutonDemarrerSimulation(this.window, this));
-        this.add(start);
-        stop.addActionListener(new EcouteurBoutonGestionPauseSimulation(this.window, this));
-        this.add(stop);
-        reset.addActionListener(new EcouteurBoutonRelancerSimulation(this.window,this));
-        this.add(reset);
+        
+        this.etat = STOP;
     }
     
     public void setEtat(int etat){
         this.etat = etat;
+        
     }
     
-    public Timer getTimer(){
-        return this.timer;
+    public void passerEnEtatSimulationEnCours() {
+        etat = START;
+        start.setEnabled(false);
+        stop.setEnabled(true);
     }
     
-    public JButton getStart(){
-        return this.start;
+    public void passerEnEtatSimulationEnPause() {
+        etat = STOP;
+        stop.setEnabled(false);
+        start.setEnabled(true);
     }
     
-    public JButton getStop(){
-        return this.stop;
+    public void mettreEnPauseLaSimulation() {
+        passerEnEtatSimulationEnPause();
+        window.mettreEnPauseLaSimulation();
     }
     
-    public JButton getReset(){
-        return this.reset;
+    /**
+     * Relance le déroulement de la simulation.
+     */
+    public void relancerLaSimulation() {
+        window.relancerLaSimulation();
     }
 
-    void setTimer(Timer timer) {
-        this.timer = timer;
+    public void demarrerSimulation() {
+        passerEnEtatSimulationEnCours();
+        window.demarrerSimulation();
     }
+    
+    public void reinitialiserLesBoutons() {
+        stop.setEnabled(false);
+        start.setEnabled(true);
+        reset.setEnabled(true);
+    }
+    
+    
 }

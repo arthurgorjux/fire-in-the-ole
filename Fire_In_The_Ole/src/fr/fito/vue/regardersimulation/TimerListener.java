@@ -1,12 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package fr.fito.vue.regardersimulation;
 
-import fr.fito.vue.regardersimulation.PanelPilotageSimulation;
-import fr.fito.vue.regardersimulation.FenetreRegarderSimulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -17,14 +10,12 @@ import javax.swing.Timer;
  */
 public class TimerListener implements ActionListener{
     
-    private FenetreRegarderSimulation window;
-    private PanelPilotageSimulation panel;
+    private final FenetreRegarderSimulation window;
     private int compteur;
     private boolean affichageTermine;
     
-    public TimerListener(FenetreRegarderSimulation window, PanelPilotageSimulation panel){
+    public TimerListener(FenetreRegarderSimulation window){
         this.window = window;
-        this.panel = panel;
         compteur = 0;
         affichageTermine = false;
     }
@@ -56,9 +47,7 @@ public class TimerListener implements ActionListener{
         if (affichageTermine) {
             //si affichage terminé on stop le timer et on re-set les boutons
             t.stop();
-            panel.getStop().setEnabled(false);
-            panel.getStart().setEnabled(true);
-            panel.getReset().setEnabled(true);
+            window.reinitialiserBoutonsPilotage();
             System.out.println("Fin");
         }
     }    

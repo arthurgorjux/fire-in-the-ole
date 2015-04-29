@@ -9,7 +9,6 @@ import fr.fito.modele.parametrage.InitialisationRobot;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import fr.fito.modele.parametrage.JeuDeParametres;
 import fr.fito.vue.regardersimulation.FenetreRegarderSimulation;
 import java.awt.Dimension;
@@ -31,7 +30,7 @@ import javax.swing.JPanel;
 public class FenetreAccueil extends JFrame{
     private final JLabel labelComboJeuxDeParametres = new JLabel("Jeu de paramètres : ");
     private JComboBox<String> comboJeuxDeParametres;
-    public Map<String, JeuDeParametres> hashmapJeuxDeParametres = new HashMap<>();
+    private Map<String, JeuDeParametres> hashmapJeuxDeParametres = new HashMap<>();
     private final JButton boutonLancerSimulation = new JButton("Lancer");
     
     /**
