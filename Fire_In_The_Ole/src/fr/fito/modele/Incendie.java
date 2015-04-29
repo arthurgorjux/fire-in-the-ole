@@ -58,7 +58,8 @@ public class Incendie implements Entite {
 
     @Override
     public void agir() {
-        if (intensite >= 7) {
+        // 7 de base, à remettre par default
+        if (intensite >= 20) {
             sePropager();
         } else if (intensite <= 0) {
             sEteindre();

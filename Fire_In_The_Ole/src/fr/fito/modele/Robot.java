@@ -9,6 +9,7 @@ import fr.fito.modele.pathfinding.PathFinder;
 import fr.fito.modele.pathfinding.PathFinderToutDroit;
 import fr.fito.modele.pathfinding.Position;
 import fr.fito.modele.parametrage.InitialisationRobot;
+import fr.fito.modele.pathfinding.PathFinderDijkstra;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,7 +58,8 @@ public class Robot implements Entite {
         this.observateurs = new LinkedList<>();
         this.etat = EtatRobot.ARRET;
         this.pathFinder = new PathFinderToutDroit(simulation);
-        calculerChemin();
+        //this.pathFinder = new PathFinderDijkstra(simulation, this);
+        calculerChemin(); //???? n'a pas encore de destination à priori ?! ne faut-il pas le mettre lors de l'affectation d'une destination ? ie : definirDestination() ?
     }
     /**
      * Instancie un objet de classe Robot en utilisant les coordonées d'origine x et y, le type du robot, son nom et la simulation dans laquelle il évolue.
@@ -156,6 +158,7 @@ public class Robot implements Entite {
         Position suivant = chemin.getPositionSuivante(positionActuelle);
         if (simulation.contientUnIncendie(suivant)) {
             etat = EtatRobot.EXTINCTION;
+            definirDestination(suivant);
         } else {
             if (simulation.contientUnRobot(suivant)) {
                 calculerChemin();

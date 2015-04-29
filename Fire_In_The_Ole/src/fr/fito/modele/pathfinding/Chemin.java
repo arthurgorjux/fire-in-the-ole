@@ -16,7 +16,7 @@ public class Chemin {
     
     /**
      * Retourne la position suivant celle passée en paramètre dans le chemin.
-     * @param etapeCourante La position dont on veut la successeure.
+     * @param etapeCourante La position dont on veut la suivante.
      * @return La position suivant celle passée en paramètre dans le chemin.
      */
     public Position getPositionSuivante(Position etapeCourante) {

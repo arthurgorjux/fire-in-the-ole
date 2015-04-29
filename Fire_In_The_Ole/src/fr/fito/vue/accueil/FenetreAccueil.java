@@ -89,9 +89,9 @@ public class FenetreAccueil extends JFrame{
      */
     private List<InitialisationIncendie> getListeDesIncendies(){
         List<InitialisationIncendie> feux = new ArrayList<>();
-        feux.add(new InitialisationIncendie(10, 10));
+        //feux.add(new InitialisationIncendie(10, 10));
         feux.add(new InitialisationIncendie(1, 2));
-        feux.add(new InitialisationIncendie(3, 5));
+        //feux.add(new InitialisationIncendie(3, 5));
         feux.add(new InitialisationIncendie(4, 4));
         feux.add(new InitialisationIncendie(10, 1));
         return feux;
@@ -104,9 +104,9 @@ public class FenetreAccueil extends JFrame{
     private List<InitialisationRobot> getListeDesRobots(){
         List<InitialisationRobot> robots = new ArrayList<>();
         robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
+        //robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
         robots.add(new InitialisationRobot(10, 0, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
+        //robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
         robots.add(new InitialisationRobot(0, 6, TypeRobot.CHENILLE));
         return robots;
     }

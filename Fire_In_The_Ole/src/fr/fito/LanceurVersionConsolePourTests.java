@@ -32,7 +32,7 @@ public class LanceurVersionConsolePourTests {
         // Robots
         robots = new LinkedList<>();
         robots.add(new InitialisationRobot(1, 1, TypeRobot.PATTE));
-        robots.add(new InitialisationRobot(2, 2, TypeRobot.PATTE));
+        //robots.add(new InitialisationRobot(2, 2, TypeRobot.PATTE));
         robots.add(new InitialisationRobot(4, 5, TypeRobot.PATTE));
         robots.add(new InitialisationRobot(7, 5, TypeRobot.PATTE));
         // Incendies
