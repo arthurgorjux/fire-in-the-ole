@@ -4,10 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Ecouteur du bouton start.
+ * Ecouteur du bouton Start.
  * @author arthur
  */
-class EcouteurBoutonDemarrerSimulation implements ActionListener {
+public class EcouteurBoutonDemarrerSimulation implements ActionListener {
     private final PanelPilotageSimulation panel;
     
     public EcouteurBoutonDemarrerSimulation(PanelPilotageSimulation panel) {

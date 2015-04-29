@@ -36,8 +36,12 @@ public class FenetreRegarderSimulation extends JFrame{
     public JPanel layout_north;
     private final JPanel layout_south;
     private Timer timer;
+    private int compteur;
+    private boolean affichageTermine;
     
     public FenetreRegarderSimulation(Simulation simu, CarteDeTerrain map) throws IOException {
+        compteur = 0;
+        affichageTermine = false;
         this.layout_north = new JPanel();
         this.layout_south = new JPanel();
         this.simulation = simu;
@@ -119,7 +123,7 @@ public class FenetreRegarderSimulation extends JFrame{
             taille_carte += simulation.getCarte().getHauteur()*simulation.getCarte().getLargeur();
             
             ThreadCalcul calcul = new ThreadCalcul(simulation);
-            timerTemporaire = new Timer(1000, new TimerListener(this));
+            timerTemporaire = new Timer(1000, new EcouteurTimer(this));
             
             if (nb_params > 50 || taille_carte > 2500) {
                 //TODO modifier limite en fonction des tests de performances
@@ -151,7 +155,7 @@ public class FenetreRegarderSimulation extends JFrame{
 
     void relancerLaSimulation() {
         timer.stop();
-        timer = new Timer(1000, new TimerListener(this));
+        timer = new Timer(1000, new EcouteurTimer(this));
     }
 
     void mettreEnPauseLaSimulation() {
@@ -161,5 +165,33 @@ public class FenetreRegarderSimulation extends JFrame{
 
     void reinitialiserBoutonsPilotage() {
         simulateur.reinitialiserLesBoutons();
+    }
+
+    void majAffichageSimulation() {
+        if (compteur < simulation.getArchiveResultat().getArchive().size()) {
+            // on regarde la taille de l'arraylist pr voir si on peut get l'objet
+            // ex : si compteur = 2 et qu'on a calculé 3 tours on get tours[2] qui existe bien (car size = 3 donc 2<3)
+            // si compteur = 2 et qu'on a calculé 2 tours, on a size = 2 et tours[2] n'existe pas (cpt = size dans ce cas)
+            // si compteur = 2 et qu'on a calculé 1 tour, on a size = 1 et tours[2] n'existe pas (cpt > size)
+            setMap(simulation.getArchiveResultat().getArchive().get(compteur));
+            compteur++;
+        }
+        else if (!simulation.estTerminee()) {
+            //si le calcul simu n'est pas terminée, c'est que le tour suivant n'est pas encore disponible. on sleep l'affichage
+            int new_delay = (int)(timer.getDelay()*1.2);
+            System.out.println("Tour pas encore dispo... Augmentation du timer de 20% : "+new_delay);
+            timer.setDelay(new_delay);
+        }
+        else {
+            //si le calcul est terminé et qu'on arrive pas a get : on a fini l'affichage
+            System.out.println("Affichage terminé");
+            affichageTermine = true;
+        }
+            
+        if (affichageTermine) {
+            timer.stop();
+            reinitialiserBoutonsPilotage();
+            System.out.println("Fin");
+        }
     }
 }

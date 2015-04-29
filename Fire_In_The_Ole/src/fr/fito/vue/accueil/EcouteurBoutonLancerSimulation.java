@@ -12,7 +12,7 @@ public class EcouteurBoutonLancerSimulation implements ActionListener {
 
     /**
      * Construit l'écouteur en lui passant une référence vers la fenêtre qui l'utilise.
-     * @param fenetre 
+     * @param fenetre La fenêtre parent.
      */
     public EcouteurBoutonLancerSimulation(FenetreAccueil fenetre) {
         this.fenetre = fenetre;

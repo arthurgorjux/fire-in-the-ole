@@ -41,14 +41,7 @@ public class PanelPilotageSimulation extends JPanel{
         this.add(reset);
         
         stop.setEnabled(false);
-        reset.setEnabled(false);
-        
         this.etat = STOP;
-    }
-    
-    public void setEtat(int etat){
-        this.etat = etat;
-        
     }
     
     public void passerEnEtatSimulationEnCours() {
