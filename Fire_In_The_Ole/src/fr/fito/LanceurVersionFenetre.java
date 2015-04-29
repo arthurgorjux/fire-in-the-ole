@@ -1,6 +1,6 @@
 package fr.fito;
 
-import fr.fito.vue.JeuParametreDialog;
+import fr.fito.vue.accueil.FenetreAccueil;
 import java.io.IOException;
 /**
  * Le lanceur de l'application en mode fenêtré.
@@ -13,7 +13,7 @@ public class LanceurVersionFenetre {
      * @throws IOException 
      */
 	public static void main(String[] args) throws IOException {
-            JeuParametreDialog config = new JeuParametreDialog();
+            FenetreAccueil config = new FenetreAccueil();
 	}
 
 }
