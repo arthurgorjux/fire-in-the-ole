@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue;
+package fr.fito.vue.wtf;
 
 import fr.fito.modele.archivage.EtatEntite;
 import fr.fito.modele.Robot;
+import fr.fito.vue.regardersimulation.FenetreRegarderSimulation;
 import java.awt.Image;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -25,11 +26,11 @@ import javax.swing.JPanel;
 public class RobotsPanel extends JPanel{
     
     private JButton creerRobot;
-    private Main window;
+    private FenetreRegarderSimulation window;
     private JList robots = null;
     private boolean alreadyExist = false;
     
-    public RobotsPanel(Main window, List<Robot> robots) throws IOException{
+    public RobotsPanel(FenetreRegarderSimulation window, List<Robot> robots) throws IOException{
         super();
         this.window = window;
         Image imgRobot = ImageIO.read(getClass().getResource("/IMG/plus.png"));

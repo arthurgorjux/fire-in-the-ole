@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
 import fr.fito.modele.CarteDeTerrain;
 import fr.fito.modele.archivage.EtatEntite;
@@ -22,14 +22,14 @@ import javax.imageio.ImageIO;
  *
  * @author S219
  */
-public class MapPanel extends javax.swing.JPanel{
+public class PanelAffichageCarte extends javax.swing.JPanel{
 
     private final CarteDeTerrain map;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
     private HashMap<Integer,Color> mapping;
     
-    MapPanel(CarteDeTerrain map) {
+    PanelAffichageCarte(CarteDeTerrain map) {
         this.map = map;
         //this.setBackground(new Color(144,238,144));
         // Set size map
@@ -87,7 +87,7 @@ public class MapPanel extends javax.swing.JPanel{
                     g2d.drawImage(img, x, y, widthEntite, heightEntite, this);
                     //g2d.fillRect(x, y, widthEntite, heightEntite);
                 } catch (IOException ex) {
-                    Logger.getLogger(MapPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(PanelAffichageCarte.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

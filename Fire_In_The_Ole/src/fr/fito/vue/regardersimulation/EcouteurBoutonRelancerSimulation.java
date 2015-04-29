@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,12 +8,12 @@ import javax.swing.Timer;
  *
  * @author Nicolas
  */
-public class ResetSimuListener implements ActionListener{
+public class EcouteurBoutonRelancerSimulation implements ActionListener{
 
-    private Main window;
-    private SimulationPanel panel;
+    private FenetreRegarderSimulation window;
+    private PanelPilotageSimulation panel;
 
-    public ResetSimuListener(Main window, SimulationPanel panel) {
+    public EcouteurBoutonRelancerSimulation(FenetreRegarderSimulation window, PanelPilotageSimulation panel) {
         this.window = window;this.panel = panel;
     }
     

@@ -1,4 +1,4 @@
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
 import fr.fito.modele.archivage.ArchiveTourSimulation;
 import fr.fito.modele.CarteDeTerrain;
@@ -21,28 +21,30 @@ import javax.swing.JPanel;
  *
  * @author S219
  */
-public class Main extends JFrame{
+public class FenetreRegarderSimulation extends JFrame{
     
     private CarteDeTerrain map;
-    public MapPanel mapPanel;
+    public PanelAffichageCarte mapPanel;
     private Simulation simulation;
     
     private javax.swing.JButton start;
     private javax.swing.JButton creerRobot;
-    private RobotsPanel listeRobots;
+    //private RobotsPanel listeRobots;
     private javax.swing.JPanel infos;
     private javax.swing.JPanel simulateur;
     private javax.swing.JPanel stats;
     private EtatEntite[] etatsEntite;
     private List<Robot> robots;
-    private JPanel layout = new JPanel();
-    public JPanel layout_north = new JPanel();
-    private JPanel layout_south = new JPanel();
-    private JMenuBar menu = new JMenuBar();
-    private JMenu fichier = new JMenu("Fichier");
-    private JMenuItem bitmapCharger = new JMenuItem("Charger map");
+    private final JPanel layout = new JPanel();
+    public JPanel layout_north;
+    private final JPanel layout_south;
+    private final JMenuBar menu = new JMenuBar();
+    private final JMenu fichier = new JMenu("Fichier");
+    private final JMenuItem bitmapCharger = new JMenuItem("Charger map");
     
-    public Main(Simulation simu, CarteDeTerrain map) throws IOException {
+    public FenetreRegarderSimulation(Simulation simu, CarteDeTerrain map) throws IOException {
+        this.layout_north = new JPanel();
+        this.layout_south = new JPanel();
         //this.simulation = new Simulation();
         this.simulation = simu;
         this.map = map;
@@ -72,9 +74,10 @@ public class Main extends JFrame{
         return this.etatsEntite;
     }
     
-    public RobotsPanel getRobotsPanel(){
-        return this.listeRobots;
-    }
+    
+    //public RobotsPanel getRobotsPanel(){
+    //    return this.listeRobots;
+    //}
     
     public CarteDeTerrain getMap(){
         return this.map;
@@ -100,7 +103,7 @@ public class Main extends JFrame{
         
         //start.addActionListener(new StartListener(this));
         
-        mapPanel = new MapPanel(map);
+        mapPanel = new PanelAffichageCarte(map);
         mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         mapPanel.setPreferredSize(new Dimension(300,300));  
         
@@ -110,7 +113,7 @@ public class Main extends JFrame{
         //creerRobot = new javax.swing.JButton("Creer");
         stats = new javax.swing.JPanel();
         stats.setPreferredSize(new Dimension(infos.getWidth()*(2/3), infos.getHeight()));
-        simulateur = new SimulationPanel(this);
+        simulateur = new PanelPilotageSimulation(this);
         simulateur.setPreferredSize(new Dimension(infos.getWidth()*(1/3), infos.getHeight()));
         //start = new javax.swing.JButton("Start");
 

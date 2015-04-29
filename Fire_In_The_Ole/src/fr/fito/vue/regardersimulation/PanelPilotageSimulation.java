@@ -1,11 +1,5 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
-import java.awt.Graphics;
 import java.awt.Image;
 import java.io.IOException;
 import javax.imageio.ImageIO;
@@ -18,18 +12,18 @@ import javax.swing.Timer;
  *
  * @author arthur
  */
-public class SimulationPanel extends JPanel{
+public class PanelPilotageSimulation extends JPanel{
     
     private int etat;
-    private int START = 1;
-    private int STOP = 0;
-    private JButton start;
-    private JButton stop;
-    private JButton reset;
-    private Main window;
+    private final int START = 1;
+    private final int STOP = 0;
+    private final JButton start;
+    private final JButton stop;
+    private final JButton reset;
+    private final FenetreRegarderSimulation window;
     private Timer timer;
     
-    public SimulationPanel(Main window) throws IOException{
+    public PanelPilotageSimulation(FenetreRegarderSimulation window) throws IOException{
         super();
         this.etat = STOP;
         this.timer = null;
@@ -42,11 +36,11 @@ public class SimulationPanel extends JPanel{
         reset = new JButton(new ImageIcon(imgReset));
         stop.setEnabled(false);
         reset.setEnabled(false);
-        start.addActionListener(new StartListener(this.window, this));
+        start.addActionListener(new EcouteurBoutonDemarrerSimulation(this.window, this));
         this.add(start);
-        stop.addActionListener(new StopListener(this.window, this));
+        stop.addActionListener(new EcouteurBoutonGestionPauseSimulation(this.window, this));
         this.add(stop);
-        reset.addActionListener(new ResetSimuListener(this.window,this));
+        reset.addActionListener(new EcouteurBoutonRelancerSimulation(this.window,this));
         this.add(reset);
     }
     

@@ -1,9 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
 import fr.fito.controleur.ThreadCalcul;
 import fr.fito.modele.Simulation;
@@ -14,15 +9,14 @@ import java.util.logging.Logger;
 import javax.swing.Timer;
 
 /**
- *
+ * Ecouteur du bouton start.
  * @author arthur
  */
-class StartListener implements ActionListener {
-
-    private Main window;
-    private SimulationPanel panel;
-    private Simulation simulation;
-    public StartListener(Main window, SimulationPanel panel) {
+class EcouteurBoutonDemarrerSimulation implements ActionListener {
+    private final FenetreRegarderSimulation window;
+    private final PanelPilotageSimulation panel;
+    private final Simulation simulation;
+    public EcouteurBoutonDemarrerSimulation(FenetreRegarderSimulation window, PanelPilotageSimulation panel) {
         this.window = window;
         this.simulation = window.getSimulation();
         this.panel = panel;
@@ -63,7 +57,7 @@ class StartListener implements ActionListener {
                     Thread.sleep(1000);
                     System.out.println("Calcul toujours en cours...");
                     } catch (InterruptedException ex) {
-                        Logger.getLogger(StartListener.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(EcouteurBoutonDemarrerSimulation.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 }
                 //simulation terminée, on lance le timer de l'affichage

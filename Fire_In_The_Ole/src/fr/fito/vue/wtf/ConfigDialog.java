@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue;
+package fr.fito.vue.wtf;
 
+import fr.fito.vue.wtf.CreerRobotListener;
 import fr.fito.modele.CarteDeTerrain;
 import fr.fito.modele.Robot;
 import java.awt.BorderLayout;

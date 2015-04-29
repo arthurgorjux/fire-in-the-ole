@@ -1,26 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package fr.fito.vue;
+package fr.fito.vue.regardersimulation;
 
-import fr.fito.modele.archivage.ArchiveSimulation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.Timer;
+
 
 /**
- *
+ * Ecouteur du bouton Stop.
  * @author arthur
  */
-class StopListener implements ActionListener {
+class EcouteurBoutonGestionPauseSimulation implements ActionListener {
 
-    private Main window;
-    private SimulationPanel panel;
-    public StopListener(Main window, SimulationPanel panel) {
+    private FenetreRegarderSimulation window;
+    private PanelPilotageSimulation panel;
+    public EcouteurBoutonGestionPauseSimulation(FenetreRegarderSimulation window, PanelPilotageSimulation panel) {
         this.window = window;
         this.panel = panel;
     }

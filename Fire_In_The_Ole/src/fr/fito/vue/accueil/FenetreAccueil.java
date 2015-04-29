@@ -11,7 +11,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 
 import fr.fito.modele.parametrage.JeuDeParametres;
-import fr.fito.vue.Main;
+import fr.fito.vue.regardersimulation.FenetreRegarderSimulation;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.io.IOException;
@@ -65,7 +65,7 @@ public class FenetreAccueil extends JFrame{
         String nameParam = (String) this.comboJeuxDeParametres.getSelectedItem();
         JeuDeParametres params = this.hashmapJeuxDeParametres.get(nameParam);
         try {
-            Main main = new Main(new Simulation(params), new CarteDeTerrain(params.getFichier_carte()));
+            FenetreRegarderSimulation main = new FenetreRegarderSimulation(new Simulation(params), new CarteDeTerrain(params.getFichier_carte()));
             this.dispose();
         } catch (IOException ex) {
             Logger.getLogger(EcouteurBoutonLancerSimulation.class.getName()).log(Level.SEVERE, null, ex);
