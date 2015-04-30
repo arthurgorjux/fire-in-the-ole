@@ -57,9 +57,9 @@ public class Robot implements Entite {
         this.nom = nom;
         this.observateurs = new LinkedList<>();
         this.etat = EtatRobot.ARRET;
-        this.pathFinder = new PathFinderToutDroit(simulation);
-        //this.pathFinder = new PathFinderDijkstra(simulation, this);
-        calculerChemin(); //???? n'a pas encore de destination à priori ?! ne faut-il pas le mettre lors de l'affectation d'une destination ? ie : definirDestination() ?
+        //this.pathFinder = new PathFinderToutDroit(simulation);
+        this.pathFinder = new PathFinderDijkstra(simulation, this);
+        //calculerChemin(); //???? n'a pas encore de destination à priori ?! ne faut-il pas le mettre lors de l'affectation d'une destination ? ie : definirDestination() ?
     }
     /**
      * Instancie un objet de classe Robot en utilisant les coordonées d'origine x et y, le type du robot, son nom et la simulation dans laquelle il évolue.
@@ -78,6 +78,7 @@ public class Robot implements Entite {
     public void definirDestination(Position nouvelleDestination) {
         destination = nouvelleDestination;
         this.etat = DEPLACEMENT;
+        calculerChemin();
     }
 
     /**
