@@ -6,6 +6,8 @@
 package fr.fito.vue.regardersimulation;
 
 import fr.fito.modele.CarteDeTerrain;
+import fr.fito.modele.Robot;
+import fr.fito.modele.Simulation;
 import fr.fito.modele.archivage.EtatEntite;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -13,7 +15,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -28,9 +32,11 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
     private HashMap<Integer,Color> mapping;
+    private Simulation simulation;
     
-    PanelAffichageCarte(CarteDeTerrain map) {
+    PanelAffichageCarte(CarteDeTerrain map, Simulation simu) {
         this.map = map;
+        this.simulation = simu;
         //this.setBackground(new Color(144,238,144));
         // Set size map
         int preferredWidth = this.map.getLargeur()* PREFERRED_GRID_SIZE_PIXELS;
@@ -67,7 +73,7 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
                     Image img = null;
                     Color colorEntite = null;
                     switch(entite.getType()){
-                        case "typeRobot":
+                        case "typeRobot":                            
                             Image imgRobot = ImageIO.read(getClass().getResource("/IMG/robot.png"));
                             img = imgRobot;
                             break;

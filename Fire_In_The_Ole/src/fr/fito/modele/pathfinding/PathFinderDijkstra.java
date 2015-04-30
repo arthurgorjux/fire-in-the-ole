@@ -1,5 +1,6 @@
 package fr.fito.modele.pathfinding;
 
+import fr.fito.modele.CarteDeTerrain;
 import static fr.fito.modele.ConstantesTypesRobot.*;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
@@ -17,7 +18,7 @@ public class PathFinderDijkstra implements PathFinder{
     private Simulation simu;
     private Robot robot;
     private Chemin cheminDijkstra;
-    private int[][] map;
+    private CarteDeTerrain map;
     private int[][] matrice;
     public List<Arete> aretes;
     private List<Position> chemin = new ArrayList<>();
@@ -43,11 +44,11 @@ public class PathFinderDijkstra implements PathFinder{
     
     @Override
     public Chemin getCheminLePlusCourt(Position debut, Position fin) {
-        this.map = this.simu.getCarte().getCarte();
+        this.map = this.simu.getCarte();
         return calculerChemin(map,debut,fin);
     }
     
-    public Chemin calculerChemin(int[][] carte, Position debut, Position fin){
+    public Chemin calculerChemin(CarteDeTerrain carte, Position debut, Position fin){
         this.initialisation_matrice(carte);
         this.dijkstra(debut, fin);        
         
@@ -140,18 +141,18 @@ public class PathFinderDijkstra implements PathFinder{
     }
     
     
-    private void initialisation_matrice(int[][] carte){    
-        int[][] matrice = new int[carte.length][carte.length];
+    private void initialisation_matrice(CarteDeTerrain carte){    
+        int[][] matrice = new int[carte.getHauteur()][carte.getLargeur()];
         List<Arete> edges = new LinkedList<>();
-        for(int i = 0 ; i < carte.length ; i++){
-            for(int j = 0 ; j < carte.length; j++){
-                matrice [i][j] = check_difficulte_typeRobot(this.robot, carte[j][i]);
+        for(int i = 0 ; i < carte.getHauteur() ; i++){
+            for(int j = 0 ; j < carte.getLargeur(); j++){
+                matrice [i][j] = check_difficulte_typeRobot(this.robot, carte.getDifficulte(j, i));
             }
         }
-        this.map = matrice;
+        this.map.setCarte(matrice);
         List<Arete> adjacentsFinaux = new LinkedList<>();
-        for(int i = 0 ; i < this.map.length ; i++){
-            for(int j = 0 ; j < this.map.length; j++){
+        for(int i = 0 ; i < this.map.getHauteur() ; i++){
+            for(int j = 0 ; j < this.map.getLargeur(); j++){
                 Position base = new Position(i, j);
                 this.aretes = this.getAllAdjacents(base, adjacentsFinaux);
             }
@@ -168,7 +169,7 @@ public class PathFinderDijkstra implements PathFinder{
         adjacents[3] = new Position(x-1, y);
         for(Position adjacent : adjacents){
            if(checkAdjacentExiste(adjacent)){
-                adjacentsFinaux.add(new Arete(base, adjacent, this.map[adjacent.getX()][adjacent.getY()]));
+                adjacentsFinaux.add(new Arete(base, adjacent, this.map.getCarte()[adjacent.getX()][adjacent.getY()]));
            }               
         }
         return adjacentsFinaux;
@@ -177,9 +178,9 @@ public class PathFinderDijkstra implements PathFinder{
     private boolean checkAdjacentExiste(Position pos){
         int x = pos.getX();
         int y = pos.getY();
-        if(x < 0 || x > (this.map.length)-1)
+        if(x < 0 || x > (this.map.getLargeur())-1)
             return false;
-        if(y < 0 || y > (this.map.length)-1)
+        if(y < 0 || y > (this.map.getHauteur())-1)
             return false;
         return true;
     }

@@ -76,7 +76,7 @@ public class FenetreAccueil extends JFrame{
      */
     private void majComboParametresSimulation(){
         String[] listJeux = new String[1];
-        System.out.println(this.getClass().getResource("/IMG/test_1.bmp").getPath());
+        //System.out.println(this.getClass().getResource("/IMG/test_1.bmp").getPath());
         JeuDeParametres jeu1 = new JeuDeParametres(this.getClass().getResource("/IMG/test_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
         listJeux[0] = "Jeu 1";
         hashmapJeuxDeParametres.put("Jeu 1", jeu1);

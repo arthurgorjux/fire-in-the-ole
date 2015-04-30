@@ -1,5 +1,7 @@
 package fr.fito.modele.archivage;
 
+import fr.fito.modele.Robot;
+import fr.fito.modele.Simulation;
 import fr.fito.modele.pathfinding.Position;
 
 /**
@@ -44,8 +46,8 @@ public class EtatEntite {
     }
 
     /**
-     * Retourne le type du robot.
-     * @return Le type du robot.
+     * Retourne le type de l'entité (Robot ou Incendie).
+     * @return Le type de l'entité.
      */
     public String getType() {
         return type;
@@ -73,7 +75,7 @@ public class EtatEntite {
     public EtatEntite(int x, int y, String nom, String type) {
         this(new Position(x, y), nom, type);
     }
-
+    
     @Override
     /**
      * Debugage log

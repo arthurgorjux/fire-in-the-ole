@@ -77,7 +77,7 @@ public class FenetreRegarderSimulation extends JFrame{
         layout_north.setLayout(new BoxLayout(layout_north, BoxLayout.X_AXIS));
         layout_south.setLayout(new GridLayout(1, 2));
 
-        mapPanel = new PanelAffichageCarte(map);
+        mapPanel = new PanelAffichageCarte(map, simulation);
         mapPanel.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
         mapPanel.setPreferredSize(new Dimension(300,300));  
         
