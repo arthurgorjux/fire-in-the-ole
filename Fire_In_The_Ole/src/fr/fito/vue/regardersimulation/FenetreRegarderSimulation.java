@@ -105,6 +105,9 @@ public class FenetreRegarderSimulation extends JFrame{
         return this.robots;
     }
     
+    /**
+     * Lance le déroulement de la simulation à l'écran.
+     */
     public void demarrerSimulation() {
         Timer timerTemporaire;
         
@@ -153,20 +156,32 @@ public class FenetreRegarderSimulation extends JFrame{
         }  
     }
 
-    void relancerLaSimulation() {
+    /**
+     * Reprends le déroulement de l'affichage de la simulation.
+     */
+    public void relancerLaSimulation() {
         timer.stop();
         timer = new Timer(1000, new EcouteurTimer(this));
     }
 
-    void mettreEnPauseLaSimulation() {
+    /**
+     * Interrompt le déroulement de l'affichage de la simulation.
+     */
+    public void mettreEnPauseLaSimulation() {
         System.out.println("Simulation en pause...");
         timer.stop();
     }
 
+    /**
+     * Réinitialise le pannel de boutons de pilotage de la simulation.
+     */
     void reinitialiserBoutonsPilotage() {
         simulateur.reinitialiserLesBoutons();
     }
 
+    /**
+     * Met à jour l'image de la simulation.
+     */
     void majAffichageSimulation() {
         if (compteur < simulation.getArchiveResultat().getArchive().size()) {
             // on regarde la taille de l'arraylist pr voir si on peut get l'objet

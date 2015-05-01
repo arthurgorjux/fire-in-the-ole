@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * Ecouteur du bouton Stop.
+ * Ecouteur du bouton mettre en pause la simulation.
  * @author arthur
  */
 public class EcouteurBoutonMettreEnPauseLaSimulation implements ActionListener {
@@ -18,10 +18,11 @@ public class EcouteurBoutonMettreEnPauseLaSimulation implements ActionListener {
         this.panel = panel;
     }
 
-    @Override
     /**
-     * Met en pause la simulation lmors du clic sur le bouton.
+     * Lors du clic sur le bouton, demande à la fenêtre de mettre en pause la simulation.
+     * @param e L'évènement qui a déclanchée l'action.
      */
+    @Override
     public void actionPerformed(ActionEvent e) {
         panel.mettreEnPauseLaSimulation();
     }

@@ -1,7 +1,6 @@
 package fr.fito.modele;
 
 import fr.fito.modele.pathfinding.Position;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;

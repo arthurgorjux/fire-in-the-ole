@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
  * @author arthur
  */
 public class EcouteurBoutonLancerSimulation implements ActionListener {
-    private FenetreAccueil fenetre;
+    private final FenetreAccueil fenetre;
 
     /**
      * Construit l'écouteur en lui passant une référence vers la fenêtre qui l'utilise.

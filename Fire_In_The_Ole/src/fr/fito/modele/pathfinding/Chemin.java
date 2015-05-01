@@ -2,6 +2,7 @@ package fr.fito.modele.pathfinding;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Un chemin est une suite de positions successives à occuper pour aller d'un point à un autre.
@@ -42,17 +43,38 @@ public class Chemin {
         return this.etapes;
     }
 
+    /**
+     * Retourne si l'objet en pramètre est bien un chemin comprenant exactement les mêmes étapes.
+     * @param o L'objet en pramètre.
+     * @return true si l'objet en pramètre est bien un chemin comprenant exactement les mêmes étapes.
+     */
     @Override
     public boolean equals(Object o){
-        Chemin other = (Chemin) o;
-        boolean result = true;
-        for(int i = 0; i < this.etapes.size(); i++){
-            for(int j = 0; j < other.etapes.size(); j++){
-                if(!other.etapes.get(j).equals(this.etapes.get(i))){
-                    result = false;
-                }
+        // Vérifie la classe
+        if (o.getClass() != this.getClass()) {
+            return false;
+        }
+        Chemin autreChemin = (Chemin) o;
+        
+        // Vérifie les tailles
+        if (this.etapes.size() != autreChemin.etapes.size()) {
+            return false;
+        }
+        
+        // Vérifie que toutes les étapes sont identiques
+        for (int i = 0; i < this.etapes.size(); i++) {
+            if ( !(this.etapes.get(i).equals(autreChemin.etapes.get(i)))  ) {
+                return false;
             }
         }
-        return result;
+        
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 61 * hash + Objects.hashCode(this.etapes);
+        return hash;
     }
 }

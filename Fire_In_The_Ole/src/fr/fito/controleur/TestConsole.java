@@ -8,7 +8,7 @@ import fr.fito.modele.parametrage.JeuDeParametres;
  * Un controleur permettant de manipuler une simulation de facon très basique pour les tests.
  */
 public class TestConsole {
-	ArchiveSimulation archive;
+	private ArchiveSimulation archive;
         
         /**
          * Déroule une simulation à partir du JeuDeParametres et enregistre son résultat.

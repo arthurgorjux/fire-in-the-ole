@@ -9,14 +9,18 @@ import java.awt.event.ActionListener;
  */
 public class EcouteurTimer implements ActionListener{
     
-    private final FenetreRegarderSimulation window;
+    private final FenetreRegarderSimulation fenetre;
     
-    public EcouteurTimer(FenetreRegarderSimulation window){
-        this.window = window;
+     /**
+     * Construit l'écouteur en lui fournissant une référence vers la fenêtre qui le contient.
+     * @param fenetre La fenêtre qui le contient.
+     */
+    public EcouteurTimer(FenetreRegarderSimulation fenetre){
+        this.fenetre = fenetre;
     }
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        window.majAffichageSimulation();
+        fenetre.majAffichageSimulation();
     }    
 }

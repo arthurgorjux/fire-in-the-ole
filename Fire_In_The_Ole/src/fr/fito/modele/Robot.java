@@ -219,7 +219,7 @@ public class Robot implements Entite {
      * Retourne l'état courant du robot.
      * @return L'état courant du robot.
      */
-    EtatRobot getEtatCourant() {
+    public EtatRobot getEtatCourant() {
         return this.etat;
     }
     /**

@@ -5,13 +5,13 @@
  */
 package Model.pathfinding;
 
+import fr.fito.modele.CarteDeTerrain;
 import fr.fito.modele.pathfinding.Position;
 import fr.fito.modele.pathfinding.Chemin;
 import fr.fito.modele.pathfinding.PathFinderDijkstra;
 import fr.fito.modele.Robot;
 import fr.fito.modele.TypeRobot;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -80,8 +80,8 @@ public class PathFinderDijkstraTest {
         etapesChemin.add(new Position(3, 3));
         Chemin expResult = new Chemin(etapesChemin);
         
-        Chemin result = instance.calculerChemin(matrice, depart, fin);
-        assertEquals(expResult.getEtapes(), result.getEtapes());
+        Chemin result = instance.calculerChemin(new CarteDeTerrain(matrice), depart, fin);
+        assertEquals(expResult, result);
     }
     
     /*@Test

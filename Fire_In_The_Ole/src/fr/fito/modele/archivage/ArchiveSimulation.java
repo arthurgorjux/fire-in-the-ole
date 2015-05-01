@@ -10,7 +10,7 @@ import java.util.List;
  */
 public class ArchiveSimulation {
 
-    final List<ArchiveTourSimulation> tours;
+    private final List<ArchiveTourSimulation> tours;
 
     /**
      * Constructeur d'une archive vide.

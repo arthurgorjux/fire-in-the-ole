@@ -7,8 +7,7 @@ import java.io.IOException;
  * Données geographiques d'une carte. Immutable
  */
 public final class CarteDeTerrain {
-
-    private int carte[][];
+    private final int carte[][];
 
     /**
      * Retourne la hauteur en cases de la carte.
@@ -112,9 +111,5 @@ public final class CarteDeTerrain {
      */
     public int[][] getCarte() {
         return carte.clone();
-    }
-
-    public void setCarte(int[][] matrice) {
-        this.carte = matrice;
     }
 }

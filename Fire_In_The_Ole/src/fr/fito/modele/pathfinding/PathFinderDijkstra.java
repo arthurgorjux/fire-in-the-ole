@@ -150,7 +150,7 @@ public class PathFinderDijkstra implements PathFinder{
                 matrice[i][j] = check_difficulte_typeRobot(this.robot, carte.getDifficulte(i,j));
             }
         }
-        this.map.setCarte(matrice);
+        this.map = new CarteDeTerrain(matrice);
         List<Arete> adjacentsFinaux = new LinkedList<>();
         for(int i = 0 ; i < this.map.getLargeur(); i++){
             for(int j = 0 ; j < this.map.getHauteur(); j++){

@@ -146,7 +146,7 @@ public class Incendie implements Entite {
      * Méthode permettant d'arroser un incendie et donc de baisser son intensité.
      * @param puissanceDuJet 
      */
-    void arroser(int puissanceDuJet) {
+    public void arroser(int puissanceDuJet) {
         System.out.println(this + " Se fait arroser !"); //TODO sortir version finale
         intensite -= puissanceDuJet;
     }

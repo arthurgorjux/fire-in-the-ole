@@ -7,7 +7,12 @@ import fr.fito.modele.Simulation;
  * @author Lucas
  */
 public class ThreadCalcul extends Thread {
-    Simulation simulation;
+    private final Simulation simulation;
+    
+    /**
+     * Créer le threade en lui passant la simulation à manipuler/
+     * @param simulation La simulation à manipuler.
+     */
     public ThreadCalcul(Simulation simulation) {
         this.simulation = simulation;
     }
