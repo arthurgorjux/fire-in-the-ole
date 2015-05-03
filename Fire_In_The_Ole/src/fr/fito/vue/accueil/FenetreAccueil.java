@@ -105,9 +105,10 @@ public class FenetreAccueil extends JFrame{
         List<InitialisationRobot> robots = new ArrayList<>();
         robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
         //robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(10, 0, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(10, 0, TypeRobot.ROUE));
         //robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(0, 6, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(0, 6, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(6, 5, TypeRobot.JETPACK));
         return robots;
     }
 }

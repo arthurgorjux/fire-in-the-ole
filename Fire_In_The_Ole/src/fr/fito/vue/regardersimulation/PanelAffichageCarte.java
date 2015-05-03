@@ -6,6 +6,7 @@
 package fr.fito.vue.regardersimulation;
 
 import fr.fito.modele.CarteDeTerrain;
+import fr.fito.modele.MappingTypeRobot;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
 import fr.fito.modele.archivage.EtatEntite;
@@ -73,9 +74,10 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
                     Image img = null;
                     Color colorEntite = null;
                     switch(entite.getType()){
-                        case "typeRobot":                            
-                            Image imgRobot = ImageIO.read(getClass().getResource("/IMG/robot.png"));
+                        default:                            
+                            Image imgRobot = ImageIO.read(getClass().getResource(MappingTypeRobot.getPicture(entite.getType())));
                             img = imgRobot;
+                            System.out.println(entite.getType());
                             break;
                         case "incendie":
                             //colorEntite = new Color(255, 0, 0);

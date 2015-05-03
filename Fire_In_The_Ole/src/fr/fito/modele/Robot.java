@@ -199,7 +199,7 @@ public class Robot implements Entite {
      * @return Un EtatEntite représentant le robot au moment de l'appel.
      */
     public EtatEntite getEtatEntite() {
-        return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, "typeRobot");
+        return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, this.typeRobot.toString());
     }
 
     @Override
@@ -221,29 +221,5 @@ public class Robot implements Entite {
      */
     public EtatRobot getEtatCourant() {
         return this.etat;
-    }
-    /**
-     * Retourne le chemin vers l'image du robot en fonction de son type.
-     * @return chemin vers l'image.
-     */
-    
-    public String getPicture(){
-        String path = "/IMG/";
-        switch(this.typeRobot){
-            case PATTE :
-                path += "Robot_Patte.png";
-                break;
-            case CHENILLE :
-                path += "Robot_Chenille.png";
-                break;
-            case ROUE :
-                path += "Robot_Roue.png";
-                break;
-            case JETPACK :
-                path += "Robot_Jetpack.png";
-                break;
-        }
-        
-        return path;
     }
 }
