@@ -1,7 +1,9 @@
 package fr.fito.modele.pathfinding;
 
 import fr.fito.modele.CarteDeTerrain;
+import fr.fito.modele.ConstantesTypesRobot;
 import static fr.fito.modele.ConstantesTypesRobot.*;
+import fr.fito.modele.ConstantesTypesTerrain;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
 import java.util.ArrayList;
@@ -13,7 +15,7 @@ import java.util.List;
  *
  * @author S219
  */
-public class PathFinderDijkstra implements PathFinder{
+public class PathFinderDijkstra implements PathFinder,ConstantesTypesRobot,ConstantesTypesTerrain{
     
     private Simulation simu;
     private Robot robot;
@@ -21,21 +23,7 @@ public class PathFinderDijkstra implements PathFinder{
     private CarteDeTerrain map;
     private int[][] matrice;
     public List<Arete> aretes;
-    private List<Position> chemin = new ArrayList<>();
-    
-    private static final int CHEMIN_MIN = 0;
-    private static final int CHEMIN_MAX = 42;
-    private static final int PLAINE_MIN = 43;
-    private static final int PLAINE_MAX = 85;
-    private static final int TERRAIN_ACCIDENTE_MIN = 86;
-    private static final int TERRAIN_ACCIDENTE_MAX = 128;
-    private static final int FORET_MIN = 129;
-    private static final int FORET_MAX = 171;
-    private static final int ROCHER_MIN = 172;
-    private static final int ROCHER_MAX = 173;
-    private static final int MONTAGNE_MIN = 214;
-    private static final int MONTAGNE_MAX = 255;
-    
+    private List<Position> chemin = new ArrayList<>();    
     
     public PathFinderDijkstra(Simulation simulation, Robot robot) {
         this.simu = simulation;
