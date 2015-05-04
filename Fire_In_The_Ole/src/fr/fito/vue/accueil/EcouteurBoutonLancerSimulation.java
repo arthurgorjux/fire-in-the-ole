@@ -1,5 +1,6 @@
 package fr.fito.vue.accueil;
 
+import fr.fito.vue.accueil.config.ConfigDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -24,7 +25,11 @@ public class EcouteurBoutonLancerSimulation implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        fenetre.lancerLaSimulation();
+        if(((String) this.fenetre.getComboBox().getSelectedItem()).equals("Personnaliser ...")){
+            new ConfigDialog();
+        }else{
+            fenetre.lancerLaSimulation();
+        }        
     }
     
 }

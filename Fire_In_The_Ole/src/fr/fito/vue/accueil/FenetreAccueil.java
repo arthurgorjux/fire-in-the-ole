@@ -58,6 +58,14 @@ public class FenetreAccueil extends JFrame{
     }
     
     /**
+     * Retourne la combobox
+     * @return l'objet JComboBox
+     */
+    public JComboBox<String> getComboBox(){
+        return this.comboJeuxDeParametres;
+    }
+    
+    /**
      * Lance une simulation dans une nouvelle fenêtre et ferme celle-ci.
      */
     public void lancerLaSimulation() {
@@ -75,10 +83,11 @@ public class FenetreAccueil extends JFrame{
      * Met à jour le contenu de la combobox des jeux de paramètres.
      */
     private void majComboParametresSimulation(){
-        String[] listJeux = new String[1];
+        String[] listJeux = new String[10];
         //System.out.println(this.getClass().getResource("/IMG/test_1.bmp").getPath());
         JeuDeParametres jeu1 = new JeuDeParametres(this.getClass().getResource("/IMG/test_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
         listJeux[0] = "Jeu 1";
+        listJeux[1] = "Personnaliser ...";
         hashmapJeuxDeParametres.put("Jeu 1", jeu1);
         comboJeuxDeParametres = new JComboBox<>(listJeux);
     }

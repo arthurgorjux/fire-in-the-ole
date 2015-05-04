@@ -3,16 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue.wtf;
+package fr.fito.vue.accueil.config;
 
+import fr.fito.vue.accueil.config.ConfigDialog;
 import fr.fito.utilitaire.BitmapLoader;
 import fr.fito.modele.CarteDeTerrain;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -43,8 +46,15 @@ public class BitmapChargerListener implements ActionListener{
             try {
                 BitmapLoader bmp = new BitmapLoader();
                 CarteDeTerrain map = new CarteDeTerrain(bmp.lireFichierBitmap(dir + "/" + filename));
-                this.window.setMap(map);
-                this.window.setLabel("Carte choisie : " + filename);
+                JFrame frame = new JFrame();
+                frame.setContentPane(new PanelAffichageBmp(map));
+                frame.setPreferredSize(new Dimension(500, 500));
+                frame.setBounds(500, 400, 1200, 550);
+                frame.setVisible(true);
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                this.window.dispose();
+                //this.window.setMap(map);
+                //this.window.setLabel("Carte choisie : " + filename);
             } catch (IOException ex) {
                 Logger.getLogger(BitmapChargerListener.class.getName()).log(Level.SEVERE, null, ex);
             }

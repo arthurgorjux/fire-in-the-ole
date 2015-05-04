@@ -24,7 +24,7 @@ public interface ConstantesTypesTerrain {
     static final int FORET_MAX = 171;
     
     static final int ROCHER_MIN = 172;
-    static final int ROCHER_MAX = 173;
+    static final int ROCHER_MAX = 213;
     
     static final int MONTAGNE_MIN = 214;
     static final int MONTAGNE_MAX = 255;

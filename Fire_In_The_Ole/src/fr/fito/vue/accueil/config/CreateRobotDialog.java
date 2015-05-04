@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue.wtf;
+package fr.fito.vue.accueil.config;
 
 import fr.fito.modele.Robot;
 import fr.fito.modele.TypeRobot;
+import fr.fito.modele.parametrage.InitialisationRobot;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.List;
@@ -19,11 +18,9 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
-import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 
 /**
@@ -36,12 +33,12 @@ public class CreateRobotDialog extends JDialog{
     private JComboBox<String> robotType;
     private JButton ajouterRobot;
     private JButton annuler;
-    public List<Robot> robots;
+    public List<InitialisationRobot> robots;
     private JSpinner coordX;
     private JSpinner coordY;
     private ConfigDialog main;
     
-    public CreateRobotDialog(List<Robot> robots, ConfigDialog main){
+    public CreateRobotDialog(List<InitialisationRobot> robots, ConfigDialog main){
         super();
         this.robots = robots;
         this.main = main;

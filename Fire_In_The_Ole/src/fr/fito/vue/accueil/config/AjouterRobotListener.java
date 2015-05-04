@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue.wtf;
+package fr.fito.vue.accueil.config;
 
-import fr.fito.vue.wtf.CreateRobotDialog;
+import fr.fito.vue.accueil.config.CreateRobotDialog;
 import fr.fito.modele.Robot;
+import fr.fito.modele.parametrage.InitialisationRobot;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,8 +48,8 @@ class AjouterRobotListener implements ActionListener {
     
     private boolean coordAvailable(int x, int y){
         if(this.window.robots.size() > 0){
-           for(Robot robot : this.window.robots){
-                if(robot.getPosition().getX() == x && robot.getPosition().getY() == y){
+           for(InitialisationRobot robot : this.window.robots){
+                if(robot.getX_depart()== x && robot.getY_depart()== y){
                     return false;
                 }
             } 

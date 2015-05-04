@@ -6,6 +6,7 @@
 package fr.fito.vue.regardersimulation;
 
 import fr.fito.modele.CarteDeTerrain;
+import fr.fito.modele.ConstantesTypesTerrain;
 import fr.fito.modele.MappingTypeRobot;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
@@ -32,7 +33,6 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
     private final CarteDeTerrain map;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
-    private HashMap<Integer,Color> mapping;
     private Simulation simulation;
     
     PanelAffichageCarte(CarteDeTerrain map, Simulation simu) {
@@ -48,7 +48,6 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
     @Override
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        this.initMapping();
         Graphics2D g2d = (Graphics2D) g;
         
         g2d.clearRect(0, 0, getWidth(), getHeight());
@@ -59,12 +58,12 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
         for (int i = 0; i < this.map.getHauteur()-1; i++) {
             for (int j = 0; j < this.map.getLargeur()-1; j++) {
                 int [][] carte = this.map.getCarte();
-                Color color = this.mapping.get(carte[i][j]);
+                Color color = CouleurCases.getColorByDifficulte(carte[i][j]);
                 // Upper left corner of this terrain rect
                 int x = i * rectWidth;
                 int y = j * rectHeight;
                 g2d.setColor(color);
-                g2d.fill3DRect(x, y, rectWidth, rectHeight, false);
+                g2d.fill3DRect(x, y, rectWidth, rectHeight, true);
                 
             }
         } 
@@ -77,7 +76,6 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
                         default:                            
                             Image imgRobot = ImageIO.read(getClass().getResource(MappingTypeRobot.getPicture(entite.getType())));
                             img = imgRobot;
-                            System.out.println(entite.getType());
                             break;
                         case "incendie":
                             //colorEntite = new Color(255, 0, 0);
@@ -104,11 +102,4 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
     public void setEtatsEntites(EtatEntite[] etatsEntite) {
         this.etatEntites = etatsEntite;
     }  
-    
-    private void initMapping() {
-        this.mapping = new HashMap<>();
-        this.mapping.put(51, new Color(139,69,19));
-        this.mapping.put(153, new Color(50,205,50));
-        this.mapping.put(255, new Color(144,238,144));
-    }
 }

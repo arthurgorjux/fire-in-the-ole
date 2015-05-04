@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.fito.vue.wtf;
+package fr.fito.vue.accueil.config;
 
+import fr.fito.vue.accueil.config.ConfigDialog;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
