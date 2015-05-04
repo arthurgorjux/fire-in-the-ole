@@ -8,6 +8,8 @@ import java.io.IOException;
  */
 public final class CarteDeTerrain {
     private final int carte[][];
+    
+    private String chemin;
 
     /**
      * Retourne la hauteur en cases de la carte.
@@ -33,6 +35,7 @@ public final class CarteDeTerrain {
      * Génère une carte par défaut.
      */
     public CarteDeTerrain() {
+        this.chemin = "";
         int carteGeneree[][] = {
             {0, 0, 0, 0, 0, 0, 2, 2, 2, 2, 2, 0, 2, 0, 2, 0, 0, 0},
             {0, 40, 40, 0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0},
@@ -82,6 +85,7 @@ public final class CarteDeTerrain {
      * @param bitmap Un tableau d'entier à double entrée.
      */
     public CarteDeTerrain(int[][] bitmap) {
+        this.chemin = "";
         carte = bitmap;
     }
 
@@ -91,7 +95,9 @@ public final class CarteDeTerrain {
      * @throws java.io.IOException
      */
     public CarteDeTerrain(String cheminAccesFichierBitmap) throws IOException {
+        this.chemin = "";
         BitmapLoader bitmapLoader = new BitmapLoader();
+        this.chemin = cheminAccesFichierBitmap;
         carte = bitmapLoader.lireFichierBitmap(cheminAccesFichierBitmap);
     }
 
@@ -111,5 +117,13 @@ public final class CarteDeTerrain {
      */
     public int[][] getCarte() {
         return carte.clone();
+    }
+    
+    /**
+     * Retourne le chemin vers le BitMap
+     * @return le chemin vers le fichier d'origine 
+     */
+    public String getChemin(){
+        return this.chemin;
     }
 }

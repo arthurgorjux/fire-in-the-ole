@@ -6,12 +6,10 @@
 package fr.fito.vue.accueil.config;
 
 import fr.fito.modele.CarteDeTerrain;
-import fr.fito.modele.Robot;
 import fr.fito.modele.parametrage.InitialisationIncendie;
 import fr.fito.modele.parametrage.InitialisationRobot;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +24,6 @@ import javax.swing.*;
 public class ConfigDialog extends JFrame{
     
     private JLabel filename;
-    private JButton creerRobots;
-    private JButton creerIncendies;
     private JButton chargerBitmap;
     private JButton lancer;
     private JButton fermer;
@@ -51,28 +47,12 @@ public class ConfigDialog extends JFrame{
         JPanel bottom = new JPanel(new GridLayout(1, 2, 5, 5));
         JPanel center = new JPanel(new BorderLayout());
         
-        filename = new JLabel("");
-        /*creerRobots = new JButton("Ajouter des robots");
-        creerRobots.addActionListener(new CreerRobotListener(this, robots));*/
-        
         chargerBitmap = new JButton("Charger une carte");
         chargerBitmap.addActionListener(new BitmapChargerListener(this));
         
-        /*lancer = new JButton("Lancer");
-        lancer.addActionListener(new LancerProgListener(this));
-        
-        fermer = new JButton("Fermer");
-        fermer.addActionListener(new ActionListenerImpl(this));*/
-        
         top.add(chargerBitmap);
-        //top.add(creerRobots);
-        //center.add(filename, BorderLayout.CENTER);
-        //bottom.add(lancer);
-        //bottom.add(fermer);
         
         this.getContentPane().add(top);
-       // this.getContentPane().add(center);
-        //this.getContentPane().add(bottom);
     }
     
     public List<InitialisationRobot> getRobots(){

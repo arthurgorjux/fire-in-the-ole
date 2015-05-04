@@ -46,15 +46,8 @@ public class BitmapChargerListener implements ActionListener{
             try {
                 BitmapLoader bmp = new BitmapLoader();
                 CarteDeTerrain map = new CarteDeTerrain(bmp.lireFichierBitmap(dir + "/" + filename));
-                JFrame frame = new JFrame();
-                frame.setContentPane(new PanelAffichageBmp(map));
-                frame.setPreferredSize(new Dimension(500, 500));
-                frame.setBounds(500, 400, 1200, 550);
-                frame.setVisible(true);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                new FenetreCreationParametre(map);
                 this.window.dispose();
-                //this.window.setMap(map);
-                //this.window.setLabel("Carte choisie : " + filename);
             } catch (IOException ex) {
                 Logger.getLogger(BitmapChargerListener.class.getName()).log(Level.SEVERE, null, ex);
             }

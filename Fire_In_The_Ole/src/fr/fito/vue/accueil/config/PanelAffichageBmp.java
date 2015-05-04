@@ -47,8 +47,12 @@ public class PanelAffichageBmp extends JPanel{
     private List<InitialisationIncendie> incendies;
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private JPopupMenu clickDroit = new JPopupMenu();
-    PanelAffichageBmp(CarteDeTerrain map) {
+    private FenetreCreationParametre main;
+    
+    public PanelAffichageBmp(CarteDeTerrain map, FenetreCreationParametre main) {
         super();
+        this.main = main;
+        this.setPreferredSize(new Dimension(map.getLargeur()*10, map.getHauteur()*10));
         robots = new ArrayList<>();
         incendies = new ArrayList<>();
         final Dimension clickLocation = new Dimension();
@@ -130,6 +134,9 @@ public class PanelAffichageBmp extends JPanel{
             } catch (IOException ex) {
                 Logger.getLogger(PanelAffichageCarte.class.getName()).log(Level.SEVERE, null, ex);
             }
+        }
+        if(this.robots.size() > 0 && this.incendies.size() > 0){
+            this.main.ready(this.robots, this.incendies);
         }
     }
 }

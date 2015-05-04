@@ -27,6 +27,7 @@ public class EcouteurBoutonLancerSimulation implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if(((String) this.fenetre.getComboBox().getSelectedItem()).equals("Personnaliser ...")){
             new ConfigDialog();
+            this.fenetre.dispose();
         }else{
             fenetre.lancerLaSimulation();
         }        
