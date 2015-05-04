@@ -21,14 +21,16 @@ import javax.swing.JOptionPane;
 class EcouteurAjouterIncendie implements ActionListener {
 
     private List<InitialisationIncendie> incendies;
+    private List<InitialisationRobot> robots;
     private Dimension clickLocation;
     private PanelAffichageBmp main;
     private CarteDeTerrain map;
-    public EcouteurAjouterIncendie(PanelAffichageBmp main, List<InitialisationIncendie> incendies, Dimension clickLocation, CarteDeTerrain map) {
+    public EcouteurAjouterIncendie(PanelAffichageBmp main, List<InitialisationIncendie> incendies, Dimension clickLocation, CarteDeTerrain map, List<InitialisationRobot> robots) {
         this.incendies = incendies;
         this.clickLocation = clickLocation;
         this.main = main;
         this.map = map;
+        this.robots = robots;
     }
 
     @Override
@@ -37,10 +39,33 @@ class EcouteurAjouterIncendie implements ActionListener {
         int y = clickLocation.height/30;
         if(x > this.map.getLargeur() || y > this.map.getHauteur()){
             JOptionPane.showMessageDialog(this.main, "On ne peut pas ajouter cet incendie\nLes coordonnées en dehors de la carte !", "Mauvaises coordonnées", JOptionPane.ERROR_MESSAGE);
-        }else{
-           this.incendies.add(new InitialisationIncendie(x, y));  
-           this.main.repaint(); 
-        }        
+        }
+        else{
+            if(this.coordAvailable(x,y)){
+                this.incendies.add(new InitialisationIncendie(x, y)); 
+                this.main.repaint(); 
+            }else{
+                JOptionPane.showMessageDialog(this.main, "Il existe déjà un robot ou un feu aux coordonnées (" + x + ", " + y +")", "Coordonnées déjà utilisées", JOptionPane.ERROR_MESSAGE);
+            }           
+        }       
+    }
+    
+    private boolean coordAvailable(int x, int y){
+        if(this.robots.size() > 0){
+           for(InitialisationRobot robot : this.robots){
+                if(robot.getX_depart()== x && robot.getY_depart()== y){
+                    return false;
+                }
+            } 
+        }  
+        if(this.incendies.size() > 0){
+            for(InitialisationIncendie incendie : this.incendies){
+                if(incendie.getX_depart() == x && incendie.getY_depart() == y){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
     
 }

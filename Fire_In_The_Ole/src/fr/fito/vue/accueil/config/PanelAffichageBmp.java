@@ -61,11 +61,11 @@ public class PanelAffichageBmp extends JPanel{
         this.map = map;
         for(TypeRobot type : TypeRobot.values()){
             JMenuItem item = new JMenuItem("Ajouter un robot " + type.toString());
-            item.addActionListener(new EcouteurAjouterRobot(this,this.robots, clickLocation, type, map));
+            item.addActionListener(new EcouteurAjouterRobot(this,this.robots, clickLocation, type, map, this.incendies));
             this.clickDroit.add(item);
         }
         JMenuItem itemIncendie = new JMenuItem("Ajouter un incendie");
-        itemIncendie.addActionListener(new EcouteurAjouterIncendie(this,this.incendies, clickLocation,map));
+        itemIncendie.addActionListener(new EcouteurAjouterIncendie(this,this.incendies, clickLocation,map, this.robots));
         this.clickDroit.add(itemIncendie);       
         this.setComponentPopupMenu(clickDroit);
         int preferredWidth = this.map.getLargeur()* PREFERRED_GRID_SIZE_PIXELS;
