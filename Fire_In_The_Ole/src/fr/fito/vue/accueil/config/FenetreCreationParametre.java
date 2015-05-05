@@ -54,6 +54,7 @@ public class FenetreCreationParametre extends JFrame{
         this.add(this.panelCarte, BorderLayout.CENTER);
         
         JPanel bottom = new JPanel(new GridLayout(1, 2, 5, 5));
+        this.valider.addActionListener(new LancerProgListener(this));
         bottom.add(valider);
         bottom.add(fermer);
         
@@ -69,7 +70,6 @@ public class FenetreCreationParametre extends JFrame{
         this.robots = robots;
         this.incendies = incendies;
         this.valider.setEnabled(true);
-        this.valider.addActionListener(new LancerProgListener(this));
     }
     
     public void lancerSimulation(){

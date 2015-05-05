@@ -57,8 +57,8 @@ public class Robot implements Entite {
         this.nom = nom;
         this.observateurs = new LinkedList<>();
         this.etat = EtatRobot.ARRET;
-        //this.pathFinder = new PathFinderToutDroit(simulation);
-        this.pathFinder = new PathFinderDijkstra(simulation, this);
+        this.pathFinder = new PathFinderToutDroit(simulation);
+        //this.pathFinder = new PathFinderDijkstra(simulation, this);
         //calculerChemin(); //???? n'a pas encore de destination à priori ?! ne faut-il pas le mettre lors de l'affectation d'une destination ? ie : definirDestination() ?
     }
     /**
@@ -76,6 +76,7 @@ public class Robot implements Entite {
      * @param nouvelleDestination La nouvelle destination du robot.
      */
     public void definirDestination(Position nouvelleDestination) {
+        System.out.println("Je dois aller en " + nouvelleDestination);
         destination = nouvelleDestination;
         this.etat = DEPLACEMENT;
         calculerChemin();
@@ -86,6 +87,7 @@ public class Robot implements Entite {
      */
     private void calculerChemin() {
         chemin = pathFinder.getCheminLePlusCourt(positionActuelle, destination);
+        System.out.println(chemin.getEtapes().toString());
     }
 
     /**
@@ -138,9 +140,9 @@ public class Robot implements Entite {
      * Sinon il prévient les observateurs que la situation n'est pas normale.
      */
     private void agirEnEtatExtinction() {
+        
         Position suivant = chemin.getPositionSuivante(positionActuelle);
         if (simulation.getIncendieAt(suivant) != null) {
-            System.out.println(this + " eteint un feu");
             Incendie incendie = simulation.getIncendieAt(suivant);
             incendie.arroser(getPuissance());
         } else {
@@ -157,14 +159,16 @@ public class Robot implements Entite {
      */
     private void agirEnEtatDeplacement() {
         Position suivant = chemin.getPositionSuivante(positionActuelle);
+        System.out.println("La position suivante ou je vais " + suivant);
+        System.out.println("Difficulté de la case " + suivant + " : " + this.simulation.getCarte().getDifficulte(suivant.getX(), suivant.getY()));
         if (simulation.contientUnIncendie(suivant)) {
             etat = EtatRobot.EXTINCTION;
-            definirDestination(suivant);
         } else {
             if (simulation.contientUnRobot(suivant)) {
                 calculerChemin();
             } else {
                 positionActuelle = suivant;
+                calculerChemin();
             }
         }
     }

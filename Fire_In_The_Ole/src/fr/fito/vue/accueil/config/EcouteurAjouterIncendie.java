@@ -37,7 +37,7 @@ class EcouteurAjouterIncendie implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int x = clickLocation.width/30;
         int y = clickLocation.height/30;
-        if(x > this.map.getLargeur() || y > this.map.getHauteur()){
+        if(x > this.map.getHauteur()-1|| y > this.map.getLargeur()-1){
             JOptionPane.showMessageDialog(this.main, "On ne peut pas ajouter cet incendie\nLes coordonnées en dehors de la carte !", "Mauvaises coordonnées", JOptionPane.ERROR_MESSAGE);
         }
         else{

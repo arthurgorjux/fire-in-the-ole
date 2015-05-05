@@ -41,7 +41,10 @@ class EcouteurAjouterRobot implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         int x = clickPosition.width/30;
         int y = clickPosition.height/30;
-        if(x > this.map.getLargeur() || y > this.map.getHauteur()){
+        System.out.println("X : " + x + " Y : " + y);
+        System.out.println(this.map.getDifficulte(x, y));
+        if(x > this.map.getHauteur()-1|| y > this.map.getLargeur()-1){
+            
             JOptionPane.showMessageDialog(this.main, "On ne peut pas ajouter ce robot\nLes coordonnées sont en dehors de la carte !", "Mauvaises coordonnées", JOptionPane.ERROR_MESSAGE);
         }else{
             if(this.coordAvailable(x,y)){

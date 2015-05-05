@@ -171,7 +171,7 @@ public class Simulation {
     public boolean contientUnIncendie(Position emplacement) {
         for (Incendie incendie : incendies) {
             if (incendie.getPosition().equals(emplacement)) {
-                System.out.println(emplacement + " Ya un feu ici");
+                //System.out.println(emplacement + " Ya un feu ici");
                 return true;
             }
         }
