@@ -10,6 +10,7 @@ import fr.fito.modele.pathfinding.PathFinderToutDroit;
 import fr.fito.modele.pathfinding.Position;
 import fr.fito.modele.parametrage.InitialisationRobot;
 import fr.fito.modele.pathfinding.PathFinderDijkstra;
+import fr.fito.modele.pathfinding.PathfinderAstar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -57,8 +58,9 @@ public class Robot implements Entite {
         this.nom = nom;
         this.observateurs = new LinkedList<>();
         this.etat = EtatRobot.ARRET;
-        this.pathFinder = new PathFinderToutDroit(simulation);
-        //this.pathFinder = new PathFinderDijkstra(simulation, this);
+        //this.pathFinder = new PathFinderToutDroit(simulation);
+        //this.pathFinder = new PathfinderAstar(simulation);
+        this.pathFinder = new PathFinderDijkstra(simulation, this);
         //calculerChemin(); //???? n'a pas encore de destination à priori ?! ne faut-il pas le mettre lors de l'affectation d'une destination ? ie : definirDestination() ?
     }
     /**
@@ -76,7 +78,6 @@ public class Robot implements Entite {
      * @param nouvelleDestination La nouvelle destination du robot.
      */
     public void definirDestination(Position nouvelleDestination) {
-        System.out.println("Je dois aller en " + nouvelleDestination);
         destination = nouvelleDestination;
         this.etat = DEPLACEMENT;
         calculerChemin();
@@ -159,8 +160,8 @@ public class Robot implements Entite {
      */
     private void agirEnEtatDeplacement() {
         Position suivant = chemin.getPositionSuivante(positionActuelle);
-        System.out.println("La position suivante ou je vais " + suivant);
-        System.out.println("Difficulté de la case " + suivant + " : " + this.simulation.getCarte().getDifficulte(suivant.getX(), suivant.getY()));
+        //System.out.println("La position suivante ou je vais " + suivant);
+        //System.out.println("Difficulté de la case " + suivant + " : " + this.simulation.getCarte().getDifficulte(suivant.getX(), suivant.getY()));
         if (simulation.contientUnIncendie(suivant)) {
             etat = EtatRobot.EXTINCTION;
         } else {

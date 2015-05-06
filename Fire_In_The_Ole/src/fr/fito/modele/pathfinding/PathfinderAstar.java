@@ -5,6 +5,7 @@
  */
 package fr.fito.modele.pathfinding;
 
+import fr.fito.modele.CarteDeTerrain;
 import fr.fito.modele.Simulation;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -18,7 +19,7 @@ public class PathfinderAstar implements PathFinder{
     private int[][] matrice;
     private List<Position> chemin = new ArrayList<>();
     private Simulation simu;
-    private int[][] map;
+    private CarteDeTerrain map;
     private Chemin cheminastar;
     HashMap<Position, String[]> listeouverte = new HashMap<Position, String[]>();
     HashMap<Position, String[]> listefermee = new HashMap<Position, String[]>();
@@ -31,8 +32,8 @@ public class PathfinderAstar implements PathFinder{
     
     @Override
     public Chemin getCheminLePlusCourt(Position debut, Position fin) {
-        this.map = this.simu.getCarte().getCarte();
-        return calculerChemin(matrice,debut,fin);
+        this.map = this.simu.getCarte();
+        return calculerChemin(this.map.getCarte(),debut,fin);
     }
 
     public Chemin calculerChemin(int[][] carte, Position debut, Position fin) {
@@ -112,7 +113,8 @@ public class PathfinderAstar implements PathFinder{
         adjacents[2] = new Position(x, y+1);
         adjacents[3] = new Position(x-1, y);
         for(Position pos : adjacents){
-            if (checkAdjacentExiste(pos, carte)){
+            if (checkAdjacentExiste(pos)){
+                System.out.println("Position : " + pos);
                 g = Integer.toString(Integer.valueOf(listefermee.get(debut)[0]) + carte[pos.getX()][pos.getY()]);
                 infonoeud[0] = g;
                 infonoeud[3] = x + " " + y;
@@ -136,12 +138,12 @@ public class PathfinderAstar implements PathFinder{
             listeouverte.put(pos, infonoeud.clone());
     }
     
-    private boolean checkAdjacentExiste(Position pos, int[][] carte){
+    private boolean checkAdjacentExiste(Position pos){
         int x = pos.getX();
         int y = pos.getY();
-        if(x < 0 || x >= carte.length)
+        if(x < 0 || x >= (this.map.getLargeur())-1)
             return false;
-        if(y < 0 || y >= carte.length)
+        if(y < 0 || y >= (this.map.getHauteur())-1)
             return false;
         
         return true;
