@@ -24,7 +24,16 @@ public class EcouteurBoutonDemarrerSimulation implements ActionListener {
      */
     @Override
     public void actionPerformed(ActionEvent e) {
-        panel.demarrerSimulation();     
+        //etat 0 = simu en pause - etat 1 = simu en cours
+        System.out.println("ETAT SIMU = "+this.panel.getEtat());
+        if (panel.getEtat() == 0)
+            panel.demarrerSimulation();
+        else if (panel.getEtat() == 2)
+            panel.relancerLaSimulation();
+        else {
+            System.err.println("Lancement de la simulation alors que la simulation est déjà lancée...");
+            System.exit(1);
+        }
     }
     
 }

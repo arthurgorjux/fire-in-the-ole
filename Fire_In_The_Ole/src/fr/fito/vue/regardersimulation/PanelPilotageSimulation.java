@@ -14,8 +14,9 @@ import javax.swing.JPanel;
 public class PanelPilotageSimulation extends JPanel{
     
     private int etat;
+    private final int INIT = 0;
     private final int START = 1;
-    private final int STOP = 0;
+    private final int PAUSE = 2;
     private final JButton start;
     private final JButton stop;
     private final JButton reset;
@@ -41,7 +42,7 @@ public class PanelPilotageSimulation extends JPanel{
         this.add(reset);
         
         stop.setEnabled(false);
-        this.etat = STOP;
+        this.etat = INIT;
     }
     
     public void passerEnEtatSimulationEnCours() {
@@ -51,7 +52,7 @@ public class PanelPilotageSimulation extends JPanel{
     }
     
     public void passerEnEtatSimulationEnPause() {
-        etat = STOP;
+        etat = PAUSE;
         stop.setEnabled(false);
         start.setEnabled(true);
     }
@@ -65,6 +66,7 @@ public class PanelPilotageSimulation extends JPanel{
      * Relance le déroulement de la simulation.
      */
     public void relancerLaSimulation() {
+        passerEnEtatSimulationEnCours();
         window.relancerLaSimulation();
     }
 
@@ -78,6 +80,15 @@ public class PanelPilotageSimulation extends JPanel{
         start.setEnabled(true);
         reset.setEnabled(true);
     }
+
+    void resetSimulation() {
+        this.reinitialiserLesBoutons();
+        this.etat = INIT;
+        window.resetSimulation();
+    }
     
+    public int getEtat() {
+        return etat;
+    }
     
 }

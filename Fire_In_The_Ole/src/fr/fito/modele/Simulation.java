@@ -248,4 +248,9 @@ public class Simulation {
         }
         return null;
     }
+
+    public void resetSimulation() {
+        System.err.println("TODO : RESET DES PARAMETRES DE LA SIMULATION");
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

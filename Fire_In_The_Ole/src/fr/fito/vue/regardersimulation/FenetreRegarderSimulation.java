@@ -113,6 +113,7 @@ public class FenetreRegarderSimulation extends JFrame{
         
         if(timer != null){
             System.out.println("Reprise de la simulation...");
+            this.relancerLaSimulation();
         }else{
             /** on récupère le nombre de robot, le nombre d'incendies et la taille de la map
             * Si trop de paramètres, calcul avant et affichage après
@@ -135,8 +136,8 @@ public class FenetreRegarderSimulation extends JFrame{
                 System.out.println("Début du calcul...");
                 while(calcul.isAlive() || !simulation.estTerminee()){ try {
                     //check thread alive ou simu terminée ?
-                    //on attend encore...
-                    Thread.sleep(1000);
+                    //on attend encore 1 tour de timer
+                    Thread.sleep(timer.getDelay());
                     System.out.println("Calcul toujours en cours...");
                     } catch (InterruptedException ex) {
                         Logger.getLogger(EcouteurBoutonDemarrerSimulation.class.getName()).log(Level.SEVERE, null, ex);
@@ -160,8 +161,7 @@ public class FenetreRegarderSimulation extends JFrame{
      * Reprends le déroulement de l'affichage de la simulation.
      */
     public void relancerLaSimulation() {
-        timer.stop();
-        timer = new Timer(1000, new EcouteurTimer(this));
+        timer.start();
     }
 
     /**
@@ -208,5 +208,12 @@ public class FenetreRegarderSimulation extends JFrame{
             reinitialiserBoutonsPilotage();
             System.out.println("Fin");
         }
+    }
+
+    void resetSimulation() {
+        //reset du timer puis des paramètres de la simulation
+        timer.setDelay(timer.getInitialDelay());
+        timer.stop();
+        simulation.resetSimulation();
     }
 }

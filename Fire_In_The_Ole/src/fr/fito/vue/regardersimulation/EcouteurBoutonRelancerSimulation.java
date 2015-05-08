@@ -20,7 +20,8 @@ public class EcouteurBoutonRelancerSimulation implements ActionListener{
     
     @Override
     public void actionPerformed(ActionEvent e) {
-        panel.relancerLaSimulation();
+        System.out.println("On reset la simulation");
+        panel.resetSimulation();
     }
     
 }
