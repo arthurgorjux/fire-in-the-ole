@@ -28,7 +28,7 @@ public class ThreadCalcul extends Thread {
             startTime = System.currentTimeMillis();
             simulation.mettreAJour();
             endTime = System.currentTimeMillis();
-            System.out.println("Temps calcul d'un tour = "+(endTime-startTime)); //nécessaire pour les tests de performances
+//            System.out.println("Temps calcul d'un tour = "+(endTime-startTime)+" ms"); //nécessaire pour les tests de performances
             simulation.archiverTour();
         }
         System.out.println("Nbr tour total : "+nb_tour);

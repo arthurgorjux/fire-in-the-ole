@@ -88,7 +88,7 @@ public class Robot implements Entite {
      */
     private void calculerChemin() {
         chemin = pathFinder.getCheminLePlusCourt(positionActuelle, destination);
-        System.out.println(chemin.getEtapes().toString());
+        //System.out.println(chemin.getEtapes().toString());
     }
 
     /**

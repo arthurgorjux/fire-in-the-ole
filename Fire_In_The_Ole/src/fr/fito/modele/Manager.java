@@ -72,8 +72,8 @@ public class Manager implements Entite, Observateur {
             }
         }
         
-        System.out.println("Liste des occupations...");
-        System.out.println(occupation_incendies);
+//        System.out.println("Liste des occupations...");
+//        System.out.println(occupation_incendies);
 
         besoinAnalyse = false;
     }

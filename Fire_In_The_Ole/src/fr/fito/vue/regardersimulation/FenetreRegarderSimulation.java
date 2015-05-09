@@ -38,10 +38,12 @@ public class FenetreRegarderSimulation extends JFrame{
     private Timer timer;
     private int compteur;
     private boolean affichageTermine;
+    private boolean isReset;
     
     public FenetreRegarderSimulation(Simulation simu, CarteDeTerrain map) throws IOException {
         compteur = 0;
         affichageTermine = false;
+        isReset = false;
         this.layout_north = new JPanel();
         this.layout_south = new JPanel();
         this.simulation = simu;
@@ -55,6 +57,7 @@ public class FenetreRegarderSimulation extends JFrame{
     }
     
     public void setMap(ArchiveTourSimulation tour){
+        System.out.println("set map..."+timer.getDelay());
         this.etatsEntite = tour.getEtatsEntite();
         mapPanel.setEtatsEntites(tour.getEtatsEntite());
         mapPanel.repaint();
@@ -109,12 +112,11 @@ public class FenetreRegarderSimulation extends JFrame{
      * Lance le déroulement de la simulation à l'écran.
      */
     public void demarrerSimulation() {
-        Timer timerTemporaire;
-        
-        if(timer != null){
-            System.out.println("Reprise de la simulation...");
-            this.relancerLaSimulation();
-        }else{
+        if (isReset) {//si on a reset, on ne refait pas le calcul, on lit juste les archives
+            timer.start();
+        }
+        else {
+            Timer timerTemporaire;
             /** on récupère le nombre de robot, le nombre d'incendies et la taille de la map
             * Si trop de paramètres, calcul avant et affichage après
             * Sinon, calcul et affichage en même temps
@@ -125,10 +127,10 @@ public class FenetreRegarderSimulation extends JFrame{
             nb_params += simulation.getRobots().size();
             nb_params += simulation.getIncendies().size();
             taille_carte += simulation.getCarte().getHauteur()*simulation.getCarte().getLargeur();
-            
+
             ThreadCalcul calcul = new ThreadCalcul(simulation);
             timerTemporaire = new Timer(1000, new EcouteurTimer(this));
-            
+
             if (nb_params > 50 || taille_carte > 2500) {
                 //TODO modifier limite en fonction des tests de performances
                 //simulation trop importante, on calcule tout avant de lancer l'affichage
@@ -154,7 +156,8 @@ public class FenetreRegarderSimulation extends JFrame{
                 calcul.start();
                 timer.start(); 
             }
-        }  
+        }
+        
     }
 
     /**
@@ -183,6 +186,8 @@ public class FenetreRegarderSimulation extends JFrame{
      * Met à jour l'image de la simulation.
      */
     void majAffichageSimulation() {
+        System.out.println("valeur du compteur = "+compteur);
+        System.out.println("longueur de l'archive = "+simulation.getArchiveResultat().getArchive().size());
         if (compteur < simulation.getArchiveResultat().getArchive().size()) {
             // on regarde la taille de l'arraylist pr voir si on peut get l'objet
             // ex : si compteur = 2 et qu'on a calculé 3 tours on get tours[2] qui existe bien (car size = 3 donc 2<3)
@@ -214,6 +219,9 @@ public class FenetreRegarderSimulation extends JFrame{
         //reset du timer puis des paramètres de la simulation
         timer.setDelay(timer.getInitialDelay());
         timer.stop();
+        compteur = 0;
+        affichageTermine = false;
+        isReset = true;
         simulation.resetSimulation();
     }
 }

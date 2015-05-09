@@ -19,10 +19,13 @@ public class Simulation {
     private final ArchiveSimulation archive;
     private final CarteDeTerrain carte;
     private final List<Robot> robots;
+    //private final List<Robot> robots_initiaux;
     private final List<Incendie> incendies;
+    //private final List<Incendie> incendies_initiaux;
     private final List<Incendie> incendiesFutur;
     private final List<Incendie> incendiesEteints;
     private int duree = 1;
+    private JeuDeParametres parametres;
 
     /**
      * Constucteur à partir d'un JeuDeParametres.
@@ -35,25 +38,13 @@ public class Simulation {
         sens_du_vent = parametres.getSens_du_vent();
         robots = new LinkedList<>();
         incendies = new LinkedList<>();
+        //incendies_initiaux = new LinkedList<>();
         incendiesFutur = new LinkedList<>();
         incendiesEteints = new LinkedList<>();
-
-        // On ajoute les robots et les incendies aux listes
-        for (InitialisationIncendie departs_incendie : parametres.getDeparts_incendie()) {
-            incendies.add(new Incendie(departs_incendie, this));
-        }
-
-        for (InitialisationRobot depart_robot : parametres.getDeparts_robot()) {
-            robots.add(new Robot(depart_robot, "NomRandom", this)); //TODO gerer generation de noms
-        }
-
-        // On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
-        for (Robot robot : robots) {
-            robot.ajouterObservateur(manager);
-        }
-        for (Incendie incendie : incendies) {
-            incendie.ajouterObservateur(manager);
-        }
+        this.parametres = parametres;
+        
+        this.majListes();
+        
     }
 
     /**
@@ -66,12 +57,14 @@ public class Simulation {
 
         incendies.removeAll(incendiesEteints);
         incendiesEteints.removeAll(incendiesEteints);
+        /*
         System.out.println("ROBOTS MAJ=====");
         System.out.println(robots);
         System.out.println("INCENDIES MAJ=====");
         System.out.println(incendies);
         System.out.println("INCENDIES ETEINTS=====");
         System.out.println(incendiesEteints);
+        */
         if (!incendies.isEmpty()) {
             manager.agir();
             for (Robot robot : robots) {
@@ -230,9 +223,11 @@ public class Simulation {
      */
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
+        /*
         System.out.println("ETEINTS FEU : " + feu);
         System.out.println("FEU ETEINTS SIMU===");
         System.out.println(incendiesEteints);
+        */
     }
 
     /**
@@ -250,7 +245,27 @@ public class Simulation {
     }
 
     public void resetSimulation() {
-        System.err.println("TODO : RESET DES PARAMETRES DE LA SIMULATION");
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        incendies.clear();
+        robots.clear();
+        this.majListes();
+    }
+
+    private void majListes() {
+        // On ajoute les robots et les incendies aux listes
+        for (InitialisationIncendie departs_incendie : parametres.getDeparts_incendie()) {
+            incendies.add(new Incendie(departs_incendie, this));
+        }
+        
+        for (InitialisationRobot depart_robot : parametres.getDeparts_robot()) {
+            robots.add(new Robot(depart_robot, "NomRandom", this)); //TODO gerer generation de noms
+        }
+
+        // On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
+        for (Robot robot : robots) {
+            robot.ajouterObservateur(manager);
+        }
+        for (Incendie incendie : incendies) {
+            incendie.ajouterObservateur(manager);
+        }
     }
 }
