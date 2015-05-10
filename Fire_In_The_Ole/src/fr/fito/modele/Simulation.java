@@ -9,6 +9,8 @@ import fr.fito.modele.pathfinding.Position;
 import fr.fito.modele.parametrage.InitialisationIncendie;
 import fr.fito.modele.parametrage.InitialisationRobot;
 import fr.fito.modele.parametrage.JeuDeParametres;
+import java.io.File;
+import java.io.FileWriter;
 
 /**
  * La simulation de l'extinction d'incendies par des robots sur un carte.
@@ -26,6 +28,8 @@ public class Simulation {
     private final List<Incendie> incendiesEteints;
     private int duree = 1;
     private JeuDeParametres parametres;
+    private int nbIncendiesAjoutes = 0;
+    private int nbIncendiesEteints = 0;
 
     /**
      * Constucteur à partir d'un JeuDeParametres.
@@ -44,7 +48,7 @@ public class Simulation {
         this.parametres = parametres;
         
         this.majListes();
-        
+        this.statistique("debut");
     }
 
     /**
@@ -128,6 +132,7 @@ public class Simulation {
     public boolean ajouterFeu(int intensite, int x, int y) {
         if (estUnEmplacementLibre(new Position(x, y))) {
             incendiesFutur.add(new Incendie(x, y, this));
+            nbIncendiesAjoutes = nbIncendiesAjoutes + 1;
             return true;
         }
         return false;
@@ -142,6 +147,7 @@ public class Simulation {
     public boolean ajouterFeu(int intensite, Position position) {
         if (estUnEmplacementLibre(position)) {
             incendiesFutur.add(new Incendie(position, this));
+            nbIncendiesAjoutes = nbIncendiesAjoutes + 1;
             return true;
         }
         return false;
@@ -223,6 +229,7 @@ public class Simulation {
      */
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
+        nbIncendiesEteints = nbIncendiesEteints + 1;
         /*
         System.out.println("ETEINTS FEU : " + feu);
         System.out.println("FEU ETEINTS SIMU===");
@@ -266,6 +273,29 @@ public class Simulation {
         }
         for (Incendie incendie : incendies) {
             incendie.ajouterObservateur(manager);
+        }
+    }
+    
+    public void statistique(String avance) {
+        final File rep = new File("C:/statistiques FITO");
+        final String chemin = "C:/statistiques FITO/statistiques.txt";
+        rep.mkdir();
+        final File fichier = new File(chemin);
+        try{
+            final FileWriter writer = new FileWriter(fichier, true);
+            if(avance == "debut"){
+                writer.write("------------------NOUVELLE SIMULATION------------------\n\n");
+                writer.write("Nombre de robots : " + robots.size() + "\n");
+                writer.write("Nombre de feux initial : " + incendies.size() + "\n");
+            }else{
+                writer.write("Nombre de feux ajoutés pendant la simulation : " + nbIncendiesAjoutes + "\n");
+                writer.write("Nombre de feux éteints pendant la simulation : " + nbIncendiesEteints + "\n");
+                writer.write("Nombre de tours avant la fin de la simulation : " + duree + "\n");
+            }
+            
+            writer.close();
+        }catch (Exception e){
+            System.out.println("Impossible d'écrire les statistiques");
         }
     }
 }

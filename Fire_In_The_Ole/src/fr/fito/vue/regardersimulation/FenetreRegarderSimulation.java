@@ -206,6 +206,7 @@ public class FenetreRegarderSimulation extends JFrame{
             //si le calcul est terminé et qu'on arrive pas a get : on a fini l'affichage
             System.out.println("Affichage terminé");
             affichageTermine = true;
+            this.simulation.statistique("fin");
         }
             
         if (affichageTermine) {
