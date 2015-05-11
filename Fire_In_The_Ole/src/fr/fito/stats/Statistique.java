@@ -63,7 +63,8 @@ public class Statistique {
         result += "========== STATISTIQUES FINALES ========\n";
         result += "Temps total de la simulation : " + timeFinal + " ms\n";
         result += "Nombre de tours total : " + NbTour + "\n";
-        result += "Temps moyen de la simulaiton : " + timeFinal/NbTour + " ms";
+        result += "Temps moyen de la simulation : " + timeFinal/NbTour + " ms\n";
+        result += "\n\t\t\t\t\t\t\t\t\t\tGénéré automatiquement par FITO (Atchy-Dalama, Fantinel, Fenet-Garde, Gorjux, Yong)";
         return result;
     }
 }
