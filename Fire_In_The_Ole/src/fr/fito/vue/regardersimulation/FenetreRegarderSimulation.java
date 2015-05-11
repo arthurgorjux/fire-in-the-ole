@@ -6,6 +6,7 @@ import fr.fito.modele.CarteDeTerrain;
 import fr.fito.modele.archivage.EtatEntite;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
+import fr.fito.stats.StatistiqueTour;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridLayout;
@@ -206,6 +207,7 @@ public class FenetreRegarderSimulation extends JFrame{
             //si le calcul est terminé et qu'on arrive pas a get : on a fini l'affichage
             System.out.println("Affichage terminé");
             affichageTermine = true;
+            simulation.getStat().persistance();
             this.simulation.statistique("fin");
         }
             

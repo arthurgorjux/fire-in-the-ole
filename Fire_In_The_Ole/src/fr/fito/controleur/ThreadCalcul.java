@@ -1,6 +1,10 @@
 package fr.fito.controleur;
 
+import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
+import fr.fito.modele.archivage.ArchiveTourSimulation;
+import fr.fito.stats.StatistiqueTour;
+import java.util.List;
 
 /**
  * Thread permettant de calculer la simulation
@@ -29,7 +33,8 @@ public class ThreadCalcul extends Thread {
             simulation.mettreAJour();
             endTime = System.currentTimeMillis();
 //            System.out.println("Temps calcul d'un tour = "+(endTime-startTime)+" ms"); //nécessaire pour les tests de performances
-            simulation.archiverTour();
+            ArchiveTourSimulation tour = simulation.archiverTour();
+            this.simulation.getStat().addArchive(nb_tour, new StatistiqueTour(tour, endTime-startTime));
         }
         System.out.println("Nbr tour total : "+nb_tour);
     }

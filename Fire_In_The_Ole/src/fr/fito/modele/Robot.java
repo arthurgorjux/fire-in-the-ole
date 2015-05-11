@@ -114,6 +114,10 @@ public class Robot implements Entite {
     public TypeRobot getType() {
         return typeRobot;
     }
+    
+    public String getNom(){
+        return nom;
+    }
 
     /**
      * Fait agir le robot durant ce tour de simulation.
@@ -121,6 +125,7 @@ public class Robot implements Entite {
      */
     @Override
     public void agir() {
+        System.out.println("Etat de " + this.nom + " : " + this.etat);
         switch (etat) {
             case DEPLACEMENT:
                 agirEnEtatDeplacement();
@@ -204,7 +209,7 @@ public class Robot implements Entite {
      * @return Un EtatEntite représentant le robot au moment de l'appel.
      */
     public EtatEntite getEtatEntite() {
-        return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, this.typeRobot.toString());
+        return new EtatEntite(positionActuelle.getX(), positionActuelle.getY(), this.nom, this.typeRobot.toString(), this.etat);
     }
 
     @Override
@@ -226,5 +231,9 @@ public class Robot implements Entite {
      */
     public EtatRobot getEtatCourant() {
         return this.etat;
+    }
+    
+    public void setEtatCourant(EtatRobot etat){
+        this.etat = etat;
     }
 }

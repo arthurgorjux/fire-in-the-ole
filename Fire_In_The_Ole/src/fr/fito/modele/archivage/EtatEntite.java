@@ -1,5 +1,6 @@
 package fr.fito.modele.archivage;
 
+import fr.fito.modele.EtatRobot;
 import fr.fito.modele.Robot;
 import fr.fito.modele.Simulation;
 import fr.fito.modele.pathfinding.Position;
@@ -12,6 +13,7 @@ public class EtatEntite {
     private final String nom;
     private final String type;
     private final Position position;
+    private final EtatRobot etatRobot;
 
     /**
      * Retourne la position x de l'entité.
@@ -52,7 +54,24 @@ public class EtatEntite {
     public String getType() {
         return type;
     }
+    
+    public EtatRobot getEtat(){
+        return this.etatRobot;
+    }
 
+    /**
+     * Constructeur à partir de la position, du nom et du type de l'entité.
+     * @param position La Position de l'entité.
+     * @param nom Le nom de l'entité.
+     * @param type Le Type de l'entité.
+     */
+    public EtatEntite(Position position, String nom, String type, EtatRobot etat) {
+        this.position = position;
+        this.nom = nom;
+        this.type = type;
+        this.etatRobot = etat;
+    }
+    
     /**
      * Constructeur à partir de la position, du nom et du type de l'entité.
      * @param position La Position de l'entité.
@@ -63,6 +82,18 @@ public class EtatEntite {
         this.position = position;
         this.nom = nom;
         this.type = type;
+        this.etatRobot = null;
+    }
+    
+    /**
+     * Constructeur à partir des coordonés, x et y, du nom et du type de l'entité.
+     * @param x La coordoné x de l'entité.
+     * @param y La coordoné y de l'entité.
+     * @param nom Le nom de l'entité.
+     * @param type Le Type de l'entité.
+     */
+    public EtatEntite(int x, int y, String nom, String type, EtatRobot etat) {
+        this(new Position(x, y), nom, type, etat);
     }
 
     /**

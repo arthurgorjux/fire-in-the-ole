@@ -9,6 +9,8 @@ import fr.fito.modele.pathfinding.Position;
 import fr.fito.modele.parametrage.InitialisationIncendie;
 import fr.fito.modele.parametrage.InitialisationRobot;
 import fr.fito.modele.parametrage.JeuDeParametres;
+import fr.fito.stats.Statistique;
+import fr.fito.stats.StatistiqueTour;
 import java.io.File;
 import java.io.FileWriter;
 
@@ -30,6 +32,7 @@ public class Simulation {
     private JeuDeParametres parametres;
     private int nbIncendiesAjoutes = 0;
     private int nbIncendiesEteints = 0;
+    private Statistique stat;
 
     /**
      * Constucteur à partir d'un JeuDeParametres.
@@ -48,6 +51,7 @@ public class Simulation {
         this.parametres = parametres;
         
         this.majListes();
+        this.stat = new Statistique();
         this.statistique("debut");
     }
 
@@ -61,14 +65,7 @@ public class Simulation {
 
         incendies.removeAll(incendiesEteints);
         incendiesEteints.removeAll(incendiesEteints);
-        /*
-        System.out.println("ROBOTS MAJ=====");
-        System.out.println(robots);
-        System.out.println("INCENDIES MAJ=====");
-        System.out.println(incendies);
-        System.out.println("INCENDIES ETEINTS=====");
-        System.out.println(incendiesEteints);
-        */
+
         if (!incendies.isEmpty()) {
             manager.agir();
             for (Robot robot : robots) {
@@ -83,7 +80,7 @@ public class Simulation {
     /**
      * Archive l'état de la simulation.
      */
-    public void archiverTour() {
+    public ArchiveTourSimulation archiverTour() {
         final List<EtatEntite> etatsEntite;
         etatsEntite = new LinkedList<>();
         for (Robot robot : robots) {
@@ -92,10 +89,10 @@ public class Simulation {
         for (Incendie incendie : incendies) {
             etatsEntite.add(incendie.getEtatEntite());
         }
-
+        
         ArchiveTourSimulation tour = new ArchiveTourSimulation(etatsEntite);
         archive.addTour(tour);
-//		return tour;
+        return tour;
     }
 
     /**
@@ -222,6 +219,10 @@ public class Simulation {
     public CarteDeTerrain getCarte() {
         return this.carte;
     }
+    
+    public Statistique getStat(){
+        return this.stat;
+    }
 
     /**
      * Demande le retrait de l'incendie en paramètres de la simulation pour cause d'extinction.
@@ -262,9 +263,11 @@ public class Simulation {
         for (InitialisationIncendie departs_incendie : parametres.getDeparts_incendie()) {
             incendies.add(new Incendie(departs_incendie, this));
         }
-        
+        int compteur = 0;
         for (InitialisationRobot depart_robot : parametres.getDeparts_robot()) {
-            robots.add(new Robot(depart_robot, "NomRandom", this)); //TODO gerer generation de noms
+            String nom = "Robot " + depart_robot.getType().toString() + " #" + compteur;
+            compteur++;
+            robots.add(new Robot(depart_robot, nom, this));
         }
 
         // On inscrit le manager en tant qu'observateur sur tous les incendies et tous les robots.
