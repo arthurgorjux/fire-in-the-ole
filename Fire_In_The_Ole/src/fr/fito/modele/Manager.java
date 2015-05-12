@@ -34,8 +34,6 @@ public class Manager implements Entite, Observateur {
         List<Robot> robots = simulation.getRobots();
         //construction de la liste des feu occupés...
         List<Incendie> incendies = simulation.getIncendies();
-//        System.out.println("Liste des incendies avant affectation : ");
-//        System.out.println(incendies);
         
         
         occupation_incendies.clear();
@@ -59,8 +57,6 @@ public class Manager implements Entite, Observateur {
                 }
             }
         }
-        //System.out.println("Liste des occupations avant affectation : ");
-        //System.out.println(occupation_incendies);
         
         for (Robot robotActuel : robots) {
             if (!(robotActuel.getEtatCourant() == EtatRobot.EXTINCTION)) {
@@ -71,10 +67,6 @@ public class Manager implements Entite, Observateur {
                 occupation_incendies.put(incendieProche, nb_occup+1); //on ajoute 1
             }
         }
-        
-//        System.out.println("Liste des occupations...");
-//        System.out.println(occupation_incendies);
-
         besoinAnalyse = false;
     }
 

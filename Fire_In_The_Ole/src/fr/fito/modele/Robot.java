@@ -125,7 +125,7 @@ public class Robot implements Entite {
      */
     @Override
     public void agir() {
-        System.out.println("Etat de " + this.nom + " : " + this.etat);
+//        System.out.println("Etat de " + this.nom + " : " + this.etat);
         switch (etat) {
             case DEPLACEMENT:
                 agirEnEtatDeplacement();

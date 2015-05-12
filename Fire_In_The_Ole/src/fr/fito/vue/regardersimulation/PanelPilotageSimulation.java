@@ -49,6 +49,7 @@ public class PanelPilotageSimulation extends JPanel{
         etat = START;
         start.setEnabled(false);
         stop.setEnabled(true);
+        reset.setEnabled(false);
     }
     
     public void passerEnEtatSimulationEnPause() {
@@ -78,7 +79,7 @@ public class PanelPilotageSimulation extends JPanel{
     public void reinitialiserLesBoutons() {
         stop.setEnabled(false);
         start.setEnabled(true);
-        reset.setEnabled(true);
+        reset.setEnabled(false);
     }
 
     void resetSimulation() {
@@ -89,6 +90,12 @@ public class PanelPilotageSimulation extends JPanel{
     
     public int getEtat() {
         return etat;
+    }
+
+    public void terminerSimulation() {
+        stop.setEnabled(false);
+        start.setEnabled(false);
+        reset.setEnabled(true);
     }
     
 }

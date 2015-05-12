@@ -33,6 +33,7 @@ public class Simulation {
     private int nbIncendiesAjoutes = 0;
     private int nbIncendiesEteints = 0;
     private Statistique stat;
+    private boolean isReset;
 
     /**
      * Constucteur à partir d'un JeuDeParametres.
@@ -49,6 +50,7 @@ public class Simulation {
         incendiesFutur = new LinkedList<>();
         incendiesEteints = new LinkedList<>();
         this.parametres = parametres;
+        isReset = false;
         
         this.majListes();
         this.stat = new Statistique();
@@ -103,10 +105,17 @@ public class Simulation {
         //on termine la simulation si la liste des incendies est vide
         //ou au bout d'un certain nombre de tours dans un premier temps...
         duree = duree + 1;
-        if (incendies.isEmpty()) {
+        
+        //si la simu a été reset, 
+        if (isReset) {
             return true;
-        } else {
-            return (duree >= 60);
+        }
+        else {
+            if (incendies.isEmpty()) {
+                return true;
+            } else {
+                return (duree >= 60);
+            }   
         }
     }
 
@@ -231,11 +240,6 @@ public class Simulation {
     void eteindreFeu(Incendie feu) {
         incendiesEteints.add(feu);
         nbIncendiesEteints = nbIncendiesEteints + 1;
-        /*
-        System.out.println("ETEINTS FEU : " + feu);
-        System.out.println("FEU ETEINTS SIMU===");
-        System.out.println(incendiesEteints);
-        */
     }
 
     /**
@@ -253,6 +257,8 @@ public class Simulation {
     }
 
     public void resetSimulation() {
+        isReset = true;
+        duree = 1;
         incendies.clear();
         robots.clear();
         this.majListes();

@@ -179,8 +179,15 @@ public class FenetreRegarderSimulation extends JFrame{
     /**
      * Réinitialise le pannel de boutons de pilotage de la simulation.
      */
-    void reinitialiserBoutonsPilotage() {
-        simulateur.reinitialiserLesBoutons();
+//    void reinitialiserBoutonsPilotage() {
+//        simulateur.reinitialiserLesBoutons();
+//    }
+    
+    /**
+     * Réinitialise le pannel de boutons de pilotage de la simulation.
+     */
+    private void terminerSimulation() {
+        simulateur.terminerSimulation();
     }
 
     /**
@@ -189,6 +196,7 @@ public class FenetreRegarderSimulation extends JFrame{
     void majAffichageSimulation() {
         System.out.println("valeur du compteur = "+compteur);
         System.out.println("longueur de l'archive = "+simulation.getArchiveResultat().getArchive().size());
+        System.out.println("SIMU TERMINEE ? "+simulation.estTerminee());
         if (compteur < simulation.getArchiveResultat().getArchive().size()) {
             // on regarde la taille de l'arraylist pr voir si on peut get l'objet
             // ex : si compteur = 2 et qu'on a calculé 3 tours on get tours[2] qui existe bien (car size = 3 donc 2<3)
@@ -213,7 +221,7 @@ public class FenetreRegarderSimulation extends JFrame{
             
         if (affichageTermine) {
             timer.stop();
-            reinitialiserBoutonsPilotage();
+            terminerSimulation();
             System.out.println("Fin");
         }
     }
