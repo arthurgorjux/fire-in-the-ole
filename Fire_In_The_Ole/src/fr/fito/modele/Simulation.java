@@ -35,6 +35,10 @@ public class Simulation {
     private Statistique stat;
     private boolean isReset;
 
+    public boolean isReset() {
+        return isReset;
+    }
+
     /**
      * Constucteur à partir d'un JeuDeParametres.
      * @param parametres Le jeu de paramètres initiaux de la simulation.
@@ -203,6 +207,10 @@ public class Simulation {
      */
     public List<Incendie> getIncendies() {
         return incendies;
+    }
+    
+    public int getNbIncendiesPropages(){
+        return this.nbIncendiesAjoutes;
     }
 
     /**

@@ -37,7 +37,7 @@ public class Statistique {
     /**
      * Sauvegarde les statistiques dans un fichier texte
      */
-    public void persistance(){
+    public void persistance(int nbIncendiesPropages){
         final File rep = new File(System.getProperty("user.home") + "/resultatsSimulation");
         final String chemin = rep.getPath() + "/"  + this.name + ".txt";
         rep.mkdir();
@@ -51,17 +51,18 @@ public class Statistique {
                 timeFinal += tour.getTime();
                 nbTour++;
             }
-            writer.write(this.getStatFinale(timeFinal, nbTour));
+            writer.write(this.getStatFinale(timeFinal, nbTour, nbIncendiesPropages));
             writer.close();
         }catch (Exception e){
             System.out.println("Impossible d'écrire les statistiques");
         }
     }
     
-    private String getStatFinale(Long timeFinal, int NbTour){
+    private String getStatFinale(Long timeFinal, int NbTour, int nbIncendiesPropages){
         String result = "";
         result += "========== STATISTIQUES FINALES ========\n";
-        result += "Temps total de la simulation : " + timeFinal + " ms\n";
+        result += (nbIncendiesPropages != 0) ? "Nombre d'incendies qui se sont propagés : " + nbIncendiesPropages : "Aucun incendie ne s'est propagé";
+        result += "\nTemps total de la simulation : " + timeFinal + " ms\n";
         result += "Nombre de tours total : " + NbTour + "\n";
         result += "Temps moyen de la simulation : " + timeFinal/NbTour + " ms\n";
         result += "\n\t\t\t\t\t\t\t\t\t\tGénéré automatiquement par FITO (Atchy-Dalama, Fantinel, Fenet-Garde, Gorjux, Yong)";
