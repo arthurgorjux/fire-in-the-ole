@@ -16,8 +16,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import javax.swing.border.EmptyBorder;
 
 /**
  *
@@ -93,8 +95,8 @@ public class FenetreRegarderSimulation extends JFrame{
         simulateur.setPreferredSize(new Dimension(infos.getWidth()*(1/3), infos.getHeight()));
 
         
-        simulateur.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
-        stats.setBorder(javax.swing.BorderFactory.createLineBorder(Color.black));
+        simulateur.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 0, 1, Color.black));
+        stats.setBorder(new EmptyBorder(10, 10, 10, 10));
         layout_north.add(mapPanel);
         
         layout_south.add(simulateur);
@@ -215,8 +217,10 @@ public class FenetreRegarderSimulation extends JFrame{
             //si le calcul est terminé et qu'on arrive pas a get : on a fini l'affichage
             System.out.println("Affichage terminé");
             affichageTermine = true;
-            if(!this.simulation.isReset())
+            if(!this.simulation.isReset()){
                 simulation.getStat().persistance(this.simulation.getNbIncendiesPropages());
+                this.displayStat();
+            }        
             this.simulation.statistique("fin");
         }
             
@@ -237,5 +241,19 @@ public class FenetreRegarderSimulation extends JFrame{
         this.mapPanel.enableReset();
         this.mapPanel.repaint();
         simulation.resetSimulation();
+    }
+    
+    public JPanel getPanelStat(){
+        return this.stats;
+    }
+
+    private void displayStat() {
+        String[] data = this.simulation.getStat().toString().split("\n");
+        this.stats.setLayout(new GridLayout(data.length, 1, 5, 5));
+        for(String value : data){
+            this.stats.add(new JLabel(value));
+        }        
+        this.stats.repaint();
+        this.stats.revalidate();
     }
 }

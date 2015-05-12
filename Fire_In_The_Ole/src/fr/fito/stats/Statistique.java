@@ -23,6 +23,10 @@ public class Statistique {
     
     private String name;
     private List<StatistiqueTour> archive;
+    private Long timeFinal;
+    private int nbFeuxPropages;
+    private int nbTourTotal;
+    private String chemin;
     public Statistique(){
         DateFormat format = new SimpleDateFormat("yyyy-mm-dd=HH_mm_ss");
         this.name = "Statistiques_FITO_" + format.format(new Date());
@@ -40,6 +44,7 @@ public class Statistique {
     public void persistance(int nbIncendiesPropages){
         final File rep = new File(System.getProperty("user.home") + "/resultatsSimulation");
         final String chemin = rep.getPath() + "/"  + this.name + ".txt";
+        this.chemin = chemin;
         rep.mkdir();
         final File fichier = new File(chemin);
         try{
@@ -58,13 +63,25 @@ public class Statistique {
         }
     }
     
-    private String getStatFinale(Long timeFinal, int NbTour, int nbIncendiesPropages){
+    public String getChemin(){
+        return this.chemin;
+    }
+    
+    @Override
+    public String toString(){
+       return this.getStatFinale(timeFinal, nbTourTotal, nbFeuxPropages) + "\n" + "Le fichier complet est disponible : " + this.chemin;
+    }
+    
+    private String getStatFinale(Long timeFinal, int nbTour, int nbIncendiesPropages){
+        this.timeFinal = timeFinal;
+        this.nbTourTotal = nbTour;
+        this.nbFeuxPropages = nbIncendiesPropages;
         String result = "";
         result += "========== STATISTIQUES FINALES ========\n";
         result += (nbIncendiesPropages != 0) ? "Nombre d'incendies qui se sont propagés : " + nbIncendiesPropages : "Aucun incendie ne s'est propagé";
         result += "\nTemps total de la simulation : " + timeFinal + " ms\n";
-        result += "Nombre de tours total : " + NbTour + "\n";
-        result += "Temps moyen de la simulation : " + timeFinal/NbTour + " ms\n";
+        result += "Nombre de tours total : " + nbTour + "\n";
+        result += "Temps moyen de la simulation : " + timeFinal/nbTour + " ms\n";
         result += "\n\t\t\t\t\t\t\t\t\t\tGénéré automatiquement par FITO (Atchy-Dalama, Fantinel, Fenet-Garde, Gorjux, Yong)";
         return result;
     }
