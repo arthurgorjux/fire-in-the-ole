@@ -87,11 +87,11 @@ public class FenetreAccueil extends JFrame{
         String[] listJeux = new String[10];
         JeuDeParametres jeu1 = new JeuDeParametres(new File("./IMG/map_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
         JeuDeParametres jeu2 = new JeuDeParametres(new File("./IMG/map_2.bmp").getPath(), SensVent.EST, this.getListeDesIncendiesJeu2(), this.getListeDesRobotsJeu2());
-        listJeux[0] = "Jeu 1";
-        listJeux[1] = "Jeu 2";
+        listJeux[0] = "Jeu Simu reussie";
+        listJeux[1] = "Jeu Simu echec";
         listJeux[2] = "Personnaliser ...";
-        hashmapJeuxDeParametres.put("Jeu 1", jeu1);
-        hashmapJeuxDeParametres.put("Jeu 2", jeu2);
+        hashmapJeuxDeParametres.put("Jeu Simu reussie", jeu1);
+        hashmapJeuxDeParametres.put("Jeu Simu echec", jeu2);
         comboJeuxDeParametres = new JComboBox<>(listJeux);
     }
     
@@ -101,35 +101,24 @@ public class FenetreAccueil extends JFrame{
      */
     private List<InitialisationIncendie> getListeDesIncendies(){
         List<InitialisationIncendie> feux = new ArrayList<>();
-        //feux.add(new InitialisationIncendie(10, 10));
         feux.add(new InitialisationIncendie(1, 2));
-        //feux.add(new InitialisationIncendie(3, 5));
-        feux.add(new InitialisationIncendie(4, 4));
-        feux.add(new InitialisationIncendie(10, 1));
-        feux.add(new InitialisationIncendie(5, 6));
+        feux.add(new InitialisationIncendie(4, 6));
+        feux.add(new InitialisationIncendie(10, 10));
+        feux.add(new InitialisationIncendie(20, 7));
         return feux;
     }
     
     private List<InitialisationIncendie> getListeDesIncendiesJeu2(){
         List<InitialisationIncendie> feux = new ArrayList<>();
-        //feux.add(new InitialisationIncendie(10, 10));
         feux.add(new InitialisationIncendie(1, 2));
-        //feux.add(new InitialisationIncendie(3, 5));
         feux.add(new InitialisationIncendie(4, 4));
         feux.add(new InitialisationIncendie(10, 1));
         feux.add(new InitialisationIncendie(5, 6));
+        feux.add(new InitialisationIncendie(16, 10));
+        feux.add(new InitialisationIncendie(12, 12));
+        feux.add(new InitialisationIncendie(0,4 ));
+        feux.add(new InitialisationIncendie(6, 0));
         return feux;
-    }
-    
-    private List<InitialisationRobot> getListeDesRobotsJeu2(){
-        List<InitialisationRobot> robots = new ArrayList<>();
-        robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
-        //robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(10, 0, TypeRobot.ROUE));
-        //robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(0, 6, TypeRobot.PATTE));
-        robots.add(new InitialisationRobot(6, 5, TypeRobot.JETPACK));
-        return robots;
     }
     
     /**
@@ -139,11 +128,16 @@ public class FenetreAccueil extends JFrame{
     private List<InitialisationRobot> getListeDesRobots(){
         List<InitialisationRobot> robots = new ArrayList<>();
         robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
-        //robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(10, 0, TypeRobot.ROUE));
-        //robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(0, 6, TypeRobot.PATTE));
-        robots.add(new InitialisationRobot(6, 5, TypeRobot.JETPACK));
+        robots.add(new InitialisationRobot(3, 8, TypeRobot.ROUE));
+        robots.add(new InitialisationRobot(4, 8, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(15, 7, TypeRobot.JETPACK));
+        return robots;
+    }
+    
+        private List<InitialisationRobot> getListeDesRobotsJeu2(){
+        List<InitialisationRobot> robots = new ArrayList<>();
+        robots.add(new InitialisationRobot(20, 12, TypeRobot.ROUE));
+        robots.add(new InitialisationRobot(10, 7, TypeRobot.PATTE));
         return robots;
     }
 }
