@@ -34,6 +34,7 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
     public static final int PREFERRED_GRID_SIZE_PIXELS = 10;
     private EtatEntite[] etatEntites;
     private Simulation simulation;
+    private boolean isReset = false;
     
     PanelAffichageCarte(CarteDeTerrain map, Simulation simu) {
         this.map = map;
@@ -43,6 +44,14 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
         int preferredWidth = this.map.getLargeur()* PREFERRED_GRID_SIZE_PIXELS;
         int preferredHeight = this.map.getHauteur() * PREFERRED_GRID_SIZE_PIXELS;
         setPreferredSize(new Dimension(preferredWidth, preferredHeight));
+    }
+    
+    public void enableReset(){
+        this.isReset = true;
+    }
+    
+    public void disableReset(){
+        this.isReset = false;
     }
     
     @Override
@@ -67,33 +76,35 @@ public class PanelAffichageCarte extends javax.swing.JPanel{
                 
             }
         } 
-        if(this.etatEntites != null){
-            for(EtatEntite entite : this.etatEntites){
-                try {
-                    Image img = null;
-                    Color colorEntite = null;
-                    switch(entite.getType()){
-                        default:                            
-                            Image imgRobot = ImageIO.read(getClass().getResource(MappingTypeRobot.getPicture(entite.getType())));
-                            img = imgRobot;
-                            break;
-                        case "incendie":
-                            //colorEntite = new Color(255, 0, 0);
-                            Image imgFeu = ImageIO.read(getClass().getResource("/IMG/feu_2.png"));
-                            img = imgFeu;
-                            break;
+        if(!this.isReset){
+            if(this.etatEntites != null){
+                for(EtatEntite entite : this.etatEntites){
+                    try {
+                        Image img = null;
+                        Color colorEntite = null;
+                        switch(entite.getType()){
+                            default:                            
+                                Image imgRobot = ImageIO.read(getClass().getResource(MappingTypeRobot.getPicture(entite.getType())));
+                                img = imgRobot;
+                                break;
+                            case "incendie":
+                                //colorEntite = new Color(255, 0, 0);
+                                Image imgFeu = ImageIO.read(getClass().getResource("/IMG/feu_2.png"));
+                                img = imgFeu;
+                                break;
+                        }
+                        int widthEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
+                        int heightEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
+                        int x = entite.getPosition().getX() * rectWidth;
+                        int y = entite.getPosition().getY() * rectHeight;
+                        /*if(colorEntite != null)
+                            g2d.setColor(colorEntite*/
+
+                        g2d.drawImage(img, x, y, widthEntite, heightEntite, this);
+                        //g2d.fillRect(x, y, widthEntite, heightEntite);
+                    } catch (IOException ex) {
+                        Logger.getLogger(PanelAffichageCarte.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                    int widthEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
-                    int heightEntite = PREFERRED_GRID_SIZE_PIXELS * 3;
-                    int x = entite.getPosition().getX() * rectWidth;
-                    int y = entite.getPosition().getY() * rectHeight;
-                    /*if(colorEntite != null)
-                        g2d.setColor(colorEntite*/
-                    
-                    g2d.drawImage(img, x, y, widthEntite, heightEntite, this);
-                    //g2d.fillRect(x, y, widthEntite, heightEntite);
-                } catch (IOException ex) {
-                    Logger.getLogger(PanelAffichageCarte.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }

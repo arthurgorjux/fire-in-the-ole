@@ -58,9 +58,9 @@ public class FenetreRegarderSimulation extends JFrame{
     }
     
     public void setMap(ArchiveTourSimulation tour){
-        System.out.println("set map..."+timer.getDelay());
         this.etatsEntite = tour.getEtatsEntite();
         mapPanel.setEtatsEntites(tour.getEtatsEntite());
+        mapPanel.disableReset();
         mapPanel.repaint();
     }
     
@@ -165,7 +165,7 @@ public class FenetreRegarderSimulation extends JFrame{
      * Reprends le déroulement de l'affichage de la simulation.
      */
     public void relancerLaSimulation() {
-        timer.start();
+        timer.start();        
     }
 
     /**
@@ -225,6 +225,8 @@ public class FenetreRegarderSimulation extends JFrame{
         compteur = 0;
         affichageTermine = false;
         isReset = true;
+        this.mapPanel.enableReset();
+        this.mapPanel.repaint();
         simulation.resetSimulation();
     }
 }
