@@ -57,7 +57,7 @@ public class BitmapLoader {
     public int[][] lireCarteParDefaut() throws IOException {
         BufferedImage imageBitmap;
 
-        imageBitmap = ImageIO.read(getClass().getResource("/IMG/test_1.bmp"));
+        imageBitmap = ImageIO.read(new File("./IMG/test_1.bmp"));
         return extraireMatriceDeDifficulte(imageBitmap);
     }
 
