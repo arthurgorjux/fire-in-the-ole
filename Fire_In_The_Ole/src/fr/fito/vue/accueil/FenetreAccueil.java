@@ -85,10 +85,13 @@ public class FenetreAccueil extends JFrame{
      */
     private void majComboParametresSimulation(){
         String[] listJeux = new String[10];
-        JeuDeParametres jeu1 = new JeuDeParametres(new File("./IMG/test_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
+        JeuDeParametres jeu1 = new JeuDeParametres(new File("./IMG/map_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
+        JeuDeParametres jeu2 = new JeuDeParametres(new File("./IMG/map_2.bmp").getPath(), SensVent.EST, this.getListeDesIncendiesJeu2(), this.getListeDesRobotsJeu2());
         listJeux[0] = "Jeu 1";
-        listJeux[1] = "Personnaliser ...";
+        listJeux[1] = "Jeu 2";
+        listJeux[2] = "Personnaliser ...";
         hashmapJeuxDeParametres.put("Jeu 1", jeu1);
+        hashmapJeuxDeParametres.put("Jeu 2", jeu2);
         comboJeuxDeParametres = new JComboBox<>(listJeux);
     }
     
@@ -105,6 +108,28 @@ public class FenetreAccueil extends JFrame{
         feux.add(new InitialisationIncendie(10, 1));
         feux.add(new InitialisationIncendie(5, 6));
         return feux;
+    }
+    
+    private List<InitialisationIncendie> getListeDesIncendiesJeu2(){
+        List<InitialisationIncendie> feux = new ArrayList<>();
+        //feux.add(new InitialisationIncendie(10, 10));
+        feux.add(new InitialisationIncendie(1, 2));
+        //feux.add(new InitialisationIncendie(3, 5));
+        feux.add(new InitialisationIncendie(4, 4));
+        feux.add(new InitialisationIncendie(10, 1));
+        feux.add(new InitialisationIncendie(5, 6));
+        return feux;
+    }
+    
+    private List<InitialisationRobot> getListeDesRobotsJeu2(){
+        List<InitialisationRobot> robots = new ArrayList<>();
+        robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
+        //robots.add(new InitialisationRobot(8, 3, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(10, 0, TypeRobot.ROUE));
+        //robots.add(new InitialisationRobot(7, 9, TypeRobot.CHENILLE));
+        robots.add(new InitialisationRobot(0, 6, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(6, 5, TypeRobot.JETPACK));
+        return robots;
     }
     
     /**
