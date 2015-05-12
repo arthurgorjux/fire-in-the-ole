@@ -87,11 +87,11 @@ public class FenetreAccueil extends JFrame{
         String[] listJeux = new String[10];
         JeuDeParametres jeu1 = new JeuDeParametres(new File("./IMG/map_1.bmp").getPath(), SensVent.EST, this.getListeDesIncendies(), this.getListeDesRobots());
         JeuDeParametres jeu2 = new JeuDeParametres(new File("./IMG/map_2.bmp").getPath(), SensVent.EST, this.getListeDesIncendiesJeu2(), this.getListeDesRobotsJeu2());
-        listJeux[0] = "Jeu Simu reussie";
-        listJeux[1] = "Jeu Simu echec";
+        listJeux[0] = "Jeu Simu echec";
+        listJeux[1] = "Jeu Simu reussi";
         listJeux[2] = "Personnaliser ...";
-        hashmapJeuxDeParametres.put("Jeu Simu reussie", jeu1);
-        hashmapJeuxDeParametres.put("Jeu Simu echec", jeu2);
+        hashmapJeuxDeParametres.put("Jeu Simu echec", jeu1);
+        hashmapJeuxDeParametres.put("Jeu Simu reussi", jeu2);
         comboJeuxDeParametres = new JComboBox<>(listJeux);
     }
     
@@ -105,6 +105,12 @@ public class FenetreAccueil extends JFrame{
         feux.add(new InitialisationIncendie(4, 6));
         feux.add(new InitialisationIncendie(10, 10));
         feux.add(new InitialisationIncendie(20, 7));
+        feux.add(new InitialisationIncendie(8, 6));
+        feux.add(new InitialisationIncendie(18, 14));
+        feux.add(new InitialisationIncendie(14, 14));
+        feux.add(new InitialisationIncendie(25, 10));
+        feux.add(new InitialisationIncendie(23, 0));
+        feux.add(new InitialisationIncendie(25, 14));
         return feux;
     }
     
@@ -114,7 +120,6 @@ public class FenetreAccueil extends JFrame{
         feux.add(new InitialisationIncendie(4, 4));
         feux.add(new InitialisationIncendie(10, 1));
         feux.add(new InitialisationIncendie(5, 6));
-        feux.add(new InitialisationIncendie(16, 10));
         feux.add(new InitialisationIncendie(12, 12));
         feux.add(new InitialisationIncendie(0,4 ));
         feux.add(new InitialisationIncendie(6, 0));
@@ -128,9 +133,10 @@ public class FenetreAccueil extends JFrame{
     private List<InitialisationRobot> getListeDesRobots(){
         List<InitialisationRobot> robots = new ArrayList<>();
         robots.add(new InitialisationRobot(0, 0, TypeRobot.CHENILLE));
-        robots.add(new InitialisationRobot(3, 8, TypeRobot.ROUE));
-        robots.add(new InitialisationRobot(4, 8, TypeRobot.PATTE));
-        robots.add(new InitialisationRobot(15, 7, TypeRobot.JETPACK));
+        robots.add(new InitialisationRobot(5, 5, TypeRobot.ROUE));
+        robots.add(new InitialisationRobot(10, 11, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(15, 5, TypeRobot.JETPACK));
+        robots.add(new InitialisationRobot(20, 5, TypeRobot.ROUE));
         return robots;
     }
     
@@ -138,6 +144,7 @@ public class FenetreAccueil extends JFrame{
         List<InitialisationRobot> robots = new ArrayList<>();
         robots.add(new InitialisationRobot(20, 12, TypeRobot.ROUE));
         robots.add(new InitialisationRobot(10, 7, TypeRobot.PATTE));
+        robots.add(new InitialisationRobot(5, 5, TypeRobot.CHENILLE));
         return robots;
     }
 }
