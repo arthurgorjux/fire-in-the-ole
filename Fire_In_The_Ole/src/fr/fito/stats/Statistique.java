@@ -81,7 +81,7 @@ public class Statistique {
         result += (nbIncendiesPropages != 0) ? "Nombre d'incendies qui se sont propagés : " + nbIncendiesPropages : "Aucun incendie ne s'est propagé";
         result += "\nTemps total de la simulation : " + timeFinal + " ms\n";
         result += "Nombre de tours total : " + nbTour + "\n";
-        result += "Temps moyen de la simulation : " + timeFinal/nbTour + " ms\n";
+        result += "Temps moyen par tour : " + timeFinal/nbTour + " ms\n";
         result += "\n\t\t\t\t\t\t\t\t\t\tGénéré automatiquement par FITO (Atchy-Dalama, Fantinel, Fenet-Garde, Gorjux, Yong)";
         return result;
     }
