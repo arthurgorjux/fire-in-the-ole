@@ -54,7 +54,8 @@ public class FenetreRegarderSimulation extends JFrame{
         this.timer = null;
         this.initComponents();        
         this.setLocationRelativeTo(null);
-        this.setSize(500, 500);
+        this.setSize(1200, 720);
+        this.setLocation(300, 500);
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         this.setVisible(true);
     }

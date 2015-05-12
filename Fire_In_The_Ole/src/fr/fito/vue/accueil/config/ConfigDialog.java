@@ -38,6 +38,7 @@ public class ConfigDialog extends JFrame{
         this.setBounds(500, 400, 450, 200);
         this.setResizable(false);
         this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
     
     private void initComponents(){
