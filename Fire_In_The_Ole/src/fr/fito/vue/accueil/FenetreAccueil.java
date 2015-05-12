@@ -106,11 +106,11 @@ public class FenetreAccueil extends JFrame{
         feux.add(new InitialisationIncendie(10, 10));
         feux.add(new InitialisationIncendie(20, 7));
         feux.add(new InitialisationIncendie(8, 6));
-        feux.add(new InitialisationIncendie(18, 14));
-        feux.add(new InitialisationIncendie(14, 14));
+        feux.add(new InitialisationIncendie(18, 13));
+        feux.add(new InitialisationIncendie(14, 12));
         feux.add(new InitialisationIncendie(25, 10));
         feux.add(new InitialisationIncendie(23, 0));
-        feux.add(new InitialisationIncendie(25, 14));
+        feux.add(new InitialisationIncendie(25, 11));
         return feux;
     }
     
